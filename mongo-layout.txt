@@ -6,7 +6,7 @@ person = {
     "junior-grades" : {"math": num, "english": num, "science": num, "history": num},
     "senior-grades" : {"math": num, "english": num, "science": num, "history": num},
     "athletics" : "desc of what they did" || "desc of awards/competitions",
-    "performing-arts" : "desc of what they did" || "desc of awards/competitions",
+    "performing-arts/awards" : "desc of awards/competitions",
     "clubs" : ["List of clubs and their desc {"Theater": "desc"}, {"Band": "desc"}"],
     "jobs/internships/orgs": ["List of all of them like the one above"],
     "community serice hours": num,
