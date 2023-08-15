@@ -1,0 +1,11 @@
+{
+  "name": "fbla-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mongo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrew Murphy / Jonatham Lam",
+  "license": "MIT"
+}
