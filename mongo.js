@@ -8,7 +8,9 @@ const collection = client.db('ClusterDB').collection('students');
 
 export class Student{
     constructor(name, grade_level, school){
-        Object.assign(this, {});
+        Object.assign(this, {
+            
+        });
     }
 }
 
