@@ -1,15 +1,18 @@
-import dotenv from 'dotenv';
-import { Collection, MongoClient } from 'mongodb';
-import {Student} from './Student_Scripts/studentObject.js'
+import {createStudent} from './Student_Scripts/studentCreation.js';
+import {updateName, updateGradeLvl, updateSchool, updateLetterGrades} from './Student_Scripts/updateStudent.js'
 
-dotenv.config();
 
-const client = await MongoClient.connect(process.env.MONGO);
-const collection = client.db('ClusterDB').collection('students');
+// await createStudent("Andrew Murphy", 12, "Thunderbird");
 
-export async function createStudent(){
-    let student = new Student("Andrew Murphy", 12, "Thunderbird", [23, 45, 67, 89], [12, 34, 56, 78], [9, 21, 43, 65])
-    await collection.insertOne(student)
-}
 
-createStudent();
+
+// await updateName(String:"Full name of student", String:"Full new name of student");
+// await updateName("Andrew Murphy", "Jonathan lam");
+
+
+// await updateGradeLvl("Jonathan lam", 10);
+
+// await updateSchool("Jonathan lam", "O'Connor");
+
+// await updateLetterGrades("Jonathan lam", "freshman", "math", 98);
+
