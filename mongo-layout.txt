@@ -6,6 +6,7 @@ person = {
     "sophmore_grades" : {"math": num, "english": num, "science": num, "history": num},
     "junior_grades" : {"math": num, "english": num, "science": num, "history": num},
     "senior_grades" : {"math": num, "english": num, "science": num, "history": num},
+    
     "athletics" : "desc of what they did" || "desc of awards/competitions",
     "performing_arts/awards" : "desc of awards/competitions",
     "clubs" : ["List of clubs and their desc {"Theater": "desc"}, {"Band": "desc"}"],
