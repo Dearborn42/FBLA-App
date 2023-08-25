@@ -1,11 +1,11 @@
 import dotenv from 'dotenv';
-import { Collection, MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb';
 dotenv.config();
 const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');
 
 class Student{
-    constructor(name, grade_level, school, fgrades, sophgrades, jgrades, sengrades, clubNames, clubDescs){
+    constructor(name, grade_level, school, fgrades, sophgrades, jgrades, sengrades, clubNames, clubDescs, jobNames, jobDescs, jobType){
         let grades = this.setGrades(fgrades, sophgrades, jgrades, sengrades)
         Object.assign(this, {
             name, 
@@ -16,6 +16,7 @@ class Student{
             "junior-grades": grades[2],
             "senior-grades": grades[3],
             "clubs": this.setClubs(clubNames, clubDescs),
+            "work": this.setJobs(jobNames, jobDescs, jobType)
         });
     }
     setGrades(f = [], so = [], j = [], se = []) {
@@ -46,14 +47,30 @@ class Student{
         }
         return this && clubs
     }
+    setJobs(jn, jd, jt){
+        let jobs = [];
+        if((jn.length == jd.length) && (Array.isArray(jn)) && (Array.isArray(jd) && Array.isArray(jt))){
+            for(let i=0; i<jn.length; i++){
+                let obj = {
+                    "company": jn[i],
+                    "job_desc": jd[i], 
+                    "type": jt[i]
+                }
+                jobs.push(obj)
+            }
+        }else{
+            return this && "N/A"
+        }
+        return this && jobs
+    }
 }
 
-export async function createStudent(name, grade, school, grade_1, grade_2, grade_3, grade_4, clubNames, clubDescs){
+export async function createStudent(name, grade, school, grade_1, grade_2, grade_3, grade_4, clubNames, clubDescs, jobNames, jobDescs, jobType){
     try{
         let student = new Student(
         name, grade, school, grade_1, 
         grade_2, grade_3, grade_4, clubNames, 
-        clubDescs
+        clubDescs, jobNames, jobDescs, jobType
         );
         await collection.insertOne(student)
         console.log("Passed");

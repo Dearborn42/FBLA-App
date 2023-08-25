@@ -1,10 +1,13 @@
 import {createStudent} from './Student_Scripts/studentCreation.js';
-import {updateName, updateGradeLvl, updateSchool, updateLetterGrades, updateClubsDesc} from './Student_Scripts/updateStudent.js'
+import {
+    updateName, updateGradeLvl, updateSchool, updateLetterGrades, 
+    updateClubsDesc, removeClub, addClub, addJob, removeJob
+} from './Student_Scripts/updateStudent.js'
 
 
 /*await createStudent(Fill in at least Full Name, grade, and school)
 await createStudent("Andrew Murphy", 12, "Thunderbird");
-await createStudent("Andrew Murphy", 12, "Thunderbird", [89, 90, 87, 91], [79, 43, 67, 80], [82, 83, 84, 85], [90, 96, 97, 99], ["theater", "speech and debate"], ["this is the theater decs", "this is the speech and debate desc"]);
+await createStudent("Andrew Murphy", 12, "Thunderbird", [89, 90, 87, 91], [79, 43, 67, 80], [82, 83, 84, 85], [90, 96, 97, 99], ["theater", "speech and debate"], ["this is the theater decs", "this is the speech and debate desc"], ["Five Guys", "Target", "Walmart"], ["I was a crew member that cooked and prepped food", "I was a stocker and a cashier", "I was a cashier and stocker"], ["Job", "Internship", "Organizational partnership"]);
 
 await updateName(
     String:"Full name of student", 
@@ -31,6 +34,38 @@ await updateLetterGrades(
     Number: new grade
 ):
 await updateLetterGrades("Jonathan lam", "freshman", "math", 98);
-*/
 
+await updateClubDesc(
+    String:"Full name of student", 
+    String: "Name of club", 
+    String: "New desc"
+);
 await updateClubsDesc("Jonathan Lam", "theater", "This is the test theater desc")
+
+await removeClub(
+    String:"Full name of student", 
+    String:"Name of club"
+)
+await removeClub("Jonathan Lam", "speech and debate");
+
+await addClub(
+    String:"Full name of student", 
+    String:"Name of club", 
+    String: "Club description"
+);
+await addClub("Jonathan Lam", "decatholan", "This is the test");
+
+await addJob(
+    String:"Full name of student", 
+    String:"Name of company", 
+    String:"description", 
+    String:"job type"
+)
+await addJob("Jonathan Lam", "Pei Wei", "I worked there as a crew member", "Job")
+
+await removeJob(
+    String:"Full name of student", 
+    String:"Name of company"
+);
+await removeJob("Jonathan Lam", "Walmart");
+*/

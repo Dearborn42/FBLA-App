@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { Collection, MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb';
 dotenv.config();
 const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');
@@ -59,4 +59,55 @@ export async function updateClubsDesc(name, club, desc){
         { $set: {[`clubs.${clubIndex}.${club}`]: desc}},
         { returnOriginal: false }
     ])
+}
+
+export async function removeClub(name, club){
+    try{
+        const studentDocument = await collection.findOne({ "name": name });
+        const clubIndex = studentDocument.clubs.findIndex(x => x[`${club}`]);
+        const result = await collection.updateOne(
+            {"name": name},
+            { $pull: {"clubs": studentDocument.clubs[clubIndex]}},
+            {returnOriginal: false}
+        )
+    }catch(e){
+        console.error(e);
+    }
+}
+
+export async function addClub(name, clubName, clubDesc){
+    await formatFOAU([
+        {"name": name},
+        {$push: {"clubs": {[`${clubName}`]: clubDesc}}},
+        {returnOriginal: false}
+    ])
+}
+
+export async function addJob(name, jobName, jobDesc, jobType){
+    await formatFOAU([
+        {"name": name},
+        {$push: {"work": {
+            "company": jobName,
+            "job_desc": jobDesc, 
+            "type": jobType
+        }}},
+        {returnOriginal: false}
+    ])
+}
+export async function removeJob(name, job){
+    try{
+        const studentDocument = await collection.findOne({ "name": name });
+        const index = studentDocument.work.findIndex(x => x.company === job);
+        const result = await collection.updateOne(
+            {"name": name},
+            { $pull: {"work": studentDocument.work[index]}},
+            {returnOriginal: false}
+        )
+    }catch(e){
+        console.error(e);
+    }
+}
+
+export async function updateJobDesc(name, job, newDesc){
+    
 }
