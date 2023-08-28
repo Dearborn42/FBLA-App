@@ -62,17 +62,13 @@ export async function updateClubsDesc(name, club, desc){
 }
 
 export async function removeClub(name, club){
-    try{
-        const studentDocument = await collection.findOne({ "name": name });
-        const clubIndex = studentDocument.clubs.findIndex(x => x[`${club}`]);
-        const result = await collection.updateOne(
-            {"name": name},
-            { $pull: {"clubs": studentDocument.clubs[clubIndex]}},
-            {returnOriginal: false}
-        )
-    }catch(e){
-        console.error(e);
-    }
+    const studentDocument = await collection.findOne({ "name": name });
+    const clubIndex = studentDocument.clubs.findIndex(x => x[`${club}`]);
+    await formatFOAU([
+        {"name": name},
+        { $pull: {"clubs": studentDocument.clubs[clubIndex]}},
+        {returnOriginal: false}
+    ])
 }
 
 export async function addClub(name, clubName, clubDesc){
@@ -95,17 +91,13 @@ export async function addJob(name, jobName, jobDesc, jobType){
     ])
 }
 export async function removeJob(name, job){
-    try{
-        const studentDocument = await collection.findOne({ "name": name });
-        const index = studentDocument.work.findIndex(x => x.company === job);
-        const result = await collection.updateOne(
-            {"name": name},
-            { $pull: {"work": studentDocument.work[index]}},
-            {returnOriginal: false}
-        )
-    }catch(e){
-        console.error(e);
-    }
+    const studentDocument = await collection.findOne({ "name": name });
+    const index = studentDocument.work.findIndex(x => x.company === job);
+    await formatFOAU([
+        {"name": name},
+        { $pull: {"work": studentDocument.work[index]}},
+        {returnOriginal: false}
+    ])
 }
 
 export async function updateJobDesc(name, job, newDesc){
