@@ -1,7 +1,7 @@
 import {createStudent} from './Student_Scripts/studentCreation.js';
 import {
     updateName, updateGradeLvl, updateSchool, updateLetterGrades, 
-    updateClubsDesc, removeClub, addClub, addJob, removeJob
+    updateClubsDesc, removeClub, addClub, addJob, removeJob, updateJobDesc
 } from './Student_Scripts/updateStudent.js'
 
 
@@ -68,4 +68,13 @@ await removeJob(
     String:"Name of company"
 );
 await removeJob("Jonathan Lam", "Walmart");
+
+await updateJobDesc(
+    String:"Full name of student", 
+    String:"Name of company", 
+    String:"description", 
+)
+await updateJobDesc("Jonathan Lam", "Target", "I was a cashier and a stocker");
 */
+
+

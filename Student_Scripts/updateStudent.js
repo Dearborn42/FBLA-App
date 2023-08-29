@@ -101,5 +101,10 @@ export async function removeJob(name, job){
 }
 
 export async function updateJobDesc(name, job, newDesc){
-    
+    const studentDocument = await collection.findOne({ "name": name });
+    const index = studentDocument.work.findIndex(x => x.company === job);
+    await formatFOAU([
+        {"name": name},
+        { $set: {[`work.${index}.job_desc`]: newDesc}}
+    ]);
 }
