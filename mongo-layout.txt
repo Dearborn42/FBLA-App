@@ -6,12 +6,13 @@ person = {
     "sophmore_grades" : {"math": num, "english": num, "science": num, "history": num},
     "junior_grades" : {"math": num, "english": num, "science": num, "history": num},
     "senior_grades" : {"math": num, "english": num, "science": num, "history": num},
+    elective_grades : like list above
     "clubs" : ["List of clubs and their desc {"Theater": "desc"}, {"Band": "desc"}"],
     "jobs/internships/orgs": ["List of all of them like the one above"],
     
     "athletics" : "desc of what they did" || "desc of awards/competitions",
     "performing_arts/awards" : "desc of awards/competitions",
     "community serice hours": num,
-    "honors_classes" : {"honor math": num, "honor english": num, "honor science": num, "honor history": num},
+    "honors_classes" : {"ap calc": num, "honor english": num, "honor science": num, "honor history": num},
     *can think of things later*
 }

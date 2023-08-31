@@ -1,31 +1,40 @@
-import {createStudent} from './Student_Scripts/studentCreation.js';
+import {createStudent} from './scripts/studentCreation.js';
 import {
     updateName, updateGradeLvl, updateSchool, updateLetterGrades, 
-    updateClubsDesc, removeClub, addClub, addJob, removeJob, updateJobDesc
-} from './Student_Scripts/updateStudent.js'
+    updateClubsDesc, removeClub, addClub, addJob, removeJob, updateJobDesc,
+    removeElective, addElective, updateElectiveGrade
+} from './scripts/updateStudent.js'
 
 
 /*await createStudent(Fill in at least Full Name, grade, and school)
 await createStudent("Andrew Murphy", 12, "Thunderbird");
-await createStudent("Andrew Murphy", 12, "Thunderbird", [89, 90, 87, 91], [79, 43, 67, 80], [82, 83, 84, 85], [90, 96, 97, 99], ["theater", "speech and debate"], ["this is the theater decs", "this is the speech and debate desc"], ["Five Guys", "Target", "Walmart"], ["I was a crew member that cooked and prepped food", "I was a stocker and a cashier", "I was a cashier and stocker"], ["Job", "Internship", "Organizational partnership"]);
+await createStudent(
+    "Andrew Murphy", 12, "Thunderbird", 
+    [89, 90, 87, 91], [79, 43, 67, 80], [82, 83, 84, 85], [90, 96, 97, 99], 
+    ["spanish", "gym"], [91, 84], 
+    ["theater", "speech and debate"], ["this is the theater decs", "this is the speech and debate desc"], 
+    ["Five Guys", "Target", "Walmart"], 
+    ["I was a crew member that cooked and prepped food", "I was a stocker and a cashier", "I was a cashier and stocker"], 
+    ["Job", "Internship", "Organizational partnership"]
+);
 
 await updateName(
     String:"Full name of student", 
     String:"Full new name of student"
 );
-await updateName("Andrew Murphy", "Jonathan lam");
+await updateName("Andrew Murphy", "Jonathan Lam");
 
 await updateGradeLvl(
     String:"Full name of student", 
     Number: new grade level
 );
-await updateGradeLvl("Jonathan lam", 10);
+await updateGradeLvl("Jonathan Lam", 10);
 
 await updateSchool(
     String:"Full name of student", 
     String:"Full new name of School"
 );
-await updateSchool("Jonathan lam", "O'Connor");
+await updateSchool("Jonathan Lam", "O'Connor");
 
 await updateLetterGrades(
     String:"Full name of student", 
@@ -33,7 +42,7 @@ await updateLetterGrades(
     String:" Name of class", 
     Number: new grade
 ):
-await updateLetterGrades("Jonathan lam", "freshman", "math", 98);
+await updateLetterGrades("Jonathan Lam", "freshman", "math", 98);
 
 await updateClubDesc(
     String:"Full name of student", 
@@ -75,6 +84,26 @@ await updateJobDesc(
     String:"description", 
 )
 await updateJobDesc("Jonathan Lam", "Target", "I was a cashier and a stocker");
+
+await addElective(
+    "String: Full name of student", 
+    "String: Name of elective", 
+    num: number grade
+);
+await addElective("Jonathan Lam", "gym", 84);
+
+await removeElective(
+    "String: Full name of student", 
+    "String: Name of elective"
+);
+await removeElective("Jonathan Lam", "gym");
+
+await updateElectiveGrade(
+    String:"Full name of student", 
+    String:"Name of elective",
+    Number: New Grade
+)
+await updateElectiveGrade("Jonathan Lam", "Digital-photography", 100);
 */
 
 

@@ -5,7 +5,7 @@ const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');
 
 class Student{
-    constructor(name, grade_level, school, fgrades, sophgrades, jgrades, sengrades, clubNames, clubDescs, jobNames, jobDescs, jobType){
+    constructor(name, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType){
         let grades = this.setGrades(fgrades, sophgrades, jgrades, sengrades)
         Object.assign(this, {
             name, 
@@ -15,6 +15,7 @@ class Student{
             "sophomore-grades": grades[1],
             "junior-grades": grades[2],
             "senior-grades": grades[3],
+            "elective-grades": this.setClubs(electiveNames, electiveGrades),
             "clubs": this.setClubs(clubNames, clubDescs),
             "work": this.setJobs(jobNames, jobDescs, jobType)
         });
@@ -65,11 +66,12 @@ class Student{
     }
 }
 
-export async function createStudent(name, grade, school, grade_1, grade_2, grade_3, grade_4, clubNames, clubDescs, jobNames, jobDescs, jobType){
+export async function createStudent(name, grade, school, grade_1, grade_2, grade_3, grade_4, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType){
     try{
         let student = new Student(
         name, grade, school, grade_1, 
-        grade_2, grade_3, grade_4, clubNames, 
+        grade_2, grade_3, grade_4, electiveNames, 
+        electiveGrades, clubNames, 
         clubDescs, jobNames, jobDescs, jobType
         );
         await collection.insertOne(student)
