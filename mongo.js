@@ -15,7 +15,11 @@ await createStudent(
     ["theater", "speech and debate"], ["this is the theater decs", "this is the speech and debate desc"], 
     ["Five Guys", "Target", "Walmart"], 
     ["I was a crew member that cooked and prepped food", "I was a stocker and a cashier", "I was a cashier and stocker"], 
-    ["Job", "Internship", "Organizational partnership"]
+    ["Job", "Internship", "Organizational partnership"],
+    ["Bikes For Foster Kids", "Canned Food Donations", "Campsite Cleaning"],
+    ["Refurbished bikes for foster kids", "Put up flyers and then collected canned food", "Cleaned and fixed campsites"],
+    [12, 6, 7],
+    ["12/2/2022 - 1/5/2022", "8/17/2023 - 8/19/2023", "8/7/2022 - 8/9/2022"]
 );
 
 await updateName(
@@ -105,5 +109,3 @@ await updateElectiveGrade(
 )
 await updateElectiveGrade("Jonathan Lam", "Digital-photography", 100);
 */
-
-
