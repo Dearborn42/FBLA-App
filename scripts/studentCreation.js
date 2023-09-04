@@ -77,7 +77,7 @@ class Student{
             for(let i=0; i<csn.length; i++){
                 let obj = {
                     "service-name": csn[i],
-                    "service_desc": csd[i], 
+                    "service-desc": csd[i], 
                     "service-hours": csh[i],
                     "service-date": cst[i]
                 }

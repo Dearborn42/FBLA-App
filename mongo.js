@@ -2,7 +2,9 @@ import {createStudent} from './scripts/studentCreation.js';
 import {
     updateName, updateGradeLvl, updateSchool, updateLetterGrades, 
     updateClubsDesc, removeClub, addClub, addJob, removeJob, updateJobDesc,
-    removeElective, addElective, updateElectiveGrade
+    removeElective, addElective, updateElectiveGrade, updateServiceName,
+    updateServiceDesc, updateServiceHours, updateServiceDate, removeService,
+    addService
 } from './scripts/updateStudent.js'
 
 
@@ -108,4 +110,58 @@ await updateElectiveGrade(
     Number: New Grade
 )
 await updateElectiveGrade("Jonathan Lam", "Digital-photography", 100);
+
+await updateServiceName(
+    String:"Full name of student",
+    String:"Name of service",
+    String:"New name of service"
+)
+await updateServiceName("Jonathan Lam", "Bikes For Foster Kids", "Test");
+
+await updateServiceDesc(
+    String:"Full name of student",
+    String:"Name of service",
+    String:"New desc"
+)
+await updateServiceDesc("Jonathan Lam", "Test", "New Desc that sucks")
+
+await updateServiceHours(
+    String:"Full name of student",
+    String:"Name of service",
+    Number: hours,
+)
+await updateServiceHours("Jonathan Lam", "Test", 18)
+
+await updateServiceDate(
+    String:"Full name of student",
+    String:"Name of service",
+    String:"Start date of service",
+    String:"End date of service"
+)
+await updateServiceDate("Jonathan Lam", "Test", "12/12/12", "13/13/13")
+
+await removeService(
+    String:"Full name of student",
+    String:"Name of service"
+)
+await removeService("Jonathan Lam", "Test");
+
+await addService(
+    String:"Full name of Student",
+    String:"Name of service",
+    String:"Description of service",
+    Number: hours,
+    String:"Start date of service",
+    String:"End date of service"
+)
+await addService(
+    "Jonathan Lam", 
+    "Bikes For Foster Kids", 
+    "Refurbished bikes for foster kids", 
+    12, 
+    "12/2/2022", 
+    "1/5/2022"
+)
 */
+
+
