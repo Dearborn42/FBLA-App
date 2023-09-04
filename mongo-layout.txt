@@ -13,7 +13,6 @@ person = {
     
     "athletics" : "desc of what they did" || "desc of awards/competitions",
     "performing_arts/awards" : "desc of awards/competitions",
-    "community serice hours": [{"Name": "", "Description": "", "Hours": num, "Date": ""}],
     "honors_classes" : {"ap calc": num, "honor english": num, "honor science": num, "honor history": num},
     *can think of things later*
 }
