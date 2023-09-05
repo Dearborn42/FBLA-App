@@ -1,12 +1,13 @@
 import {createStudent} from './scripts/studentCreation.js';
-import {
-    updateName, updateGradeLvl, updateSchool, updateLetterGrades, 
-    updateClubsDesc, removeClub, addClub, 
-    addJob, removeJob, updateJobDesc,
-    removeElective, addElective, updateElectiveGrade,
-    updateServiceName, updateServiceDesc, updateServiceHours, updateServiceDate, removeService, addService, 
-    addSport, removeSport, updateSportName, updateSportDesc, updateSportAwards
-} from './scripts/updateStudent.js'
+// import {
+//     updateName, updateGradeLvl, updateSchool, updateLetterGrades, 
+//     updateClubsDesc, removeClub, addClub, 
+//     addJob, removeJob, updateJobDesc,
+//     removeElective, addElective, updateElectiveGrade,
+//     updateServiceName, updateServiceDesc, updateServiceHours, updateServiceDate, removeService, addService, 
+//     addSport, removeSport, updateSportName, updateSportDesc, updateSportAwards,
+//     addArt, removeArt, updateArtName, updateArtDesc, updateArtAwards
+// } from './scripts/01-updateStudent.js'
 
 import { getStudents } from './scripts/studentDataCollection.js'
 
@@ -203,27 +204,41 @@ await updateSportAwards(
     String:"New awards"
 )
 await updateSportAwards("Jonathan Lam", "Chess", "My Elo was 2100")
+
+await addArt(
+    String:"Full Name of student",
+    String:"Name of art",
+    String:"art description",
+    String: "Awards/Acheivments"
+)
+await addArt("Jonathan Lam", "band", "I played the drums", "We won state");
+
+await removeArt(
+    String:"Full Name of student",
+    String:"Name of art"
+)
+await removeArt("Jonathan Lam", "band");
+
+await updateArtName(
+    String:"Full Name of student",
+    String:"Name of art",
+    String:"New name of art"
+)
+await updateArtName("Jonathan Lam", "band", "art");
+
+await updateArtDesc(
+    String:"Full Name of student",
+    String:"Name of art",
+    String:"New desc"
+)
+await updateArtDesc("Jonathan Lam", "band", "I played the saxaphone");
+
+await updateArtAwards(
+    String:"Full Name of student",
+    String:"Name of art",
+    String:"New awards"
+)
+await updateArtAwards("Jonathan Lam", "band", "We won nationals");
 */
 
 
-await createStudent(
-    "Andrew Murphy", 12, "Thunderbird", 
-    [89, 90, 87, 91], [79, 43, 67, 80], [82, 83, 84, 85], [90, 96, 97, 99], 
-    ["spanish", "gym"], [91, 84], 
-    ["theater", "speech and debate"], ["this is the theater decs", "this is the speech and debate desc"], 
-    ["Five Guys", "Target", "Walmart"], 
-    ["I was a crew member that cooked and prepped food", "I was a stocker and a cashier", "I was a cashier and stocker"], 
-    ["Job", "Internship", "Organizational partnership"],
-    ["Bikes For Foster Kids", "Canned Food Donations", "Campsite Cleaning"],
-    ["Refurbished bikes for foster kids", "Put up flyers and then collected canned food", "Cleaned and fixed campsites"],
-    [12, 6, 7],
-    ["12/2/2022 - 1/5/2022", "8/17/2023 - 8/19/2023", "8/7/2022 - 8/9/2022"],
-    ["football", "chess", "wrestling"],
-    ["I was a linebacker", "I participated in the intermidiet division", "I was in the middle weight class"],
-    ["Me and my team made it to nationals and got 2nd", "My elo was 1800 and I won state", "I won state and made it to nationals"],
-    ["3-d art"],
-    ["We made scultpures"],
-    ["Won the state champinon art competition"]
-);
-
-await updateName("Andrew Murphy", "Jonathan Lam");
