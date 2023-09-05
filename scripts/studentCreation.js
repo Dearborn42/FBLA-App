@@ -7,7 +7,7 @@ const collection = client.db('ClusterDB').collection('students');
 class Student{
     constructor(
         name, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
-        sportsDesc, sportAwards
+        sportsDesc, sportAwards, artsName, artsDesc, artsAwards
         ){
         let grades = this.setGrades(fgrades, sophgrades, jgrades, sengrades)
         let communityService = this.setCommunityService(
@@ -25,7 +25,8 @@ class Student{
             "clubs": this.setClubs(clubNames, clubDescs),
             "work": this.setJobs(jobNames, jobDescs, jobType),
             "community-service": communityService,
-            "sports": this.setSports(sportsName, sportsDesc, sportAwards)
+            "sports": this.setSports(sportsName, sportsDesc, sportAwards),
+            "perfrorming-arts": this.setArts(artsName, artsDesc, artsAwards)
         });
     }
     setGrades(f = [], so = [], j = [], se = []) {
@@ -108,10 +109,27 @@ class Student{
         }
         return this && jobs
     }
+    setArts(jn, jd, jt){
+        let jobs = [];
+        if((jn.length == jd.length) && (Array.isArray(jn)) && (Array.isArray(jd) && Array.isArray(jt))){
+            for(let i=0; i<jn.length; i++){
+                let obj = {
+                    "performing-art": jn[i],
+                    "desc": jd[i], 
+                    "awards/achievments": jt[i]
+                }
+                jobs.push(obj)
+            }
+        }else{
+            return this && "N/A"
+        }
+        return this && jobs
+    }
 }
 
 export async function createStudent(
-    name, grade, school, grade_1, grade_2, grade_3, grade_4, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName, sportsDesc, sportAwards
+    name, grade, school, grade_1, grade_2, grade_3, grade_4, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName, sportsDesc, sportAwards,
+    artsName, artsDesc, artsAwards
 ){
     try{
         let student = new Student(
@@ -121,7 +139,8 @@ export async function createStudent(
         clubDescs, jobNames, jobDescs, jobType,
         communityServiceName, communityServiceDesc, 
         communityServiceHours, communityServiceDate,
-        sportsName, sportsDesc, sportAwards
+        sportsName, sportsDesc, sportAwards,
+        artsName, artsDesc, artsAwards
         );
         await collection.insertOne(student)
         console.log("Passed");
