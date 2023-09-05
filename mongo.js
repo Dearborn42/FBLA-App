@@ -1,11 +1,14 @@
 import {createStudent} from './scripts/studentCreation.js';
 import {
     updateName, updateGradeLvl, updateSchool, updateLetterGrades, 
-    updateClubsDesc, removeClub, addClub, addJob, removeJob, updateJobDesc,
-    removeElective, addElective, updateElectiveGrade, updateServiceName,
-    updateServiceDesc, updateServiceHours, updateServiceDate, removeService,
-    addService
+    updateClubsDesc, removeClub, addClub, 
+    addJob, removeJob, updateJobDesc,
+    removeElective, addElective, updateElectiveGrade,
+    updateServiceName, updateServiceDesc, updateServiceHours, updateServiceDate, removeService, addService, 
+    addSport, removeSport, updateSportName, updateSportDesc, updateSportAwards
 } from './scripts/updateStudent.js'
+
+import { getStudents } from './scripts/studentDataCollection.js'
 
 
 /*await createStudent(Fill in at least Full Name, grade, and school)
@@ -21,7 +24,10 @@ await createStudent(
     ["Bikes For Foster Kids", "Canned Food Donations", "Campsite Cleaning"],
     ["Refurbished bikes for foster kids", "Put up flyers and then collected canned food", "Cleaned and fixed campsites"],
     [12, 6, 7],
-    ["12/2/2022 - 1/5/2022", "8/17/2023 - 8/19/2023", "8/7/2022 - 8/9/2022"]
+    ["12/2/2022 - 1/5/2022", "8/17/2023 - 8/19/2023", "8/7/2022 - 8/9/2022"],
+    ["football", "chess", "wrestling"],
+    ["I was a linebacker", "I participated in the intermidiet division", "I was in the middle weight class"],
+    ["Me and my team made it to nationals and got 2nd", "My elo was 1800 and I won state", "I won state and made it to nationals"]
 );
 
 await updateName(
@@ -162,6 +168,41 @@ await addService(
     "12/2/2022", 
     "1/5/2022"
 )
+
+await addSport(
+    String:"Full Name of student",
+    String:"Name of sport",
+    String:"Sport description",
+    String: "Awards/Acheivments"
+)
+await addSport("Jonathan Lam", "Golf", "I was the captin", "My team won reginals");
+
+await removeSport(
+    String:"Full Name of student",
+    String:"Name of sport"
+)
+await removeSport("Jonathan Lam", "Golf"); 
+
+await updateSportName(
+    String:"Full Name of student",
+    String:"Name of sport",
+    String:"New name of sport"
+)
+await updateSportName("Jonathan Lam", "chess", "Chess");
+
+await updateSportDesc(
+    String:"Full Name of student",
+    String:"Name of sport",
+    String:"New desc"
+)
+await updateSportDesc("Jonathan Lam", "Chess", "Test description");
+
+await updateSportAwards(
+    String:"Full Name of student",
+    String:"Name of sport",
+    String:"New awards"
+)
+await updateSportAwards("Jonathan Lam", "Chess", "My Elo was 2100")
 */
 
 

@@ -5,9 +5,12 @@ const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');
 
 class Student{
-    constructor(name, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate){
+    constructor(
+        name, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
+        sportsDesc, sportAwards
+        ){
         let grades = this.setGrades(fgrades, sophgrades, jgrades, sengrades)
-        let csStuff = this.setCommunityService(
+        let communityService = this.setCommunityService(
             communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate
         );
         Object.assign(this, {
@@ -21,7 +24,8 @@ class Student{
             "elective-grades": this.setClubs(electiveNames, electiveGrades),
             "clubs": this.setClubs(clubNames, clubDescs),
             "work": this.setJobs(jobNames, jobDescs, jobType),
-            "community-service": csStuff
+            "community-service": communityService,
+            "sports": this.setSports(sportsName, sportsDesc, sportAwards)
         });
     }
     setGrades(f = [], so = [], j = [], se = []) {
@@ -88,10 +92,26 @@ class Student{
         }
         return this && community
     }
+    setSports(jn, jd, jt){
+        let jobs = [];
+        if((jn.length == jd.length) && (Array.isArray(jn)) && (Array.isArray(jd) && Array.isArray(jt))){
+            for(let i=0; i<jn.length; i++){
+                let obj = {
+                    "sport": jn[i],
+                    "sport-desc": jd[i], 
+                    "awards/achievments": jt[i]
+                }
+                jobs.push(obj)
+            }
+        }else{
+            return this && "N/A"
+        }
+        return this && jobs
+    }
 }
 
 export async function createStudent(
-    name, grade, school, grade_1, grade_2, grade_3, grade_4, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate
+    name, grade, school, grade_1, grade_2, grade_3, grade_4, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName, sportsDesc, sportAwards
 ){
     try{
         let student = new Student(
@@ -100,7 +120,8 @@ export async function createStudent(
         electiveGrades, clubNames, 
         clubDescs, jobNames, jobDescs, jobType,
         communityServiceName, communityServiceDesc, 
-        communityServiceHours, communityServiceDate
+        communityServiceHours, communityServiceDate,
+        sportsName, sportsDesc, sportAwards
         );
         await collection.insertOne(student)
         console.log("Passed");
