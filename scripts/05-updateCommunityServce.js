@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
+import { formatFOAU } from "./01-updateStudent"
 dotenv.config();
 const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');
