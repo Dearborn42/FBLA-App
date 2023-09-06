@@ -6,7 +6,7 @@ const collection = client.db('ClusterDB').collection('students');
 
 class Student{
     constructor(
-        name, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
+        name, email, password, sharePin, privacy, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
         sportsDesc, sportAwards, artsName, artsDesc, artsAwards
         ){
         let grades = this.setGrades(fgrades, sophgrades, jgrades, sengrades)
@@ -15,6 +15,10 @@ class Student{
         );
         Object.assign(this, {
             name, 
+            email,
+            password,
+            "share-pin": sharePin,
+            "private": privacy || false,
             grade_level, 
             school, 
             "freshman-grades": grades[0], 
@@ -45,7 +49,7 @@ class Student{
         return this && grades;
     }
 
-    setClubs(cn, cd){
+    setClubs(cn=null, cd=null){
         let clubs = [];
         if((cn.length == cd.length) && (Array.isArray(cn)) && (Array.isArray(cd))){
             for(let i=0; i<cd.length; i++){
@@ -57,7 +61,7 @@ class Student{
         }
         return this && clubs
     }
-    setJobs(jn, jd, jt){
+    setJobs(jn=null, jd=null, jt=null){
         let jobs = [];
         if((jn.length == jd.length) && (Array.isArray(jn)) && (Array.isArray(jd) && Array.isArray(jt))){
             for(let i=0; i<jn.length; i++){
@@ -73,7 +77,7 @@ class Student{
         }
         return this && jobs
     }
-    setCommunityService(csn, csd, csh, cst){
+    setCommunityService(csn=null, csd=null, csh=null, cst=null){
         let community = [];
         if(
             (csn.length == csd.length && csd.length === csh.length && csh.length === cst.length) &&
@@ -93,7 +97,7 @@ class Student{
         }
         return this && community
     }
-    setSports(jn, jd, jt){
+    setSports(jn=null, jd=null, jt=null){
         let jobs = [];
         if((jn.length == jd.length) && (Array.isArray(jn)) && (Array.isArray(jd) && Array.isArray(jt))){
             for(let i=0; i<jn.length; i++){
@@ -109,7 +113,7 @@ class Student{
         }
         return this && jobs
     }
-    setArts(jn, jd, jt){
+    setArts(jn=null, jd=null, jt=null){
         let jobs = [];
         if((jn.length == jd.length) && (Array.isArray(jn)) && (Array.isArray(jd) && Array.isArray(jt))){
             for(let i=0; i<jn.length; i++){
@@ -128,12 +132,13 @@ class Student{
 }
 
 export async function createStudent(
-    name, grade, school, grade_1, grade_2, grade_3, grade_4, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName, sportsDesc, sportAwards,
+    name, email, password, sharePin, privacy, grade, school, grade_1, grade_2, grade_3, grade_4, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName, sportsDesc, sportAwards,
     artsName, artsDesc, artsAwards
 ){
     try{
         let student = new Student(
-        name, grade, school, grade_1, 
+        name, email, password, sharePin, privacy, 
+        grade, school, grade_1, 
         grade_2, grade_3, grade_4, electiveNames, 
         electiveGrades, clubNames, 
         clubDescs, jobNames, jobDescs, jobType,

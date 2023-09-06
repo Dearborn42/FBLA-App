@@ -1,26 +1,20 @@
 import {createStudent} from './scripts/studentCreation.js';
 import { 
-    updateName, updateGradeLvl, updateSchool, updateLetterGrades
+    updateName, updateGradeLvl, updateSchool, updateLetterGrades, updateEmail, updatePassword, updateSharePin, updatePrivacy 
 } from './scripts/updateStudents/01-updateStudent.js'
 import { updateClubsDesc, removeClub, addClub } from './scripts/updateStudents/02-updateClubs.js'
 import { addJob, removeJob, updateJobDesc } from "./scripts/updateStudents/03-updateJobs.js"
-import { removeElective, addElective, updateElectiveGrade } from './scrpts/04-updateElective.js'
-import { 
-    updateServiceName, updateServiceDesc, updateServiceHours, updateServiceDate, removeService, addService
-} from "./scripts/updateStudents/05-updateCommunityServce.js"
-import { 
-    addSport, removeSport, updateSportName, updateSportDesc, updateSportAwards
-} from './scripts/updateStudents/06-updateSport.js'
-import { 
-    addArt, removeArt, updateArtName, updateArtDesc, updateArtAwards
-} from './scripts/updateStudents/07-updatePerformingArt.js'
+import { removeElective, addElective, updateElectiveGrade } from './scripts/updateStudents/04-updateElective.js'
+import { updateServiceName, updateServiceDesc, updateServiceHours, updateServiceDate, removeService, addService } from "./scripts/updateStudents/05-updateCommunityServce.js"
+import { addSport, removeSport, updateSportName, updateSportDesc, updateSportAwards } from './scripts/updateStudents/06-updateSport.js'
+import { addArt, removeArt, updateArtName, updateArtDesc, updateArtAwards } from './scripts/updateStudents/07-updatePerformingArt.js'
 import { getStudents } from './scripts/studentDataCollection.js'
 
 
 /*await createStudent(Fill in at least Full Name, grade, and school)
 await createStudent("Andrew Murphy", 12, "Thunderbird");
 await createStudent(
-    "Andrew Murphy", 12, "Thunderbird", 
+    "Andrew Murphy", "amurph068@west-mec.org", "testPassword", 1234567, true, 12, "Thunderbird", 
     [89, 90, 87, 91], [79, 43, 67, 80], [82, 83, 84, 85], [90, 96, 97, 99], 
     ["spanish", "gym"], [91, 84], 
     ["theater", "speech and debate"], ["this is the theater decs", "this is the speech and debate desc"], 
@@ -33,8 +27,26 @@ await createStudent(
     ["12/2/2022 - 1/5/2022", "8/17/2023 - 8/19/2023", "8/7/2022 - 8/9/2022"],
     ["football", "chess", "wrestling"],
     ["I was a linebacker", "I participated in the intermidiet division", "I was in the middle weight class"],
-    ["Me and my team made it to nationals and got 2nd", "My elo was 1800 and I won state", "I won state and made it to nationals"]
+    ["Me and my team made it to nationals and got 2nd", "My elo was 1800 and I won state", "I won state and made it to nationals"],
+    ["3-d art"],
+    ["We made scultpures"],
+    ["Won the state champinon art competition"]
 );
+
+await updateEmail(
+    String:"Full name of student",
+    String:"Password",
+    String:"New Email"
+)
+await updateEmail("Andrew Murphy", "testPassword", "jlam456@west-mec.com")
+
+await updatePassword(
+    String:"Full name of student",
+    String:"Email",
+    String:"Password",
+    String:"New Password"
+)
+await updatePassword("Andrew Murphy", "jlam456@west-mec.com", "testPassword", "passwordTest");
 
 await updateName(
     String:"Full name of student", 
@@ -245,5 +257,3 @@ await updateArtAwards(
 )
 await updateArtAwards("Jonathan Lam", "band", "We won nationals");
 */
-
-

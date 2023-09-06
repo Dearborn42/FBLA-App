@@ -1,9 +1,22 @@
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
-import { formatFOAU } from "./01-updateStudent"
 dotenv.config();
 const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');
+
+async function formatFOAU(info){
+    try{
+        const result = await collection.findOneAndUpdate(
+            info[0],
+            info[1],
+            info[2]
+        );
+        if (result.value) console.log("Passed");
+        else console.log("Student doesn't exist or mis-spelled name");
+    }catch(e){
+        console.error("Error:", e);
+    }
+}
 
 export async function updateServiceName(name, serviceName, newServiceName) {
     const studentDocument = await collection.findOne({ "name": name });
