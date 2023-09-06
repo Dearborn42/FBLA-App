@@ -1,19 +1,19 @@
 import {createStudent} from './scripts/studentCreation.js';
 import { 
     updateName, updateGradeLvl, updateSchool, updateLetterGrades
-} from './scripts/01-updateStudent.js'
-import { updateClubsDesc, removeClub, addClub } from './scripts/02-updateClubs.js'
-import { addJob, removeJob, updateJobDesc } from "./scripts/03-updateJobs.js"
+} from './scripts/updateStudents/01-updateStudent.js'
+import { updateClubsDesc, removeClub, addClub } from './scripts/updateStudents/02-updateClubs.js'
+import { addJob, removeJob, updateJobDesc } from "./scripts/updateStudents/03-updateJobs.js"
 import { removeElective, addElective, updateElectiveGrade } from './scrpts/04-updateElective.js'
 import { 
     updateServiceName, updateServiceDesc, updateServiceHours, updateServiceDate, removeService, addService
-} from "./scripts/05-updateCommunityServce.js"
+} from "./scripts/updateStudents/05-updateCommunityServce.js"
 import { 
     addSport, removeSport, updateSportName, updateSportDesc, updateSportAwards
-} from './scripts/06-updateSport.js'
+} from './scripts/updateStudents/06-updateSport.js'
 import { 
     addArt, removeArt, updateArtName, updateArtDesc, updateArtAwards
-} from './scripts/07-updatePerformingArt.js'
+} from './scripts/updateStudents/07-updatePerformingArt.js'
 import { getStudents } from './scripts/studentDataCollection.js'
 
 
