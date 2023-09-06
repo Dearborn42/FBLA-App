@@ -1,5 +1,7 @@
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
+import mongoose from'mongoose';
+import student from './mongoSchema.js'
 dotenv.config();
 const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');
@@ -57,7 +59,7 @@ class Student{
                 clubs.push(obj)
             }
         }else{
-            return this && "N/A"
+            return this && []
         }
         return this && clubs
     }
@@ -73,7 +75,7 @@ class Student{
                 jobs.push(obj)
             }
         }else{
-            return this && "N/A"
+            return this && []
         }
         return this && jobs
     }
@@ -93,7 +95,7 @@ class Student{
                 community.push(obj)
             }
         }else{
-            return this && "N/A"
+            return this && []
         }
         return this && community
     }
@@ -109,7 +111,7 @@ class Student{
                 jobs.push(obj)
             }
         }else{
-            return this && "N/A"
+            return this && []
         }
         return this && jobs
     }
@@ -125,7 +127,7 @@ class Student{
                 jobs.push(obj)
             }
         }else{
-            return this && "N/A"
+            return this && []
         }
         return this && jobs
     }
@@ -136,7 +138,7 @@ export async function createStudent(
     artsName, artsDesc, artsAwards
 ){
     try{
-        let student = new Student(
+        let studentObject = new Student(
         name, email, password, sharePin, privacy, 
         grade, school, grade_1, 
         grade_2, grade_3, grade_4, electiveNames, 
@@ -147,7 +149,7 @@ export async function createStudent(
         sportsName, sportsDesc, sportAwards,
         artsName, artsDesc, artsAwards
         );
-        await collection.insertOne(student)
+        await collection.insertOne(new student(studentObject));
         console.log("Passed");
     }catch(e){
         console.log(e)

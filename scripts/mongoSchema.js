@@ -13,20 +13,60 @@ const electiveGradesSchema = new mongoose.Schema([
     }
 ])
 
+const clubsSchema = new mongoose.Schema([
+    {
+        dynamicProperty: String
+    }
+])
+
+const workSchema = new mongoose.Schema([
+    {
+        "company": String,
+        "job_desc": String,
+        "type": String,
+    }
+])
+
+const communityServiceSchema = new mongoose.Schema([
+    {
+        
+        "service-name": String,
+        "service-desc": String,
+        "service-hours": Number,
+        "service-date": String
+    }
+])
+
+const sportsSchema = new mongoose.Schema([
+    {
+        "sport": String,
+        "sport-desc": String,
+        "awards/achievments": String
+    }
+])
+
+const artSchema = new mongoose.Schema([
+    {
+        "performing-art": String,
+        "desc": String,
+        "awards/achievments": String
+    }
+])
+
 
 const studentSchema = new mongoose.Schema({
-    name: {
+    "name": {
         type: String,
         required: true,
         trim: true
     },
-    email:{
+    "email":{
         type: String,
         required: true,
         unique: true,
         trim: true
     },
-    password: {
+    "password": {
         type: String,
         required: true,
         unique: true,
@@ -41,12 +81,12 @@ const studentSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    grade_level: {
+    "grade_level": {
         type: Number,
         required: true,
         trim: true
     }, 
-    school: {
+    "school": {
         type: String,
         required: true,
         trim: true
@@ -67,13 +107,71 @@ const studentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Mixed,
         validate: {
             validator: (value) => {
-
+                if(typeof value === Array && value.length === 0)
+                    return true
+                else
+                    return electiveGradesSchema.validate(value)
             }
         }
     },
-    "clubs": this.setClubs(clubNames, clubDescs),
-    "work": this.setJobs(jobNames, jobDescs, jobType),
-    "community-service": communityService,
-    "sports": this.setSports(sportsName, sportsDesc, sportAwards),
-    "perfrorming-arts": this.setArts(artsName, artsDesc, artsAwards)
+    "clubs": {
+        type: mongoose.Schema.Types.Mixed,
+        validate: {
+            validator: (value) => {
+                if(typeof value === Array && value.length === 0)
+                    return true
+                else
+                    return clubsSchema.validate(value)
+            }
+        }
+    },
+    "work": {
+        type: mongoose.Schema.Types.Mixed,
+        validate: {
+            validator: (value) => {
+                if(typeof value === Array && value.length === 0)
+                    return true
+                else
+                    return workSchema.validate(value)
+            }
+        }
+    },
+    "community-service": {
+        type: mongoose.Schema.Types.Mixed,
+        validate: {
+            validator: (value) => {
+                if(typeof value === Array && value.length === 0)
+                    return true
+                else
+                    return communityServiceSchema.validate(value)
+            }
+        }
+    },
+    "sports": {
+        type: mongoose.Schema.Types.Mixed,
+        validate: {
+            validator: (value) => {
+                if(typeof value === Array && value.length === 0)
+                    return true
+                else
+                    return sportsSchema.validate(value)
+            }
+        }
+    },
+    "perfrorming-arts": {
+        type: mongoose.Schema.Types.Mixed,
+        validate: {
+            validator: (value) => {
+                if(typeof value === Array && value.length === 0)
+                    return true
+                else
+                    return artSchema.validate(value)
+            }
+        }
+    },
 })
+
+
+const student = mongoose.model('Student', studentSchema);
+
+export default student;
