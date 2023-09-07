@@ -172,6 +172,12 @@ const studentSchema = new mongoose.Schema({
 })
 
 
+function test(param){
+    return electiveGradesSchema
+}
+
+console.log(test([{"Test": 10}]))
+
 const student = mongoose.model('Student', studentSchema);
 
 export default student;

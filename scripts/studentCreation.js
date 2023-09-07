@@ -138,7 +138,7 @@ export async function createStudent(
     artsName, artsDesc, artsAwards
 ){
     try{
-        let studentObject = new Student(
+        let studentObject = new student(new Student(
         name, email, password, sharePin, privacy, 
         grade, school, grade_1, 
         grade_2, grade_3, grade_4, electiveNames, 
@@ -148,8 +148,9 @@ export async function createStudent(
         communityServiceHours, communityServiceDate,
         sportsName, sportsDesc, sportAwards,
         artsName, artsDesc, artsAwards
-        );
-        await collection.insertOne(new student(studentObject));
+        ));
+        await studentObject.save()
+            .then(() => console.log("Student created"))
         console.log("Passed");
     }catch(e){
         console.log(e)
