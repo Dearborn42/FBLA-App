@@ -27,7 +27,7 @@ class Student{
             "sophomore-grades": grades[1],
             "junior-grades": grades[2],
             "senior-grades": grades[3],
-            "elective-grades": this.setClubs(electiveNames, electiveGrades),
+            "elective-grades": this.setElectives(electiveNames, electiveGrades),
             "clubs": this.setClubs(clubNames, clubDescs),
             "work": this.setJobs(jobNames, jobDescs, jobType),
             "community-service": communityService,
@@ -50,12 +50,30 @@ class Student{
 
         return this && grades;
     }
+    setElectives(cn=null, cd=null){
+        let clubs = [];
+        if((cn.length == cd.length) && (Array.isArray(cn)) && (Array.isArray(cd))){
+            for(let i=0; i<cd.length; i++){
+                let obj = {
+                    "elective-name": cn[i],
+                    "elective-grade": cd[i]
+                }
+                clubs.push(obj)
+            }
+        }else{
+            return this && []
+        }
+        return this && clubs
+    }
 
     setClubs(cn=null, cd=null){
         let clubs = [];
         if((cn.length == cd.length) && (Array.isArray(cn)) && (Array.isArray(cd))){
             for(let i=0; i<cd.length; i++){
-                let obj = {[cn[i]]: cd[i]}
+                let obj = {
+                    "club-name": cn[i],
+                    "club-desc": cd[i]
+                }
                 clubs.push(obj)
             }
         }else{
@@ -138,7 +156,7 @@ export async function createStudent(
     artsName, artsDesc, artsAwards
 ){
     try{
-        let studentObject = new student(new Student(
+        let data = new Student(
         name, email, password, sharePin, privacy, 
         grade, school, grade_1, 
         grade_2, grade_3, grade_4, electiveNames, 
@@ -148,7 +166,10 @@ export async function createStudent(
         communityServiceHours, communityServiceDate,
         sportsName, sportsDesc, sportAwards,
         artsName, artsDesc, artsAwards
-        ));
+        )
+        console.log(data)
+        let studentObject = new student(data)
+        await studentObject.validate()
         await studentObject.save()
             .then(() => console.log("Student created"))
         console.log("Passed");

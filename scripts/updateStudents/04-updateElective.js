@@ -20,7 +20,7 @@ async function formatFOAU(info){
 
 export async function removeElective(name, elective){
     const studentDocument = await collection.findOne({ "name": name });
-    const Index = studentDocument[`elective-grades`].findIndex(x => x[`${elective}`]);
+    const Index = studentDocument[`elective-grades`].findIndex(x => x[`elective-name`] === elective);
     await formatFOAU([
         {"name": name},
         { $pull: {"elective-grades": studentDocument[`elective-grades`][Index]}},
@@ -31,17 +31,17 @@ export async function removeElective(name, elective){
 export async function addElective(name, electiveName, electiveGrade){
     await formatFOAU([
         {"name": name},
-        {$push: {"elective-grades": {[`${electiveName}`]: electiveGrade}}},
+        {$push: {"elective-grades": {"elective-name": electiveName, "elective-grade": electiveGrade}}},
         {returnOriginal: false}
     ])
 }
 
 export async function updateElectiveGrade(name, electiveName, electiveGrade){
     const studentDocument = await collection.findOne({ "name": name });
-    const Index = studentDocument["elective-grades"].findIndex(x => x[`${electiveName}`]);
+    const Index = studentDocument["elective-grades"].findIndex(x => x[`elective-name`] === electiveName);
     await formatFOAU([
         {"name": name},
-        { $set: {[`elective-grades.${Index}.${electiveName}`]: electiveGrade}},
+        { $set: {[`elective-grades.${Index}.elective-grade`]: electiveGrade}},
         { returnOriginal: false }
     ])
 }
