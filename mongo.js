@@ -279,3 +279,22 @@ await createStudent(
     ["We made scultpures"],
     ["Won the state champinon art competition"]
 );
+
+
+/*
+Given: 
+'elective-grades': [
+    { 'elective-name': 'spanish', 'elective-grade': 91 },
+    { 'elective-name': 'gym', 'elective-grade': 84 }
+]
+
+Expected:
+(property) "elective-grades"?: {
+    [x: number]: {
+        "elective-name"?: string | undefined;
+        "elective-grade"?: number | undefined;
+    };
+} | undefined
+
+
+*/

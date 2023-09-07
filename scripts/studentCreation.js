@@ -3,8 +3,12 @@ import { MongoClient } from 'mongodb';
 import mongoose from'mongoose';
 import student from '../Schema/mongoSchema.js'
 dotenv.config();
-const client = await MongoClient.connect(process.env.MONGO);
-const collection = client.db('ClusterDB').collection('students');
+// const client = await MongoClient.connect(process.env.MONGO);
+// const collection = client.db('ClusterDB').collection('students');
+mongoose.connect(process.env.MONGO, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 
 class Student{
     constructor(
@@ -167,12 +171,10 @@ export async function createStudent(
         sportsName, sportsDesc, sportAwards,
         artsName, artsDesc, artsAwards
         )
-        console.log(data)
         let studentObject = new student(data)
         await studentObject.validate()
-        await studentObject.save()
-            .then(() => console.log("Student created"))
-        console.log("Passed");
+        await studentObject.save();
+        console.log("Student created");
     }catch(e){
         console.log(e)
     }

@@ -33,52 +33,7 @@ const gradeSchema = new Schema({
     "history": letterGradeCheck,
 })
 
-const electiveGradesSchema = new Schema([
-    {
-        "elective-name": stringCheck,
-        "elective-grade": numCheck
-    }
-])
 
-const clubsSchema = new Schema([
-    {
-        "club-name": stringCheck,
-        "club-desc": stringCheck
-    }
-])
-
-const workSchema = new Schema([
-    {
-        "company": stringCheck,
-        "job_desc": stringCheck,
-        "type": stringCheck,
-    }
-])
-
-const communityServiceSchema = new Schema([
-    {    
-        "service-name": stringCheck,
-        "service-desc": stringCheck,
-        "service-hours": numCheck,
-        "service-date": stringCheck
-    }
-])
-
-const sportsSchema = new Schema([
-    {
-        "sport": stringCheck,
-        "sport-desc": stringCheck,
-        "awards/achievments": stringCheck
-    }
-])
-
-const artSchema = new Schema([
-    {
-        "performing-art": stringCheck,
-        "desc": stringCheck,
-        "awards/achievments": stringCheck
-    }
-])
 
 
 const studentSchema = new Schema({
@@ -105,14 +60,85 @@ const studentSchema = new Schema({
     "senior-grades": {
         type: gradeSchema,
     },
-    "elective-grades": { type: electiveGradesSchema, ...listWithObjValidator },
-    "clubs": { type: clubsSchema, ...listWithObjValidator },
-    "work": { type: workSchema, ...listWithObjValidator },
-    "community-service": { type: communityServiceSchema, ...listWithObjValidator },
-    "sports": { type: sportsSchema, ...listWithObjValidator },
-    "perfrorming-arts": { type: artSchema, ...listWithObjValidator },
-})
+    "elective-grades": {
+        type: Array,
+        validate: {
+            validator: (value) => {
+                value.every(x => {
+                    let name = typeof x["elective-name"] === "string";
+                    let grade = typeof x["elective-grade"] === "number"
+                    return name && grade;
+                })
+            }
+        }
+    },
+    "clubs": {
+        type: Array,
+        validate: {
+            validator: (value) => {
+                value.every(x => {
+                    let name = typeof x["club-name"] === "string";
+                    let desc = typeof x["club-desc"] === "string";
+                    return name && desc;
+                })
+            }
+        }
+    },
+    "work": {
+        type: Array,
+        validate: {
+            validator: (value) => {
+                value.every(x => {
+                    let company = typeof x["company"] === "string";
+                    let desc = typeof x["job_desc"] === "string";
+                    let type = typeof x["type"] === "string";
+                    return company && desc && type;
+                })
+            }
+        }
+    },
+    "community-service": { 
+        type: Array, 
+        validate: {
+            validator: (value) => {
+                value.every(x => {
+                    let name = typeof x["service-name"] === "string";
+                    let desc = typeof x["service-desc"] === "string";
+                    let hours = typeof x["service-hours"] === "number";
+                    let date = typeof x["service-date"] === "string";
+                    return name && desc && hours && date
+                })
+            }
+        } 
+    },
+    "sports": { 
+        type: Array,
+        validate: {
+            validator: (value) => {
+                value.every(x => {
+                    let sport = typeof x["sport"] === "string";
+                    let desc = typeof x["sport-desc"] === "string";
+                    let awards = typeof x["awards/achievments"] === "string";
+                    return sport && desc && awards
+                })
+            }
+        }
+    },
+    "perfrorming-arts": { 
+        type: Array,
+        validate: {
+            validator: (value) => {
+                value.every(x => {
+                    let name = typeof x["performing-art"] === "string";
+                    let desc = typeof x["desc"] === "string";
+                    let awards = typeof x["awards/achievments"] === "string";
+                    return name && desc && awards
+                })
+            }
+        }
+     },
+}, { collection: 'ClusterDB.students'})
 
-const student = mongoose.model('Student', studentSchema);
+const student = mongoose.model('Student', studentSchema, "ClusterDB");
 
 export default student;
