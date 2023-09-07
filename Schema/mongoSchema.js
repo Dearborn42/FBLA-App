@@ -137,8 +137,8 @@ const studentSchema = new Schema({
             }
         }
      },
-}, { collection: 'ClusterDB.students'})
+}, {  database: 'ClusterDB', collection: 'students'})
 
-const student = mongoose.model('Student', studentSchema, "ClusterDB");
+const student = mongoose.model('Student', studentSchema);
 
 export default student;
