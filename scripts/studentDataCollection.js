@@ -4,11 +4,25 @@ dotenv.config();
 const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');
 
-export async function getPublicStudents(){
+export async function getFullPublicStudents(){
     return await collection.find({}).toArray()
       .then((documents) => {
         documents = documents.filter((doc) => {
           return doc.private === false;
+        })
+        console.log(documents)
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+}
+export async function getPublicStudentsName(){
+    return await collection.find({}).toArray()
+      .then((documents) => {
+        documents = documents.filter((doc) => {
+          return doc.private === false;
+        }).map((doc) => {
+          return doc.name;
         })
         console.log(documents)
       })
@@ -33,3 +47,21 @@ export async function getPrivateStudent(name, pin){
     console.error(err);
   }
 }
+
+export async function getStudent(name, email, school){
+  try{
+    const studentDocument = await collection.findOne({ 
+      "name": name, 
+      "email": email,
+      "school": school 
+    });
+    if(studentDocument){
+      return studentDocument;
+    }else{
+      console.log("Student not found");
+      return;
+    }
+  }catch(err){
+    console.error(err);
+  }
+}   
