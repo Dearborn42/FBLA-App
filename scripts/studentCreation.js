@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 import mongoose from'mongoose';
-import student from './mongoSchema.js'
+import student from '../Schema/mongoSchema.js'
 dotenv.config();
 const client = await MongoClient.connect(process.env.MONGO);
 const collection = client.db('ClusterDB').collection('students');

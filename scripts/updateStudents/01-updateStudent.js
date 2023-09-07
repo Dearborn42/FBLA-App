@@ -78,7 +78,7 @@ export async function updatePrivacy(name, password, email){
     if(password === studentDocument.password && email === studentDocument.email){
         await formatFOAU([
             {"name": name},
-            { $set: { "private": {$ne: "$private"}}},
+            { $set: { "private": !studentDocument.private}},
             { returnOriginal: false }
         ])
     }else{

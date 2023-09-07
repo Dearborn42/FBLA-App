@@ -8,7 +8,7 @@ import { removeElective, addElective, updateElectiveGrade } from './scripts/upda
 import { updateServiceName, updateServiceDesc, updateServiceHours, updateServiceDate, removeService, addService } from "./scripts/updateStudents/05-updateCommunityServce.js"
 import { addSport, removeSport, updateSportName, updateSportDesc, updateSportAwards } from './scripts/updateStudents/06-updateSport.js'
 import { addArt, removeArt, updateArtName, updateArtDesc, updateArtAwards } from './scripts/updateStudents/07-updatePerformingArt.js'
-import { getStudents } from './scripts/studentDataCollection.js'
+import { getPublicStudents, getPrivateStudent } from './scripts/studentDataCollection.js'
 
 
 /*await createStudent(Fill in at least Full Name, grade, and school)
