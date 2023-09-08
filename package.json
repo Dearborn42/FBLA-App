@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "mongo.js",
   "scripts": {
-    "global-install": "npm install",
+    "global-install": "npm install && cd Acadar && npm install",
     "start": "npx expo start --tunnel"
   },
   "author": "Andrew Murphy / Jonatham Lam",

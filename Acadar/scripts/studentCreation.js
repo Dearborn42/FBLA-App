@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import { MongoClient } from 'mongodb';
 import mongoose from'mongoose';
 import student from '../Schema/mongoSchema.js'
 dotenv.config();
