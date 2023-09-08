@@ -16,16 +16,6 @@ const letterGradeCheck = {
     validate: {validator: (value) => {return (typeof value === 'number' || typeof value === 'string')}}
 }
 
-const listWithObjValidator = {
-    validate: {
-        validator: (value) => {
-            value.map(x => {
-                x.validate();
-            })
-        }
-    }
-}
-
 const gradeSchema = new Schema({
     "math": letterGradeCheck,
     "science": letterGradeCheck,
