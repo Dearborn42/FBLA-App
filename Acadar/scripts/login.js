@@ -1,7 +1,6 @@
-import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
-dotenv.config();
-const client = await MongoClient.connect(process.env.MONGO);
+import {getENV} from '../../EVNvariable.js'
+const client = await MongoClient.connect(getENV());
 const collection = client.db('ClusterDB').collection('students');
 
 

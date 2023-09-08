@@ -1,12 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import dotenv from 'dotenv';
-dotenv.config();
+import Config from 'react-native-config'
+import config from './config';
 
+console.log(Config.MONGO_KEY);
+console.log(config.MONGO_KEY)
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app! {process.env.MONGO}</Text>
+      <Text>Open up App.js to start working on your app! {}</Text>
       <StatusBar style="auto" />
     </View>
   );
