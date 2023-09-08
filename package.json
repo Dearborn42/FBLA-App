@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "main": "mongo.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "global-install": "npm install",
+    "start": "npx expo start --tunnel"
   },
   "author": "Andrew Murphy / Jonatham Lam",
   "license": "MIT",

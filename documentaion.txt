@@ -1,0 +1,3 @@
+run in global terminal:
+    npm run global-install
+    
