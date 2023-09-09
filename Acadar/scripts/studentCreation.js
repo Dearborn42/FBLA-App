@@ -1,10 +1,7 @@
-import dotenv from 'dotenv';
 import mongoose from'mongoose';
 import student from '../Schema/mongoSchema.js'
-dotenv.config();
-// const client = await MongoClient.connect(process.env.MONGO);
-// const collection = client.db('ClusterDB').collection('students');
-mongoose.connect(process.env.MONGO, {
+import { MONGO } from '@env'
+mongoose.connect(MONGO, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

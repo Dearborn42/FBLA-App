@@ -1,7 +1,6 @@
-import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
-dotenv.config();
-const client = await MongoClient.connect(process.env.MONGO);
+import { MONGO } from '@env'
+const client = await MongoClient.connect(MONGO);
 const collection = client.db('ClusterDB').collection('students');
 
 async function formatFOAU(info){
