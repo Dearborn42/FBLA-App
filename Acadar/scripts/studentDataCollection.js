@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb';
 import { MONGO } from '@env'
-const client = await MongoClient.connect(MONGO);
-const collection = client.db('ClusterDB').collection('students');
+import student  from '../../Schema/mongoSchema.js';
+
 
 export async function getFullPublicStudents(){
-    return await collection.find({}).toArray()
+    return await student.find({}).toArray()
       .then((documents) => {
         documents = documents.filter((doc) => {
           return doc.private === false;
@@ -16,7 +16,7 @@ export async function getFullPublicStudents(){
       })
 }
 export async function getPublicStudentsName(){
-    return await collection.find({}).toArray()
+    return await student.find({}).toArray()
       .then((documents) => {
         documents = documents.filter((doc) => {
           return doc.private === false;
@@ -32,7 +32,7 @@ export async function getPublicStudentsName(){
 
 export async function getPrivateStudent(name, pin){
   try{
-    const studentDocument = await collection.findOne({ 
+    const studentDocument = await student.findOne({ 
       "name": name, 
       "share-pin": pin 
     });
@@ -49,7 +49,7 @@ export async function getPrivateStudent(name, pin){
 
 export async function getStudent(name, email, school){
   try{
-    const studentDocument = await collection.findOne({ 
+    const studentDocument = await student.findOne({ 
       "name": name, 
       "email": email,
       "school": school 

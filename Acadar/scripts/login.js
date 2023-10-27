@@ -1,12 +1,11 @@
 import { MongoClient } from 'mongodb';
 import { MONGO } from '@env'
-const client = await MongoClient.connect(MONGO);
-const collection = client.db('ClusterDB').collection('students');
+import student  from '../../Schema/mongoSchema.js';
 
 
 export async function login(email, password) {
     try{
-    const studentDocument = await collection.findOne({ 
+    const studentDocument = await student.findOne({ 
       "email": email, 
       "password": password 
     });

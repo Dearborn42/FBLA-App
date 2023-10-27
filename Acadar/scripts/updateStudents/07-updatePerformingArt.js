@@ -1,21 +1,8 @@
 import { MongoClient } from 'mongodb';
 import { MONGO } from '@env'
-const client = await MongoClient.connect(MONGO);
-const collection = client.db('ClusterDB').collection('students');
+import { formatFOAU } from './01-updateStudent.js';
+import student  from '../../Schema/mongoSchema.js';
 
-async function formatFOAU(info){
-    try{
-        const result = await collection.findOneAndUpdate(
-            info[0],
-            info[1],
-            info[2]
-        );
-        if (result.value) console.log("Passed");
-        else console.log("Student doesn't exist or mis-spelled name");
-    }catch(e){
-        console.error("Error:", e);
-    }
-}
 
 export async function addArt(name, artName, artDesc, artAwards) {
     await formatFOAU([
@@ -30,7 +17,7 @@ export async function addArt(name, artName, artDesc, artAwards) {
 }
 
 export async function removeArt(name, artName) {
-    const studentDocument = await collection.findOne({ "name": name });
+    const studentDocument = await student.findOne({ "name": name });
     const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
     await formatFOAU([
         {"name": name},
@@ -40,7 +27,7 @@ export async function removeArt(name, artName) {
 }
 
 export async function updateArtName(name, artName, newName) {
-    const studentDocument = await collection.findOne({ "name": name });
+    const studentDocument = await student.findOne({ "name": name });
     const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
     await formatFOAU([
         {"name": name},
@@ -50,7 +37,7 @@ export async function updateArtName(name, artName, newName) {
 }
 
 export async function updateArtDesc(name, artName, newDesc) {
-    const studentDocument = await collection.findOne({ "name": name });
+    const studentDocument = await student.findOne({ "name": name });
     const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
     await formatFOAU([
         {"name": name},
@@ -60,7 +47,7 @@ export async function updateArtDesc(name, artName, newDesc) {
 }
 
 export async function updateArtAwards(name, artName, newAwards) {
-    const studentDocument = await collection.findOne({ "name": name });
+    const studentDocument = await student.findOne({ "name": name });
     const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
     await formatFOAU([
         {"name": name},
