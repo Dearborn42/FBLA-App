@@ -1,10 +1,5 @@
-import { MongoClient } from 'mongodb';
-import { MONGO } from '@env';
-import { formatFOAU } from './01-updateStudent.js';
-import student  from '../../Schema/mongoSchema.js'
-const client = await MongoClient.connect(MONGO);
-const collection = client.db('ClusterDB').collection('students');
-
+import Student from "../Schema/mongoSchema.js";
+import { formatFOAU } from "./01-updateStudent.js";
 
 export async function addJob(name, jobName, jobDesc, jobType){
     await formatFOAU([
@@ -18,7 +13,7 @@ export async function addJob(name, jobName, jobDesc, jobType){
     ])
 }
 export async function removeJob(name, job){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const index = studentDocument.work.findIndex(x => x.company === job);
     await formatFOAU([
         {"name": name},
@@ -28,7 +23,7 @@ export async function removeJob(name, job){
 }
 
 export async function updateJobDesc(name, job, newDesc){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const index = studentDocument.work.findIndex(x => x.company === job);
     await formatFOAU([
         {"name": name},

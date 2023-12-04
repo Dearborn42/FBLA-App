@@ -1,8 +1,5 @@
-import { MongoClient } from 'mongodb';
-import { MONGO } from '@env'
-import { formatFOAU } from './01-updateStudent.js';
-import student  from '../../Schema/mongoSchema.js';
-
+import Student from "../Schema/mongoSchema.js";
+import { formatFOAU } from "./01-updateStudent.js";
 
 export async function addSport(name, sportName, sportDesc, sportAwards) {
     await formatFOAU([
@@ -17,7 +14,7 @@ export async function addSport(name, sportName, sportDesc, sportAwards) {
 }
 
 export async function removeSport(name, sportName) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["sports"].findIndex(x => x["sport"] === sportName);
     await formatFOAU([
         {"name": name},
@@ -27,7 +24,7 @@ export async function removeSport(name, sportName) {
 }
 
 export async function updateSportName(name, sportName, newName) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["sports"].findIndex(x => x["sport"] === sportName);
     await formatFOAU([
         {"name": name},
@@ -37,7 +34,7 @@ export async function updateSportName(name, sportName, newName) {
 }
 
 export async function updateSportDesc(name, sportName, newDesc) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["sports"].findIndex(x => x["sport"] === sportName);
     await formatFOAU([
         {"name": name},
@@ -47,7 +44,7 @@ export async function updateSportDesc(name, sportName, newDesc) {
 }
 
 export async function updateSportAwards(name, sportName, newAwards) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["sports"].findIndex(x => x["sport"] === sportName);
     await formatFOAU([
         {"name": name},

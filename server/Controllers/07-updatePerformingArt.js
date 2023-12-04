@@ -1,8 +1,5 @@
-import { MongoClient } from 'mongodb';
-import { MONGO } from '@env'
-import { formatFOAU } from './01-updateStudent.js';
-import student  from '../../Schema/mongoSchema.js';
-
+import Student from "../Schema/mongoSchema.js";
+import { formatFOAU } from "./01-updateStudent.js";
 
 export async function addArt(name, artName, artDesc, artAwards) {
     await formatFOAU([
@@ -17,7 +14,7 @@ export async function addArt(name, artName, artDesc, artAwards) {
 }
 
 export async function removeArt(name, artName) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
     await formatFOAU([
         {"name": name},
@@ -27,7 +24,7 @@ export async function removeArt(name, artName) {
 }
 
 export async function updateArtName(name, artName, newName) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
     await formatFOAU([
         {"name": name},
@@ -37,7 +34,7 @@ export async function updateArtName(name, artName, newName) {
 }
 
 export async function updateArtDesc(name, artName, newDesc) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
     await formatFOAU([
         {"name": name},
@@ -47,7 +44,7 @@ export async function updateArtDesc(name, artName, newDesc) {
 }
 
 export async function updateArtAwards(name, artName, newAwards) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
     await formatFOAU([
         {"name": name},

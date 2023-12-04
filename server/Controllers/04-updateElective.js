@@ -1,13 +1,8 @@
-import { MongoClient } from 'mongodb';
-import { MONGO } from '@env';
-import { formatFOAU } from './01-updateStudent.js';
-import student  from '../../Schema/mongoSchema.js'
-const client = await MongoClient.connect(MONGO);
-const collection = client.db('ClusterDB').collection('students');
-
+import Student from "../Schema/mongoSchema.js";
+import { formatFOAU } from "./01-updateStudent.js";
 
 export async function removeElective(name, elective){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument[`elective-grades`].findIndex(x => x[`elective-name`] === elective);
     await formatFOAU([
         {"name": name},
@@ -25,7 +20,7 @@ export async function addElective(name, electiveName, electiveGrade){
 }
 
 export async function updateElectiveGrade(name, electiveName, electiveGrade){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["elective-grades"].findIndex(x => x[`elective-name`] === electiveName);
     await formatFOAU([
         {"name": name},

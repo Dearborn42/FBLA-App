@@ -1,12 +1,10 @@
-import { MongoClient } from 'mongodb';
-import { MONGO } from '@env'
-import student  from '../../Schema/mongoSchema.js'
+import Student  from '../Schema/mongoSchema.js'
 const client = await MongoClient.connect(MONGO);
 const collection = client.db('ClusterDB').collection('students');
 
 export async function formatFOAU(info){
     try{
-        const result = await student.findOneAndUpdate(
+        const result = await Student.findOneAndUpdate(
             info[0],
             info[1],
             info[2]
@@ -56,7 +54,7 @@ export async function updateGradeLvl(name, new_value) {
 // )
 // await updateEmail("Andrew Murphy", "testPassword", "jlam456@west-mec.com")
 export async function updateEmail(name, password, newEmail){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     if(password === studentDocument.password){
         await formatFOAU([
             {"name": name},
@@ -78,7 +76,7 @@ export async function updateEmail(name, password, newEmail){
 // )
 // await updatePassword("Andrew Murphy", "jlam456@west-mec.com", "testPassword", "passwordTest");
 export async function updatePassword(name, email, Oldpassword, newPassword){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     if(Oldpassword === studentDocument.password && email === studentDocument.email){
         await formatFOAU([
             {"name": name},
@@ -91,7 +89,7 @@ export async function updatePassword(name, email, Oldpassword, newPassword){
 }
 
 export async function updateSharePin(name, password, email, newSharePin){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     if(password === studentDocument.password && email === studentDocument.email){
         await formatFOAU([
             {"name": name},
@@ -104,7 +102,7 @@ export async function updateSharePin(name, password, email, newSharePin){
 }
 
 export async function updatePrivacy(name, password, email){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     if(password === studentDocument.password && email === studentDocument.email){
         await formatFOAU([
             {"name": name},

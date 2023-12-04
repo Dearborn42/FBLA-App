@@ -1,12 +1,12 @@
 import mongoose from'mongoose';
-import student from '../Schema/mongoSchema.js'
+import Student from './mongoSchema.js'
 import { MONGO } from '@env'
 mongoose.connect(MONGO, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 
-class Student{
+class Students{
     constructor(
         name, email, password, sharePin, privacy, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
         sportsDesc, sportAwards, artsName, artsDesc, artsAwards
@@ -156,18 +156,18 @@ export async function createStudent(
     artsName, artsDesc, artsAwards
 ){
     try{
-        let data = new Student(
-        name, email, password, sharePin, privacy, 
-        grade, school, grade_1, 
-        grade_2, grade_3, grade_4, electiveNames, 
-        electiveGrades, clubNames, 
-        clubDescs, jobNames, jobDescs, jobType,
-        communityServiceName, communityServiceDesc, 
-        communityServiceHours, communityServiceDate,
-        sportsName, sportsDesc, sportAwards,
-        artsName, artsDesc, artsAwards
+        let data = new Students(
+            name, email, password, sharePin, privacy, 
+            grade, school, grade_1, 
+            grade_2, grade_3, grade_4, electiveNames, 
+            electiveGrades, clubNames, 
+            clubDescs, jobNames, jobDescs, jobType,
+            communityServiceName, communityServiceDesc, 
+            communityServiceHours, communityServiceDate,
+            sportsName, sportsDesc, sportAwards,
+            artsName, artsDesc, artsAwards
         )
-        let studentObject = new student(data)
+        let studentObject = new Student(data)
         await studentObject.validate()
         await studentObject.save();
         console.log("Student created");

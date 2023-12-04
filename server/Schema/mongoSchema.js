@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import mongoose from "mongoose"
 const { Schema } = mongoose
 
@@ -129,6 +130,10 @@ const studentSchema = new Schema({
      },
 }, {  database: 'ClusterDB', collection: 'students'})
 
-const student = mongoose.model('Student', studentSchema);
+studentSchema.methods.validPassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
-export default student;
+const Student = mongoose.model('Student', studentSchema);
+
+export default Student;

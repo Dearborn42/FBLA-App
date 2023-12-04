@@ -1,12 +1,8 @@
-import { MongoClient } from 'mongodb';
-import { MONGO } from '@env'
-import { formatFOAU } from './01-updateStudent.js';
-import student  from '../../Schema/mongoSchema.js'
-const client = await MongoClient.connect(MONGO);
-const collection = client.db('ClusterDB').collection('students');
+import Student from "../Schema/mongoSchema.js";
+import { formatFOAU } from "./01-updateStudent.js";
 
 export async function updateClubsDesc(name, club, desc){
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const clubIndex = studentDocument.clubs.findIndex(x => x[`club-name`] === club);
     await formatFOAU([
         {"name": name},
@@ -16,7 +12,7 @@ export async function updateClubsDesc(name, club, desc){
 }
 
 export async function removeClub(name, club){
-    const studentDocument = await studentstudent.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const clubIndex = studentDocument.clubs.findIndex(x => x[`club-name`] === club);
     await formatFOAU([
         {"name": name},

@@ -1,10 +1,8 @@
-import { MongoClient } from 'mongodb';
-import { MONGO } from '@env';
-import { formatFOAU } from './01-updateStudent.js';
-import student  from '../../Schema/mongoSchema.js';
+import Student from "../Schema/mongoSchema.js";
+import { formatFOAU } from "./01-updateStudent.js";
 
 export async function updateServiceName(name, serviceName, newServiceName) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
     await formatFOAU([
         {"name": name},
@@ -14,7 +12,7 @@ export async function updateServiceName(name, serviceName, newServiceName) {
 }
 
 export async function updateServiceDesc(name, serviceName, newServiceDesc) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
     await formatFOAU([
         {"name": name},
@@ -24,7 +22,7 @@ export async function updateServiceDesc(name, serviceName, newServiceDesc) {
 }
 
 export async function updateServiceHours(name, serviceName, hours) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
     await formatFOAU([
         {"name": name},
@@ -34,7 +32,7 @@ export async function updateServiceHours(name, serviceName, hours) {
 }
 
 export async function updateServiceDate(name, serviceName, startDate, endDate) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
     await formatFOAU([
         {"name": name},
@@ -44,7 +42,7 @@ export async function updateServiceDate(name, serviceName, startDate, endDate) {
 }
 
 export async function removeService(name, serviceName) {
-    const studentDocument = await student.findOne({ "name": name });
+    const studentDocument = await Student.findOne({ "name": name });
     const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
     await formatFOAU([
         {"name": name},
