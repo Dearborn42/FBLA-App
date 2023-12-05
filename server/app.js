@@ -30,6 +30,11 @@ app.use(passport.session());
 // app.use('/users', isAuthenticated, users);
 // app.use('/admin', isAuthenticated, admin_access, admin);
 
-app.listen(port, ()=>{console.log(`listening on port ${port}`)});
-
+app.post("/", (req, res) => {
+    res.send("Hello World")
+})
+app.get('/home', (req, res) => {
+  res.json({ message: 'Welcome to the home endpoint!' });
+});
+app.listen(port, process.env.ip, ()=>{console.log(`listening on port ${port}`)});
 export default app;
