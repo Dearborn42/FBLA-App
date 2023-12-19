@@ -1,6 +1,4 @@
-import Student  from '../Schema/mongoSchema.js'
-const client = await MongoClient.connect(MONGO);
-const collection = client.db('ClusterDB').collection('students');
+import Student  from '../Schema/mongoSchema.js';
 
 export async function formatFOAU(info){
     try{
@@ -9,8 +7,8 @@ export async function formatFOAU(info){
             info[1],
             info[2]
         );
-        if (result.value) console.log("Passed");
-        else console.log("Student doesn't exist or mis-spelled name");
+        if (result.value) return true;
+        else return false;
     }catch(e){
         console.error("Error:", e);
     }
