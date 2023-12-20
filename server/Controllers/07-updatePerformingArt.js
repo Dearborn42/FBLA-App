@@ -1,54 +1,67 @@
 import Student from "../Schema/mongoSchema.js";
 import { formatFOAU } from "./01-updateStudent.js";
 
-export async function addArt(name, artName, artDesc, artAwards) {
+export async function addArt(req, res) {
+    const {name, desc, awards} = req.body;
+    const userName = req.user.name;
     await formatFOAU([
-        {"name": name},
+        {"name": userName},
         { $push: {"perfrorming-arts": {
-            "performing-art": artName,
-            "desc": artDesc,
-            "awards/achievments": artAwards
+            "performing-art": name,
+            "desc": desc,
+            "awards/achievments": awards
         }}},
         { returnOriginal: false }
-    ])
+    ], res)
 }
 
-export async function removeArt(name, artName) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
+export async function removeArt(res, req) {
+    const {name} = req.params
+    const userName = req.user.name;
+    const studentDocument = await Student.findOne({ "name": userName });
+    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
     await formatFOAU([
-        {"name": name},
+        {"name": userName},
         { $pull: {"perfrorming-arts": studentDocument["perfrorming-arts"][`${Index}`]}},
         { returnOriginal: false }
-    ])
+    ], res)
 }
 
-export async function updateArtName(name, artName, newName) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
+export async function updateArtName(req, res) {
+    const {name} = req.params;
+    const {value} = req.body
+    const userName = req.user.name
+    const studentDocument = await Student.findOne({ "name": userName });
+    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
     await formatFOAU([
-        {"name": name},
-        { $set: {[`perfrorming-arts.${Index}.performing-art`]: newName}},
+        {"name": userName},
+        { $set: {[`perfrorming-arts.${Index}.performing-art`]: value}},
         { returnOriginal: false }
-    ])
+    ], res)
 }
 
-export async function updateArtDesc(name, artName, newDesc) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
+export async function updateArtDesc(req, res) {
+    const {name} = req.params;
+    const {value} = req.body
+    const userName = req.user.name
+    const studentDocument = await Student.findOne({ "name": userName });
+    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
     await formatFOAU([
-        {"name": name},
-        { $set: {[`perfrorming-arts.${Index}.desc`]: newDesc}},
+        {"name": userName},
+        { $set: {[`perfrorming-arts.${Index}.desc`]: value}},
         { returnOriginal: false }
-    ])
+    ], res)
 }
 
-export async function updateArtAwards(name, artName, newAwards) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === artName);
+export async function updateArtAwards(req, res) {
+    const {name} = req.params;
+    const {value} = req.body
+    const userName = req.user.name
+    const studentDocument = await Student.findOne({ "name": userName });
+    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
     await formatFOAU([
-        {"name": name},
-        { $set: {[`perfrorming-arts.${Index}.awards/achievments`]: newAwards}},
+        {"name": userName},
+        { $set: {[`perfrorming-arts.${Index}.awards/achievments`]: value}},
         { returnOriginal: false }
     ])
 }

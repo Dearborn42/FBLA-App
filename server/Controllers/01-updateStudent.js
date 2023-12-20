@@ -1,137 +1,37 @@
 import Student  from '../Schema/mongoSchema.js';
+import { hashPassword } from '../Middleware/login.js';
 
-export async function formatFOAU(info){
+export async function formatFOAU(info, res){
     try{
         const result = await Student.findOneAndUpdate(
             info[0],
             info[1],
             info[2]
         );
-        if (result.value) return true;
-        else return false;
+        if (result.value) return res.status(200).json({success: true});
+        else return res.status(404).json({success: false});
     }catch(e){
-        console.error("Error:", e);
+        res.status(500).json({success: false, error: e.message});
     }
 }
 
-
-// await updateName(
-//     String:"Full name of student", 
-//     String:"Full new name of student"
-// );
-// await updateName("Andrew Murphy", "Jonathan Lam");
-export async function updateName(name, new_value) {
-    await formatFOAU([
-        { "name": name },
-        { $set: { "name": new_value } },
-        { returnOriginal: false }
-    ])
-}
-
-
-// await updateGradeLvl(
-//     String:"Full name of student", 
-//     Number: new grade level
-// );
-// await updateGradeLvl("Jonathan Lam", 10);
-export async function updateGradeLvl(name, new_value) {
-    await formatFOAU([
-        {"name": name}, 
-        { $set: { "grade_level": Number(new_value) }},
-        { returnOriginal: false }
-    ])
-}
-
-
-
-
-// await updateEmail(
-//     String:"Full name of student",
-//     String:"Password",
-//     String:"New Email"
-// )
-// await updateEmail("Andrew Murphy", "testPassword", "jlam456@west-mec.com")
-export async function updateEmail(name, password, newEmail){
-    const studentDocument = await Student.findOne({ "name": name });
-    if(password === studentDocument.password){
+export async function updateStudent(req, res){
+    const {type} = req.params;
+    const {value} = req.body
+    const email = req.user.email
+    if(type === 'password'){
         await formatFOAU([
-            {"name": name},
-            { $set: { "email": newEmail}},
+            { "email": email },
+            { $set: { [`${type}`]: await hashPassword(value) } },
             { returnOriginal: false }
-        ])
+        ], res)
     }else{
-        console.log("Please enter right password");
-    }
-}
-
-
-
-// await updatePassword(
-//     String:"Full name of student",
-//     String:"Email",
-//     String:"Password",
-//     String:"New Password"
-// )
-// await updatePassword("Andrew Murphy", "jlam456@west-mec.com", "testPassword", "passwordTest");
-export async function updatePassword(name, email, Oldpassword, newPassword){
-    const studentDocument = await Student.findOne({ "name": name });
-    if(Oldpassword === studentDocument.password && email === studentDocument.email){
         await formatFOAU([
-            {"name": name},
-            { $set: { "password": newPassword}},
+            { "email": email },
+            { $set: { [`${type}`]: value } },
             { returnOriginal: false }
-        ])
-    }else{
-        console.log("Please enter right password or email");
+        ], res)
     }
-}
-
-export async function updateSharePin(name, password, email, newSharePin){
-    const studentDocument = await Student.findOne({ "name": name });
-    if(password === studentDocument.password && email === studentDocument.email){
-        await formatFOAU([
-            {"name": name},
-            { $set: { "share-pin": newSharePin}},
-            { returnOriginal: false }
-        ])
-    }else{
-        console.log("Please enter right password or email");
-    }
-}
-
-export async function updatePrivacy(name, password, email){
-    const studentDocument = await Student.findOne({ "name": name });
-    if(password === studentDocument.password && email === studentDocument.email){
-        await formatFOAU([
-            {"name": name},
-            { $set: { "private": !studentDocument.private}},
-            { returnOriginal: false }
-        ])
-    }else{
-        console.log("Please enter right password or email");
-    }
-}
-
-
-// await updateSchool(
-//     String:"Full name of student", 
-//     String:"Full new name of School"
-// );
-// await updateSchool("Jonathan Lam", "O'Connor");
-export async function updateSchool(name, new_value) {
-    await formatFOAU([
-        {"name": name}, 
-        { $set: { "school": new_value}},
-        { returnOriginal: false }
-    ])
-}
-
-export async function updateLetterGrades(name, grade_lvl, subject, new_value) {
-    await formatFOAU([
-        { "name": name }, 
-        { $set: { [`${grade_lvl}-grades.${subject}`]: new_value } },
-        { returnOriginal: false }
-    ])
 }
 
 /*

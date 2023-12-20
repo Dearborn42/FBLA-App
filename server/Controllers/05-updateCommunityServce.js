@@ -41,27 +41,30 @@ export async function updateServiceDate(name, serviceName, startDate, endDate) {
     ])
 }
 
-export async function removeService(name, serviceName) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
+export async function removeService(req, res) {
+    const user = req.user;
+    const {name} = req.params
+    const Index = user["community-service"].findIndex(x => x["service-name"] === name);
     await formatFOAU([
-        {"name": name},
-        { $pull: {[`community-service`]: studentDocument["community-service"][`${Index}`]}},
+        {"email": user.email},
+        { $pull: {[`community-service`]: user["community-service"][`${Index}`]}},
         { returnOriginal: false }
-    ])
+    ], res)
 }
 
-export async function addService(name, serviceName, serviceDesc, serviceHours, serviceStartDate, serviceEndDate) {
+export async function addService(req, res) {
+    const {name, desc, hours, start, end} = req.body;
+    const user = req.user.email
     await formatFOAU([
-        {"name": name},
+        {"email": user},
         { $push: {"community-service": {
-                    "service-name": serviceName,
-                    "service-desc": serviceDesc, 
-                    "service-hours": serviceHours,
-                    "service-date": `${serviceStartDate} - ${serviceEndDate}`
+                    "service-name": name,
+                    "service-desc": desc, 
+                    "service-hours": hours,
+                    "service-date": `${start} - ${end}`
                 }
             }
         },
         { returnOriginal: false }
-    ])
+    ], res)
 }
