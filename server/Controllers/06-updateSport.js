@@ -1,54 +1,39 @@
 import Student from "../Schema/mongoSchema.js";
 import { formatFOAU } from "./01-updateStudent.js";
 
-export async function addSport(name, sportName, sportDesc, sportAwards) {
+export async function addSport(req, res) {
+    const user = req.user;
+    const {name, desc, awards} = req.body;
     await formatFOAU([
-        {"name": name},
+        {"email": user.email},
         { $push: {"sports": {
-            "sport": sportName,
-            "sport-desc": sportDesc,
-            "awards/achievments": sportAwards
+            "sport": name,
+            "sport-desc": desc,
+            "awards/achievments": awards
         }}},
         { returnOriginal: false }
-    ])
+    ], res)
 }
 
-export async function removeSport(name, sportName) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["sports"].findIndex(x => x["sport"] === sportName);
+export async function removeSport(req, res) {
+    const user = req.user;
+    const {name} = req.params;
+    const Index = user["sports"].findIndex(x => x["sport"] === name);
     await formatFOAU([
-        {"name": name},
-        { $pull: {"sports": studentDocument["sports"][`${Index}`]}},
+        {"email": user.email},
+        { $pull: {"sports": user["sports"][`${Index}`]}},
         { returnOriginal: false }
-    ])
+    ], res)
 }
 
-export async function updateSportName(name, sportName, newName) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["sports"].findIndex(x => x["sport"] === sportName);
+export async function updateSport(req, res) {
+    const user = req.user;
+    const {name, type} = req.params;
+    const {value} = req.body;
+    const Index = user["sports"].findIndex(x => x["sport"] === name);
     await formatFOAU([
-        {"name": name},
-        { $set: {[`sports.${Index}.sport`]: newName}},
+        {"email": user.email},
+        { $set: {[`sports.${Index}.${type}`]: value}},
         { returnOriginal: false }
-    ])
-}
-
-export async function updateSportDesc(name, sportName, newDesc) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["sports"].findIndex(x => x["sport"] === sportName);
-    await formatFOAU([
-        {"name": name},
-        { $set: {[`sports.${Index}.sport-desc`]: newDesc}},
-        { returnOriginal: false }
-    ])
-}
-
-export async function updateSportAwards(name, sportName, newAwards) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["sports"].findIndex(x => x["sport"] === sportName);
-    await formatFOAU([
-        {"name": name},
-        { $set: {[`sports.${Index}.awards/achievments`]: newAwards}},
-        { returnOriginal: false }
-    ])
+    ], res)
 }

@@ -6,6 +6,7 @@ import community from "./Routes/community-route.js";
 import jobs from "./Routes/jobs-route.js";
 import sports from "./Routes/sport-route.js";
 import studentInfo from "./Routes/student-route.js";
+import elective from "./Routes/elective-route.js";
 
 import bodyParser from 'body-parser';
 import cors from 'cors'

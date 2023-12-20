@@ -27,41 +27,14 @@ export async function removeArt(res, req) {
     ], res)
 }
 
-export async function updateArtName(req, res) {
-    const {name} = req.params;
+export async function updateArt(req, res){
+    const {name, type} = req.params;
     const {value} = req.body
-    const userName = req.user.name
-    const studentDocument = await Student.findOne({ "name": userName });
-    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
+    const user = req.user
+    const Index = user["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
     await formatFOAU([
-        {"name": userName},
-        { $set: {[`perfrorming-arts.${Index}.performing-art`]: value}},
+        {"email": user.email},
+        { $set: {[`perfrorming-arts.${Index}.${type}`]: value}},
         { returnOriginal: false }
     ], res)
-}
-
-export async function updateArtDesc(req, res) {
-    const {name} = req.params;
-    const {value} = req.body
-    const userName = req.user.name
-    const studentDocument = await Student.findOne({ "name": userName });
-    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
-    await formatFOAU([
-        {"name": userName},
-        { $set: {[`perfrorming-arts.${Index}.desc`]: value}},
-        { returnOriginal: false }
-    ], res)
-}
-
-export async function updateArtAwards(req, res) {
-    const {name} = req.params;
-    const {value} = req.body
-    const userName = req.user.name
-    const studentDocument = await Student.findOne({ "name": userName });
-    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
-    await formatFOAU([
-        {"name": userName},
-        { $set: {[`perfrorming-arts.${Index}.awards/achievments`]: value}},
-        { returnOriginal: false }
-    ])
 }

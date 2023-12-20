@@ -1,44 +1,15 @@
-import Student from "../Schema/mongoSchema.js";
 import { formatFOAU } from "./01-updateStudent.js";
 
-export async function updateServiceName(name, serviceName, newServiceName) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
+export async function updateCommunityService(req, res){
+    const user = req.user;
+    const {type, name} = req.params;
+    const {value} = req.body;
+    const Index = user["community-service"].findIndex(x => x["service-name"] === name);
     await formatFOAU([
-        {"name": name},
-        { $set: {[`community-service.${Index}.service-name`]: newServiceName}},
+        {"email": user.email},
+        { $set: {[`community-service.${Index}.${type}`]: value}},
         { returnOriginal: false }
-    ])
-}
-
-export async function updateServiceDesc(name, serviceName, newServiceDesc) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
-    await formatFOAU([
-        {"name": name},
-        { $set: {[`community-service.${Index}.service-desc`]: newServiceDesc}},
-        { returnOriginal: false }
-    ])
-}
-
-export async function updateServiceHours(name, serviceName, hours) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
-    await formatFOAU([
-        {"name": name},
-        { $set: {[`community-service.${Index}.service-hours`]: hours}},
-        { returnOriginal: false }
-    ])
-}
-
-export async function updateServiceDate(name, serviceName, startDate, endDate) {
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["community-service"].findIndex(x => x["service-name"] === serviceName);
-    await formatFOAU([
-        {"name": name},
-        { $set: {[`community-service.${Index}.service-date`]: `${startDate} - ${endDate}`}},
-        { returnOriginal: false }
-    ])
+    ], res)
 }
 
 export async function removeService(req, res) {
