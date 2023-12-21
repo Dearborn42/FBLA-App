@@ -1,4 +1,3 @@
-import Student from "../Schema/mongoSchema.js";
 import { formatFOAU } from "./01-updateStudent.js";
 
 export async function addJob(req, res){
@@ -31,7 +30,7 @@ export async function updateJobDesc(req, res){
     const {value} = req.body;
     const index = user.work.findIndex(x => x.company === name);
     await formatFOAU([
-        {"name": name},
+        {"email": user.email},
         { $set: {[`work.${index}.job_desc`]: value}}
     ], res);
 }

@@ -1,4 +1,3 @@
-import Student from "../Schema/mongoSchema.js";
 import { formatFOAU } from "./01-updateStudent.js";
 
 export async function addSport(req, res) {

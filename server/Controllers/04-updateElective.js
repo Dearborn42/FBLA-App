@@ -1,30 +1,35 @@
 import Student from "../Schema/mongoSchema.js";
 import { formatFOAU } from "./01-updateStudent.js";
 
-export async function removeElective(name, elective){
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument[`elective-grades`].findIndex(x => x[`elective-name`] === elective);
+export async function removeElective(req, res){
+    const user = req.user;
+    const {name} = req.params;
+    const Index = user[`elective-grades`].findIndex(x => x[`elective-name`] === name);
     await formatFOAU([
-        {"name": name},
-        { $pull: {"elective-grades": studentDocument[`elective-grades`][Index]}},
+        {"email": user.email},
+        { $pull: {"elective-grades": user[`elective-grades`][Index]}},
         {returnOriginal: false}
-    ])
+    ], res)
 }
 
-export async function addElective(name, electiveName, electiveGrade){
+export async function addElective(req, res){
+    const user = req.user;
+    const {name, grade} = req.body
     await formatFOAU([
-        {"name": name},
-        {$push: {"elective-grades": {"elective-name": electiveName, "elective-grade": electiveGrade}}},
+        {"email": user.email},
+        {$push: {"elective-grades": {"elective-name": name, "elective-grade": grade}}},
         {returnOriginal: false}
-    ])
+    ], res)
 }
 
-export async function updateElectiveGrade(name, electiveName, electiveGrade){
-    const studentDocument = await Student.findOne({ "name": name });
-    const Index = studentDocument["elective-grades"].findIndex(x => x[`elective-name`] === electiveName);
+export async function updateElectiveGrade(req, res){
+    const user = req.user;
+    const {name} = req.params;
+    const {value} = req.body;
+    const Index = user["elective-grades"].findIndex(x => x[`elective-name`] === name);
     await formatFOAU([
-        {"name": name},
-        { $set: {[`elective-grades.${Index}.elective-grade`]: electiveGrade}},
+        {"email": user.email},
+        { $set: {[`elective-grades.${Index}.elective-grade`]: value}},
         { returnOriginal: false }
-    ])
+    ]), res
 }

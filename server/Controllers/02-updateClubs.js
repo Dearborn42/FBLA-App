@@ -14,11 +14,11 @@ export async function updateClubsDesc(req, res){
 
 export async function removeClub(req, res){
     const {name} = req.params;
-    const studentDocument = req.user;
-    const clubIndex = studentDocument.clubs.findIndex(x => x[`club-name`] === name);
+    const user = req.user;
+    const clubIndex = user.clubs.findIndex(x => x[`club-name`] === name);
     await formatFOAU([
-        {"name": name},
-        { $pull: {"clubs": studentDocument.clubs[clubIndex]}},
+        {"email": user.email},
+        { $pull: {"clubs": user.clubs[clubIndex]}},
         {returnOriginal: false}
     ], res)
 }
