@@ -34,15 +34,17 @@ app.use(express.urlencoded({ extended: false, limit: 100000, parameterLimit: 20}
 app.use(session({secret: process.env.SECRET_KEY, resave: false, saveUninitialized: true,}));
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use('/users/create', create);
-// app.use('/users', isAuthenticated, users);
-// app.use('/admin', isAuthenticated, admin_access, admin);
+app.use("/art", isAuthenticated, art);
+app.use("/clubs", isAuthenticated, clubs);
+app.use("/community", isAuthenticated, community);
+app.use("/jobs", isAuthenticated, jobs);
+app.use("/sports", isAuthenticated, sports);
+app.use("/studentInfo", isAuthenticated, studentInfo);
+app.use("/elective", isAuthenticated, elective);
 
-app.post("/", (req, res) => {
-    res.send("Hello World")
-})
-app.get('/home', (req, res) => {
-  res.json({ message: 'Welcome to the home endpoint!' });
-});
+app.post("/login", login)
+app.get('/', (req, res) => {
+  res.status(200).json({ success: true });
+});  
 app.listen(port, process.env.ip, ()=>{console.log(`listening on port ${port}`)});
 export default app;

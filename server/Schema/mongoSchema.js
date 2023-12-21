@@ -130,9 +130,9 @@ const studentSchema = new Schema({
      },
 }, {  database: 'ClusterDB', collection: 'students'})
 
-studentSchema.methods.validPassword = function (password) {
+studentSchema.method("validPassword", function (password) {
   return bcrypt.compare(password, this.password);
-};
+});
 
 const Student = mongoose.model('Student', studentSchema);
 
