@@ -1,10 +1,8 @@
 import mongoose from'mongoose';
 import Student from './mongoSchema.js'
-import { MONGO } from '@env'
-mongoose.connect(MONGO, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+import dotenv from "dotenv";
+dotenv.config()
+mongoose.connect(process.env.MONGO_URI)
 
 class Students{
     constructor(

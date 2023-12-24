@@ -1,5 +1,6 @@
 import { isAuthenticated } from './Middleware/auth.js';
 import { login } from './Middleware/login.js';
+import {createStudent} from './Schema/studentCreation.js';
 import art from "./Routes/arts-route.js";
 import clubs from "./Routes/clubs-route.js";
 import community from "./Routes/community-route.js";
@@ -19,7 +20,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import passportSetup from './Config/passportSetup.js';
 dotenv.config()
-mongoose.connect(process.env.MONGO)
+mongoose.connect(process.env.MONGO_URI)
 passportSetup(passport)
 
 
@@ -45,6 +46,7 @@ app.use("/elective", isAuthenticated, elective);
 app.post("/login", login)
 app.get('/', (req, res) => {
   res.status(200).json({ success: true });
-});  
+});
+// app.post("/create", createStudent)
 app.listen(port, process.env.ip, ()=>{console.log(`listening on port ${port}`)});
 export default app;
