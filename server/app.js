@@ -27,7 +27,7 @@ passportSetup(passport)
 const port = 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-app.use(cors());
+app.use(cors({ credentials: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -44,9 +44,22 @@ app.use("/studentInfo", isAuthenticated, studentInfo);
 app.use("/elective", isAuthenticated, elective);
 
 app.post("/login", login)
-app.get('/', (req, res) => {
-  res.status(200).json({ success: true });
-});
+app.get("/", isAuthenticated, (req, res) => {
+  res.status(200).json({success: true, user: req.user});
+})
 // app.post("/create", createStudent)
+app.post("/create-1", (req, res)=>{
+    req.body.student_form1 = {...req.body};
+    console.log(req.body);
+    res.status(200).json({success: true});
+})
+app.post("/create-2", (req, res)=>{
+    req.body.student_form2 = {...req.body};
+    res.status(200).json({success: true});
+})
+app.post("/create-3", (req, res)=>{
+  req.body.student_form2 = {...req.body};
+  res.status(200).json({success: true});
+})
 app.listen(port, process.env.ip, ()=>{console.log(`listening on port ${port}`)});
 export default app;

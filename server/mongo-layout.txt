@@ -1,16 +1,21 @@
-person = {
-    "name" : "String",
-    "grade_level" : number,
-    "school": "String",
-    "freshman_grades" : {"math": num, "english": num, "science": num, "history": num},
-    "sophmore_grades" : {"math": num, "english": num, "science": num, "history": num},
-    "junior_grades" : {"math": num, "english": num, "science": num, "history": num},
-    "senior_grades" : {"math": num, "english": num, "science": num, "history": num},
-    elective_grades : like list above
-    "clubs" : ["List of clubs and their desc {"Theater": "desc"}, {"Band": "desc"}"],
-    "jobs/internships/orgs": ["List of all of them like the one above"],
-    "community serice hours": [{"Name": "", "Description": "", "Hours": num, "Date": ""}],
-    "athletics" : [{name, what they did, awards}],
-    "performing_arts/awards" : [{name, what they did, awards}],
-    *can think of things later*
+person = {  
+    name
+    email
+    password
+    share-pin
+    private
+    grade_level
+    school
+    ///////////////////////////////////
+    freshman-grades
+    sophomore-grades
+    junior-grades
+    senior-grades
+    elective-grades
+    /////////////////////////////////
+    clubs
+    work
+    community-service
+    sports
+    perfrorming-arts
 }

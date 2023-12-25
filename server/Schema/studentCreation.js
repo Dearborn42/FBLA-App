@@ -39,11 +39,11 @@ class Students{
         const grades = [];
 
         allGrades.forEach(gradesArray => {
-        const gradeObject = {};
-        subjects.forEach((subject, index) => {
-            gradeObject[subject] = gradesArray[index] || "N/A";
-        });
-        grades.push(gradeObject);
+            const gradeObject = {};
+            subjects.forEach((subject, index) => {
+                gradeObject[subject] = gradesArray[index] || "N/A";
+            });
+            grades.push(gradeObject);
         });
 
         return this && grades;
