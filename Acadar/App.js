@@ -1,22 +1,16 @@
-import React from 'react'
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Button, Text } from 'react-native';
 import Classes from './Components/Create/Classes';
 import Account from './Components/Create/Account';
 
 
 const App = () => {
+  const studentSetup = [Account, Classes];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const CurrentForm = studentSetup[currentIndex]
   return (
-    <View>
-      <Account />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <Classes/>
+    <View style={{height: "100%", width: "100%"}}>
+      <CurrentForm mod={setCurrentIndex}/>
     </View>
   )
 }

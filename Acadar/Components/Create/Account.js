@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Picker } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown'
 
-const Account = () => {
+const Account = ({mod}) => {
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -17,19 +18,19 @@ const Account = () => {
         });
     }
     async function handleSubmit(){
-        var body1 = await fetch("http://localhost:5000/create-1", {
+        var body1 = await fetch("http://localhost:5000/create1", {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({form})
         });
         var body1_response = await body1.json();
         if (body1_response.success){
-            console.log("Hell yeah!");
+            mod((prev) => prev += 1);
         }
     }
   return (
     <View style={styles.container}> 
-        <Text>Name</Text>
+        <Text style={{color: "black"}}>Name</Text>
         <TextInput
         style={styles.input}
         value={form.name}
@@ -39,7 +40,6 @@ const Account = () => {
         id={"name"}
         name={"name"}
         />
-        <br />
         <Text>Email</Text>
         <TextInput
         style={styles.input}
@@ -50,7 +50,6 @@ const Account = () => {
         id={"email"}
         name={"email"}
         />
-        <br />
         <Text>Password</Text>
         <TextInput
         style={styles.input}
@@ -62,7 +61,6 @@ const Account = () => {
         name={"password"}
         secureTextEntry={true}
         />
-        <br />
         <Text>Pin to share with others</Text>
         <TextInput
         style={styles.input}
@@ -74,18 +72,15 @@ const Account = () => {
         name={"share-pin"}
         secureTextEntry={true}
         />
-        <br />
         <Text>Do you want a private account?</Text>
-        <Picker
-            selectedValue={form.private ? 'true' : 'false'}
-            onValueChange={(itemValue) => updateForm({ private: itemValue === 'true' })}
-            style={styles.picker} 
-            required
-        >
-            <Picker.Item label="Yes" value="true" />
-            <Picker.Item label="No" value="false" />
-        </Picker>
-        <br />
+        <SelectDropdown
+            data={["Yes", "No"]}
+            onSelect={(itemValue) => updateForm({ private: itemValue === 'Yes' })}
+            buttonTextAfterSelection={(selectedItem) => {
+                if(selectedItem) return "Yes"
+                return "No"
+            }}
+        />
         <Text>Grade Level</Text>
         <TextInput
         style={styles.input}
@@ -96,7 +91,6 @@ const Account = () => {
         id={"grade_level"}
         name={"grade_level"}
         />
-        <br />
         <Text>School</Text>
         <TextInput
         style={styles.input}
@@ -107,9 +101,7 @@ const Account = () => {
         id={"school"}
         name={"school"}
         />
-        <br />
         <Button title="Submit" onPress={handleSubmit} />
-        <br />
     </View>
   )
 }
@@ -117,6 +109,10 @@ const Account = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
+    height: "100%",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
     backgroundColor: '#fff',
   },

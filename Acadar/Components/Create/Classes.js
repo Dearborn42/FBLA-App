@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function Classes() {
+export default function Classes({mod}) {
   const [form, setForm] = useState({
     freshman: [],
     sophomore: [],
@@ -42,14 +42,14 @@ export default function Classes() {
         }
       }
     }
-    var body2 = await fetch("http://localhost:5000/create-2", {
+    var body2 = await fetch("http://localhost:5000/create2", {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({form})
     });
     var body2_response = await body2.json();
     if (body2_response.success){
-        console.log("Hell yeah!");
+        mod((prev) => prev += 1);
     }
   };
 
