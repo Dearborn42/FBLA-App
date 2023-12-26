@@ -82,8 +82,7 @@ const studentSchema = new Schema({
                 value.every(x => {
                     let company = typeof x["company"] === "string";
                     let desc = typeof x["job_desc"] === "string";
-                    let type = typeof x["type"] === "string";
-                    return company && desc && type;
+                    return company && desc;
                 })
             }
         }
