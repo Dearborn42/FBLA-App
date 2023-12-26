@@ -6,7 +6,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 class Students{
     constructor(
-        name, email, password, sharePin, privacy, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
+        name, email, password, sharePin, privacy, grade_level, school, fgrades, sophgrades, jgrades, sengrades, clubNames, clubDescs, jobNames, jobDescs, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
         sportsDesc, sportAwards, artsName, artsDesc, artsAwards
         ){
         let grades = this.setGrades(fgrades, sophgrades, jgrades, sengrades)
@@ -25,7 +25,6 @@ class Students{
             "sophomore-grades": grades[1],
             "junior-grades": grades[2],
             "senior-grades": grades[3],
-            "elective-grades": this.setElectives(electiveNames, electiveGrades),
             "clubs": this.setClubs(clubNames, clubDescs),
             "work": this.setJobs(jobNames, jobDescs),
             "community-service": communityService,
@@ -47,21 +46,6 @@ class Students{
         });
 
         return this && grades;
-    }
-    setElectives(cn=null, cd=null){
-        let clubs = [];
-        if((cn.length == cd.length) && (Array.isArray(cn)) && (Array.isArray(cd))){
-            for(let i=0; i<cd.length; i++){
-                let obj = {
-                    "name": cn[i],
-                    "grade": cd[i]
-                }
-                clubs.push(obj)
-            }
-        }else{
-            return this && []
-        }
-        return this && clubs
     }
 
     setClubs(cn=null, cd=null){

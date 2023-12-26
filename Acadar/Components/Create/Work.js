@@ -50,7 +50,7 @@ const Work = ({mod}) => {
               <TextInput
                 style={styles.input}
                 value={job.company}
-                onChangeText={(text) => updateJob(index, company, text)}
+                onChangeText={(text) => updateJob(index, "company", text)}
                 placeholder="Enter company name"
                 required
                 id={"company"}

@@ -4,7 +4,106 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 const CommunityService = ({mod}) => {
     const [form, setForm] = useState({"community-service": []});
+
+    const addService = () => {
+        setForm((prev) => {
+            const newService = { "name": '', "desc": '', "hours": ''};
+            return { ...prev, "community-service": [...prev["community-service"], newService]};
+        });
+    };
+
+    const removeField = (index) => {
+        setForm((prev) => {
+            const updatedService = [...prev["community-service"]];
+            updatedService.splice(index, 1);
+            return { ...prev, "community-service": updatedService };
+        });
+    };
+    const updateService = (index, field, value) => {
+        setForm((prev) => {
+            const updatedServices = [...prev["community-service"]];
+            const updatedService = { ...updatedServices[index] };
+            updatedService[field] = value;
+            updatedServices[index] = updatedService;
+            return { ...prev, "community-service": updatedServices };
+        });
+    };
+
+    const handleSubmit = async () => {
+        var body7 = await fetch("http://localhost:5000/create7", {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({form})
+        });
+        var body7_response = await body7.json();
+        if (body7_response.success){
+            Alert("success")
+        }
+    }
+
+    return (
+    <View style={styles.container}>
+        <Text style={styles.header}>Enter your Community Services</Text>
+        <View>
+        {form["community-service"].map((service, index ) => (
+            <View key={index} style={styles.classContainer}>
+              <Text>Service {index + 1}</Text>
+              <TextInput
+                style={styles.input}
+                value={service.name}
+                onChangeText={(text) => updateService(index, "name", text)}
+                placeholder="Enter service name"
+                required
+                id={"name"}
+                name={"name"}
+              />
+              <TextInput
+                style={styles.input}
+                value={service.desc}
+                onChangeText={(text) => updateService(index, "desc", text)}
+                placeholder="Enter service experience"
+                required
+                id={"desc"}
+                name={"desc"}
+              />
+              <TextInput
+                style={styles.input}
+                value={service.award}
+                onChangeText={(text) => updateService(index, "hours", Number(text))}
+                placeholder="Enter amount of hours on this service"
+                required
+                id={"hours"}
+                name={"hours"}
+              />
+              <Button title="Remove" onPress={() => removeField(index)} />
+            </View>
+        ))}
+            <Button title={`Add Service`} onPress={() => addService()} />
+        </View>
+        <Button title="Submit" onPress={handleSubmit} />
+    </View> 
+  )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 20,
+  },
+});
 
 
 export default CommunityService

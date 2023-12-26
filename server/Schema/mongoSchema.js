@@ -51,18 +51,6 @@ const studentSchema = new Schema({
     "senior-grades": {
         type: gradeSchema,
     },
-    "elective-grades": {
-        type: Array,
-        validate: {
-            validator: (value) => {
-                value.every(x => {
-                    let name = typeof x["name"] === "string";
-                    let grade = typeof x["grade"] === "number"
-                    return name && grade;
-                })
-            }
-        }
-    },
     "clubs": {
         type: Array,
         validate: {
@@ -95,7 +83,6 @@ const studentSchema = new Schema({
                     let name = typeof x["name"] === "string";
                     let desc = typeof x["desc"] === "string";
                     let hours = typeof x["hours"] === "number";
-                    let date = typeof x["date"] === "string";
                     return name && desc && hours && date
                 })
             }

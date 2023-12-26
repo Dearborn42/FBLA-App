@@ -60,5 +60,22 @@ app.post("/create3", (req, res)=>{
   req.body.student_form3 = {...req.body};
   res.status(200).json({success: true});
 })
+app.post("/create4", (req, res)=>{
+  req.body.student_form4 = {...req.body};
+  res.status(200).json({success: true});
+})
+app.post("/create5", (req, res)=>{
+  req.body.student_form5 = {...req.body};
+  res.status(200).json({success: true});
+})
+app.post("/create6", (req, res)=>{
+  req.body.student_form6 = {...req.body};
+  res.status(200).json({success: true});
+})
+app.post("/create7", (req, res)=>{
+  req.body.student_form7 = {...req.body};
+  console.log(req.body);
+  res.status(200).json({success: true});
+})
 app.listen(port, ()=>{console.log(`listening on port ${port}`)});
 export default app;

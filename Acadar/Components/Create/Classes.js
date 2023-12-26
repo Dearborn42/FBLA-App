@@ -55,7 +55,7 @@ export default function Classes({mod}) {
 
   return (
     <View style={styles.container}>
-      {['freshman', 'sophomore', 'junior', 'senior','electives'].map((year) => (
+      {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
         <View key={year}>
           <Text style={styles.header}>{year.charAt(0).toUpperCase() + year.slice(1)}</Text>
           {form[year].map((classItem, index) => (
