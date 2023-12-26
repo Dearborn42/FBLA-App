@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function Classes({mod}) {
+export default function Classes({mod, data}) {
   const [form, setForm] = useState({
     freshman: [],
     sophomore: [],
@@ -33,25 +33,10 @@ export default function Classes({mod}) {
     });
   };
 
-  const handleSubmit = async () => {
-    // Validate form fields before submission
-    for (const year of ['freshman', 'sophomore', 'junior', 'senior', 'electives']) {
-      for (const classItem of form[year]) {
-        if (!classItem.name || !classItem.grade) {
-          return Alert.alert('Validation Error', `Please fill out all fields for ${year} class.`);
-        }
-      }
-    }
-    var body2 = await fetch("http://localhost:5000/create2", {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({form})
-    });
-    var body2_response = await body2.json();
-    if (body2_response.success){
-        mod((prev) => prev += 1);
-    }
-  };
+  function handleSubmit(){
+    data((prev) => {return { ...prev, ...form }});
+    mod((prev) => prev += 1);
+  }
 
   return (
     <View style={styles.container}>

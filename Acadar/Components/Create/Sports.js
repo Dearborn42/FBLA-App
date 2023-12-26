@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-const Sports = ({mod}) => {
+const Sports = ({mod, data}) => {
     const [form, setForm] = useState({sports: []});
 
     const addSport = () => {
@@ -29,16 +29,9 @@ const Sports = ({mod}) => {
         });
     };
 
-    const handleSubmit = async () => {
-        var body5 = await fetch("http://localhost:5000/create5", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({form})
-        });
-        var body5_response = await body5.json();
-        if (body5_response.success){
-            mod((prev) => prev += 1);
-        }
+    function handleSubmit(){
+      data((prev) => {return { ...prev, ...form }});
+      mod((prev) => prev += 1);
     }
 
     return (

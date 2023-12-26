@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-const PerformingArts = ({mod}) => {
+const PerformingArts = ({mod, data}) => {
     const [form, setForm] = useState({"performing-arts": []});
 
     const addArt = () => {
@@ -29,16 +29,9 @@ const PerformingArts = ({mod}) => {
         });
     };
 
-    const handleSubmit = async () => {
-        var body6 = await fetch("http://localhost:5000/create6", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({form})
-        });
-        var body6_response = await body6.json();
-        if (body6_response.success){
-            mod((prev) => prev += 1);
-        }
+    function handleSubmit(){
+      data((prev) => {return { ...prev, ...form }});
+      mod((prev) => prev += 1);
     }
 
     return (

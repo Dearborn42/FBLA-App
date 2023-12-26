@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false, limit: 100000, parameterLimit: 20}))
-app.use(session({secret: process.env.SECRET_KEY, resave: false, saveUninitialized: true,}));
+app.use(session({secret: process.env.SECRET_KEY, resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/art", isAuthenticated, art);
@@ -49,33 +49,7 @@ app.post("/login", login)
 // })
 // app.post("/create", createStudent)
 app.post("/create1", (req, res)=>{
-    req.body.student_form1 = {...req.body};
-    res.status(200).json({success: true});
-})
-app.post("/create2", (req, res)=>{
-    req.body.student_form2 = {...req.body};
-    res.status(200).json({success: true});
-})
-app.post("/create3", (req, res)=>{
-  req.body.student_form3 = {...req.body};
-  res.status(200).json({success: true});
-})
-app.post("/create4", (req, res)=>{
-  req.body.student_form4 = {...req.body};
-  res.status(200).json({success: true});
-})
-app.post("/create5", (req, res)=>{
-  req.body.student_form5 = {...req.body};
-  res.status(200).json({success: true});
-})
-app.post("/create6", (req, res)=>{
-  req.body.student_form6 = {...req.body};
-  res.status(200).json({success: true});
-})
-app.post("/create7", (req, res)=>{
-  req.body.student_form7 = {...req.body};
-  console.log(req.body);
-  res.status(200).json({success: true});
-})
+  console.log(req.body)
+});
 app.listen(port, ()=>{console.log(`listening on port ${port}`)});
 export default app;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const Work = ({mod}) => {
+const Work = ({mod, data}) => {
     const [form, setForm] = useState({work: []});
 
     const addJob = () => {
@@ -28,16 +28,9 @@ const Work = ({mod}) => {
         });
     };
 
-    const handleSubmit = async () => {
-        var body4 = await fetch("http://localhost:5000/create4", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({form})
-        });
-        var body4_response = await body4.json();
-        if (body4_response.success){
-            mod((prev) => prev += 1);
-        }
+    function handleSubmit(){
+      data((prev) => {return { ...prev, ...form }});
+      mod((prev) => prev += 1);
     }
 
     return (

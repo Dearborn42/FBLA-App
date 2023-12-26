@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
-const Account = ({mod}) => {
+const Account = ({mod, data}) => {  
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -17,16 +17,20 @@ const Account = ({mod}) => {
             return { ...prev, ...value };
         });
     }
-    async function handleSubmit(){
-        var body1 = await fetch("http://localhost:5000/create1", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({form})
-        });
-        var body1_response = await body1.json();
-        if (body1_response.success){
-            mod((prev) => prev += 1);
-        }
+    function handleSubmit(){
+      const values = Object.values(form);
+      var check = 0
+      values.forEach(value => {
+        if(value === false || value === true){
+          check++;
+          return;
+        }  
+        if(value != "") check++;
+      });
+      if(check === values.length){
+        data((prev) => {return { ...prev, ...form }});
+        mod((prev) => prev += 1);
+      }
     }
   return (
     <View style={styles.container}> 
@@ -76,10 +80,7 @@ const Account = ({mod}) => {
         <SelectDropdown
             data={["Yes", "No"]}
             onSelect={(itemValue) => updateForm({ private: itemValue === 'Yes' })}
-            buttonTextAfterSelection={(selectedItem) => {
-                if(selectedItem) return "Yes"
-                return "No"
-            }}
+            buttonTextAfterSelection={(selectedItem) => selectedItem}
         />
         <Text>Grade Level</Text>
         <TextInput

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-export default function Clubs({mod}){
+export default function Clubs({mod, data}){
     const [form, setForm] = useState({clubs: []});
 
     const addClub = () => {
@@ -29,16 +29,9 @@ export default function Clubs({mod}){
         });
     };
 
-    const handleSubmit = async () => {
-        var body3 = await fetch("http://localhost:5000/create3", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({form})
-        });
-        var body3_response = await body3.json();
-        if (body3_response.success){
-            mod((prev) => prev += 1);
-        }
+    function handleSubmit(){
+      data((prev) => {return { ...prev, ...form }});
+      mod((prev) => prev += 1);
     }
   return (
     <View style={styles.container}>

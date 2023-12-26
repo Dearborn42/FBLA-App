@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-const CommunityService = ({mod}) => {
+const CommunityService = ({mod, data}) => {
     const [form, setForm] = useState({"community-service": []});
 
     const addService = () => {
@@ -30,13 +30,13 @@ const CommunityService = ({mod}) => {
     };
 
     const handleSubmit = async () => {
-        var body7 = await fetch("http://localhost:5000/create7", {
+        var body1 = await fetch("http://localhost:5000/create1", {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({form})
+            body: JSON.stringify({...data, ...form})
         });
-        var body7_response = await body7.json();
-        if (body7_response.success){
+        var body1_response = await body1.json();
+        if (body1_response.success){
             Alert("success")
         }
     }
