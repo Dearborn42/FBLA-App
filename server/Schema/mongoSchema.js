@@ -56,8 +56,8 @@ const studentSchema = new Schema({
         validate: {
             validator: (value) => {
                 value.every(x => {
-                    let name = typeof x["elective-name"] === "string";
-                    let grade = typeof x["elective-grade"] === "number"
+                    let name = typeof x["name"] === "string";
+                    let grade = typeof x["grade"] === "number"
                     return name && grade;
                 })
             }
@@ -68,8 +68,8 @@ const studentSchema = new Schema({
         validate: {
             validator: (value) => {
                 value.every(x => {
-                    let name = typeof x["club-name"] === "string";
-                    let desc = typeof x["club-desc"] === "string";
+                    let name = typeof x["name"] === "string";
+                    let desc = typeof x["desc"] === "string";
                     return name && desc;
                 })
             }
@@ -81,7 +81,7 @@ const studentSchema = new Schema({
             validator: (value) => {
                 value.every(x => {
                     let company = typeof x["company"] === "string";
-                    let desc = typeof x["job_desc"] === "string";
+                    let desc = typeof x["desc"] === "string";
                     return company && desc;
                 })
             }
@@ -92,10 +92,10 @@ const studentSchema = new Schema({
         validate: {
             validator: (value) => {
                 value.every(x => {
-                    let name = typeof x["service-name"] === "string";
-                    let desc = typeof x["service-desc"] === "string";
-                    let hours = typeof x["service-hours"] === "number";
-                    let date = typeof x["service-date"] === "string";
+                    let name = typeof x["name"] === "string";
+                    let desc = typeof x["desc"] === "string";
+                    let hours = typeof x["hours"] === "number";
+                    let date = typeof x["date"] === "string";
                     return name && desc && hours && date
                 })
             }
@@ -106,9 +106,9 @@ const studentSchema = new Schema({
         validate: {
             validator: (value) => {
                 value.every(x => {
-                    let sport = typeof x["sport"] === "string";
-                    let desc = typeof x["sport-desc"] === "string";
-                    let awards = typeof x["awards/achievments"] === "string";
+                    let sport = typeof x["name"] === "string";
+                    let desc = typeof x["desc"] === "string";
+                    let awards = typeof x["award"] === "string";
                     return sport && desc && awards
                 })
             }
@@ -119,9 +119,9 @@ const studentSchema = new Schema({
         validate: {
             validator: (value) => {
                 value.every(x => {
-                    let name = typeof x["performing-art"] === "string";
+                    let name = typeof x["name"] === "string";
                     let desc = typeof x["desc"] === "string";
-                    let awards = typeof x["awards/achievments"] === "string";
+                    let awards = typeof x["award"] === "string";
                     return name && desc && awards
                 })
             }

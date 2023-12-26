@@ -6,7 +6,7 @@ const Work = ({mod}) => {
 
     const addJob = () => {
         setForm((prev) => {
-            const newJob = { "company": '', "job_desc": ''};
+            const newJob = { "company": '', "desc": ''};
             return { ...prev, work: [...prev.work, newJob]};
         });
     };
@@ -58,12 +58,12 @@ const Work = ({mod}) => {
               />
               <TextInput
                 style={styles.input}
-                value={job["job_desc"]}
-                onChangeText={(text) => updateJob(index, "job_desc", text)}
+                value={job["desc"]}
+                onChangeText={(text) => updateJob(index, "desc", text)}
                 placeholder="Enter job description"
                 required
-                id={"job_desc"}
-                name={"job_desc"}
+                id={"desc"}
+                name={"desc"}
               />
               <Button title="Remove" onPress={() => removeField(index)} />
             </View>

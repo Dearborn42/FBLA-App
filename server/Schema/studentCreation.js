@@ -6,7 +6,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 class Students{
     constructor(
-        name, email, password, sharePin, privacy, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, jobType, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
+        name, email, password, sharePin, privacy, grade_level, school, fgrades, sophgrades, jgrades, sengrades, electiveNames, electiveGrades, clubNames, clubDescs, jobNames, jobDescs, communityServiceName, communityServiceDesc, communityServiceHours, communityServiceDate, sportsName,
         sportsDesc, sportAwards, artsName, artsDesc, artsAwards
         ){
         let grades = this.setGrades(fgrades, sophgrades, jgrades, sengrades)
@@ -27,7 +27,7 @@ class Students{
             "senior-grades": grades[3],
             "elective-grades": this.setElectives(electiveNames, electiveGrades),
             "clubs": this.setClubs(clubNames, clubDescs),
-            "work": this.setJobs(jobNames, jobDescs, jobType),
+            "work": this.setJobs(jobNames, jobDescs),
             "community-service": communityService,
             "sports": this.setSports(sportsName, sportsDesc, sportAwards),
             "perfrorming-arts": this.setArts(artsName, artsDesc, artsAwards)
@@ -53,8 +53,8 @@ class Students{
         if((cn.length == cd.length) && (Array.isArray(cn)) && (Array.isArray(cd))){
             for(let i=0; i<cd.length; i++){
                 let obj = {
-                    "elective-name": cn[i],
-                    "elective-grade": cd[i]
+                    "name": cn[i],
+                    "grade": cd[i]
                 }
                 clubs.push(obj)
             }
@@ -69,8 +69,8 @@ class Students{
         if((cn.length == cd.length) && (Array.isArray(cn)) && (Array.isArray(cd))){
             for(let i=0; i<cd.length; i++){
                 let obj = {
-                    "club-name": cn[i],
-                    "club-desc": cd[i]
+                    "name": cn[i],
+                    "desc": cd[i]
                 }
                 clubs.push(obj)
             }
@@ -79,14 +79,13 @@ class Students{
         }
         return this && clubs
     }
-    setJobs(jn=null, jd=null, jt=null){
+    setJobs(jn=null, jd=null){
         let jobs = [];
         if((jn.length == jd.length) && (Array.isArray(jn)) && (Array.isArray(jd) && Array.isArray(jt))){
             for(let i=0; i<jn.length; i++){
                 let obj = {
                     "company": jn[i],
-                    "job_desc": jd[i], 
-                    "type": jt[i]
+                    "desc": jd[i],
                 }
                 jobs.push(obj)
             }

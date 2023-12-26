@@ -7,7 +7,7 @@ const Sports = ({mod}) => {
 
     const addSport = () => {
         setForm((prev) => {
-            const newSport = { "sport": '', "sport-desc": '', "awards/achievments": ''};
+            const newSport = { "name": '', "desc": '', "award": ''};
             return { ...prev, sports: [...prev.sports, newSport]};
         });
     };
@@ -50,30 +50,30 @@ const Sports = ({mod}) => {
               <Text>Sport {index + 1}</Text>
               <TextInput
                 style={styles.input}
-                value={sport.sport}
-                onChangeText={(text) => updateSport(index, sport, text)}
+                value={sport.name}
+                onChangeText={(text) => updateSport(index, "name", text)}
                 placeholder="Enter sport name"
                 required
-                id={"sport"}
-                name={"sport"}
+                id={"name"}
+                name={"name"}
               />
               <TextInput
                 style={styles.input}
-                value={sport["sport-desc"]}
-                onChangeText={(text) => updateSport(index, "sport-desc", text)}
+                value={sport["desc"]}
+                onChangeText={(text) => updateSport(index, "desc", text)}
                 placeholder="Enter sport experience"
                 required
-                id={"sport-desc"}
-                name={"sport-desc"}
+                id={"desc"}
+                name={"desc"}
               />
               <TextInput
                 style={styles.input}
-                value={sport["awards/achievments"]}
-                onChangeText={(text) => updateSport(index, "awards/achievments", text)}
+                value={sport["award"]}
+                onChangeText={(text) => updateSport(index, "award", text)}
                 placeholder="Enter sport highest award/achievment"
                 required
-                id={"awards/achievments"}
-                name={"awards/achievments"}
+                id={"award"}
+                name={"award"}
               />
               <Button title="Remove" onPress={() => removeField(index)} />
             </View>

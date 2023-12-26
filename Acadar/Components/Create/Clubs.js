@@ -7,7 +7,7 @@ export default function Clubs({mod}){
 
     const addClub = () => {
         setForm((prev) => {
-            const newClub = { "club-name": '', "club-desc": '' };
+            const newClub = { "name": '', "desc": '' };
             return { ...prev, clubs: [...prev.clubs, newClub] };
         });
     };
@@ -49,21 +49,21 @@ export default function Clubs({mod}){
               <Text>Club {index + 1}</Text>
               <TextInput
                 style={styles.input}
-                value={club["club-name"]}
-                onChangeText={(text) => updateClass(index, "club-name", text)}
+                value={club["name"]}
+                onChangeText={(text) => updateClass(index, "name", text)}
                 placeholder="Enter club name"
                 required
-                id={"club-name"}
-                name={"club-name"}
+                id={"name"}
+                name={"name"}
               />
               <TextInput
                 style={styles.input}
-                value={club["club-desc"]}
-                onChangeText={(text) => updateClass(index, "club-desc", text)}
+                value={club["desc"]}
+                onChangeText={(text) => updateClass(index, "desc", text)}
                 placeholder="Enter club description"
                 required
-                id={"club-desc"}
-                name={"club-desc"}
+                id={"desc"}
+                name={"desc"}
               />
               <Button title="Remove" onPress={() => removeField(index)} />
             </View>
