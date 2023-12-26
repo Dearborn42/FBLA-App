@@ -68,7 +68,7 @@ const Work = ({mod}) => {
               <Button title="Remove" onPress={() => removeField(index)} />
             </View>
         ))}
-            <Button title={`Add Club`} onPress={() => addJob()} />
+            <Button title={`Add Job`} onPress={() => addJob()} />
         </View>
         <Button title="Submit" onPress={handleSubmit} />
     </View> 
