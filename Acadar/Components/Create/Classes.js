@@ -6,8 +6,7 @@ export default function Classes({mod, data}) {
     freshman: [],
     sophomore: [],
     junior: [],
-    senior: [],
-    electives: []
+    senior: []
   });
 
   const addClass = (year) => {
@@ -34,8 +33,21 @@ export default function Classes({mod, data}) {
   };
 
   function handleSubmit(){
-    data((prev) => {return { ...prev, ...form }});
-    mod((prev) => prev += 1);
+    var check = 0;
+    var length = 0
+    for(let year in form){
+      form[year].forEach((hour) => {
+        length += 2;
+        const values = Object.values(hour);
+        values.forEach((value) => {
+          if(value.trim() != "") check++;
+        })
+      });
+    }
+    if(check == length){
+      data((prev) => {return { ...prev, ...form }});
+      mod((prev) => prev += 1);
+    }
   }
 
   return (

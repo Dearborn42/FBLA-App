@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 
 const CommunityService = ({mod, data}) => {
@@ -30,14 +30,25 @@ const CommunityService = ({mod, data}) => {
     };
 
     const handleSubmit = async () => {
-        var body1 = await fetch("http://localhost:5000/create1", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({...data, ...form})
-        });
-        var body1_response = await body1.json();
-        if (body1_response.success){
-            Alert("success")
+        var length = 0;
+        var check = 0;
+        form["performing-arts"].forEach((art) => {
+            length += 3;
+            const values = Object.values(art);
+            values.forEach((value) => {
+            if(value.trim() != "") check++;
+            })
+        })
+        if(check === length){
+            var body1 = await fetch("http://localhost:5000/create1", {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({...data, ...form})
+            });
+            var body1_response = await body1.json();
+            if (body1_response.success){
+                Alert.alert("Welcom", "You have successfully created an account")
+            }
         }
     }
 

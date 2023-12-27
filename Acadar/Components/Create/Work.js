@@ -29,8 +29,19 @@ const Work = ({mod, data}) => {
     };
 
     function handleSubmit(){
-      data((prev) => {return { ...prev, ...form }});
-      mod((prev) => prev += 1);
+      var length = 0;
+      var check = 0;
+      form.work.forEach((job) => {
+        length += 2;
+        const values = Object.values(job);
+        values.forEach((value) => {
+          if(value.trim() != "") check++;
+        })
+      })
+      if(check === length){
+        data((prev) => {return { ...prev, ...form }});
+        mod((prev) => prev += 1);
+      }
     }
 
     return (

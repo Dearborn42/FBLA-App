@@ -30,8 +30,19 @@ const PerformingArts = ({mod, data}) => {
     };
 
     function handleSubmit(){
-      data((prev) => {return { ...prev, ...form }});
-      mod((prev) => prev += 1);
+      var length = 0;
+      var check = 0;
+      form["performing-arts"].forEach((art) => {
+        length += 3;
+        const values = Object.values(art);
+        values.forEach((value) => {
+          if(value.trim() != "") check++;
+        })
+      })
+      if(check === length){
+        data((prev) => {return { ...prev, ...form }});
+        mod((prev) => prev += 1);
+      }
     }
 
     return (
