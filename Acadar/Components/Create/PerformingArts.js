@@ -3,36 +3,36 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
 const PerformingArts = ({mod, data}) => {
-    const [form, setForm] = useState({"performing-arts": []});
+    const [form, setForm] = useState({"perfrormingArts": []});
 
     const addArt = () => {
         setForm((prev) => {
             const newArt = { "name": '', "desc": '', "award": ''};
-            return { ...prev, "performing-arts": [...prev["performing-arts"], newArt]};
+            return { ...prev, "perfrormingArts": [...prev.perfrormingArts, newArt]};
         });
     };
 
     const removeField = (index) => {
         setForm((prev) => {
-            const updatedSport = [...prev["performing-arts"]];
+            const updatedSport = [...prev.perfrormingArts];
             updatedSport.splice(index, 1);
-            return { ...prev, "performing-arts": updatedSport };
+            return { ...prev, "perfrormingArts": updatedSport };
         });
     };
     const updateSport = (index, field, value) => {
         setForm((prev) => {
-            const updatedSports = [...prev["performing-arts"]];
+            const updatedSports = [...prev.perfrormingArts];
             const updatedSport = { ...updatedSports[index] };
             updatedSport[field] = value;
             updatedSports[index] = updatedSport;
-            return { ...prev, "performing-arts": updatedSports };
+            return { ...prev, "perfrormingArts": updatedSports };
         });
     };
 
     function handleSubmit(){
       var length = 0;
       var check = 0;
-      form["performing-arts"].forEach((art) => {
+      form.perfrormingArts.forEach((art) => {
         length += 3;
         const values = Object.values(art);
         values.forEach((value) => {
@@ -49,7 +49,7 @@ const PerformingArts = ({mod, data}) => {
     <View style={styles.container}>
         <Text style={styles.header}>Enter your performing arts</Text>
         <View>
-        {form["performing-arts"].map((art, index ) => (
+        {form.perfrormingArts.map((art, index ) => (
             <View key={index} style={styles.classContainer}>
               <Text>Art {index + 1}</Text>
               <TextInput

@@ -3,36 +3,36 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 
 const CommunityService = ({mod, data}) => {
-    const [form, setForm] = useState({"community-service": []});
+    const [form, setForm] = useState({"communityService": []});
 
     const addService = () => {
         setForm((prev) => {
             const newService = { "name": '', "desc": '', "hours": ''};
-            return { ...prev, "community-service": [...prev["community-service"], newService]};
+            return { ...prev, "communityService": [...prev.communityService, newService]};
         });
     };
 
     const removeField = (index) => {
         setForm((prev) => {
-            const updatedService = [...prev["community-service"]];
+            const updatedService = [...prev.communityService];
             updatedService.splice(index, 1);
-            return { ...prev, "community-service": updatedService };
+            return { ...prev, "communityService": updatedService };
         });
     };
     const updateService = (index, field, value) => {
         setForm((prev) => {
-            const updatedServices = [...prev["community-service"]];
+            const updatedServices = [...prev.communityService];
             const updatedService = { ...updatedServices[index] };
             updatedService[field] = value;
             updatedServices[index] = updatedService;
-            return { ...prev, "community-service": updatedServices };
+            return { ...prev, "communityService": updatedServices };
         });
     };
 
     const handleSubmit = async () => {
         var length = 0;
         var check = 0;
-        form["community-service"].forEach((art) => {
+        form.communityService.forEach((art) => {
             length += 3;
             const values = Object.values(art);
             values.forEach((value) => {
@@ -56,7 +56,7 @@ const CommunityService = ({mod, data}) => {
     <View style={styles.container}>
         <Text style={styles.header}>Enter your Community Services</Text>
         <View>
-        {form["community-service"].map((service, index ) => (
+        {form.communityService.map((service, index ) => (
             <View key={index} style={styles.classContainer}>
               <Text>Service {index + 1}</Text>
               <TextInput

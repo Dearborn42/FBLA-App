@@ -21,19 +21,19 @@ const studentSchema = new Schema({
     },
     "grade_level": { ...stringCheck, required: true, trim: true}, 
     "school": { ...stringCheck, required: true, trim: true}, 
-    "freshman-grades": {
+    "freshman": {
         type: Array,
         validate: {validator: (value) => value.every(x => x.name != "" && x.grade != "")}
     }, 
-    "sophomore-grades": {
+    "sophomore": {
         type: Array,
         validate: {validator: (value) => value.every(x => x.name != "" && x.grade != "")}
     },
-    "junior-grades": {
+    "junior": {
         type: Array,
         validate: {validator: (value) => value.every(x => x.name != "" && x.grade != "")}
     },
-    "senior-grades": {
+    "senior": {
         type: Array,
         validate: {validator: (value) => value.every(x => x.name != "" && x.grade != "")}
     },
@@ -45,7 +45,7 @@ const studentSchema = new Schema({
         type: Array,
         validate: {validator: (value) => value.every(x => x.company != "" && x.desc != "")}
     },
-    "community-service": { 
+    "communityService": { 
         type: Array,
         validate: {validator: (value) => value.every(
             x => x.name != "" && x.desc != "" && x.hours != ""
@@ -57,7 +57,7 @@ const studentSchema = new Schema({
             x => x.name != "" && x.desc != "" && x.award != ""
         )}
     },
-    "perfrorming-arts": { 
+    "perfrormingArts": { 
         type: Array,
         validate: {validator: (value) => value.every(
             x => x.name != "" && x.desc != "" && x.award != ""
