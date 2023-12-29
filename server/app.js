@@ -44,7 +44,7 @@ app.use("/studentInfo", isAuthenticated, studentInfo);
 app.use("/elective", isAuthenticated, elective);
 
 app.post("/login", login)
-app.get("/", isAuthenticated, (req, res) => {
+app.get("/user", isAuthenticated, (req, res) => {
   console.log(req.user);
   res.status(200).json({success: true, user: req.user});
 })

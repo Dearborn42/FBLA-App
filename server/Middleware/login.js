@@ -7,7 +7,7 @@ export async function hashPassword(password){
 
 export function login(req, res, next){
   passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/home'
+    successRedirect: '/user',
+    failureRedirect: '/login'
   })(req, res, next);
 }

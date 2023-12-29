@@ -17,10 +17,10 @@ const App = () => {
   const CurrentForm = studentSetup[currentIndex]
   return (
     <View style={{height: "100%", width: "100%"}}>
-      {/* <Login /> */}
-      {currentIndex != studentSetup.length-1 ? <CurrentForm mod={setCurrentIndex} data={setPrev}/> : 
+      <Login />
+      {/* {currentIndex != studentSetup.length-1 ? <CurrentForm mod={setCurrentIndex} data={setPrev}/> : 
         <CurrentForm mod={setCurrentIndex} data={prev}/>
-      }
+      } */}
       
     </View>
   )

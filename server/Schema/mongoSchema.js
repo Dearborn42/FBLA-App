@@ -12,7 +12,7 @@ const stringCheck = {
 const studentSchema = new Schema({
     "name": { ...stringCheck, required: true, trim: true},
     "email":{ ...stringCheck, required: true, trim: true, unique: true},
-    "password": { ...stringCheck, required: true, trim: true, unique: true},
+    "password": { ...stringCheck, required: true, trim: true},
     "share-pin": { ...stringCheck, required: true, trim: true},
     "private": {
         type: Boolean, 

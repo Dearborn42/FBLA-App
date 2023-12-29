@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown'
+import { View, Text, TextInput, Button, StyleSheet} from 'react-native';
 
 const Login = () => {  
     const [form, setForm] = useState({email: "", password: "",});
@@ -9,7 +8,7 @@ const Login = () => {
         var login = await fetch("http://localhost:5000/login", {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            credentials: 'include',
+            credentials: "include",
             body: JSON.stringify(form)
         })
         var login_response = await login.json();
@@ -23,7 +22,7 @@ const Login = () => {
         <TextInput
         style={styles.input}
         value={form.email}
-        onChangeText={(text) => updateForm({ email: text })}
+        onChangeText={(text) => updateForm({ email: text.trim() })}
         placeholder="Enter your email"
         required
         id={"email"}
@@ -33,7 +32,7 @@ const Login = () => {
         <TextInput
         style={styles.input}
         value={form.password}
-        onChangeText={(text) => updateForm({ password: text })}
+        onChangeText={(text) => updateForm({ password: text.trim() })}
         placeholder="Enter your password"
         required
         id={"password"}

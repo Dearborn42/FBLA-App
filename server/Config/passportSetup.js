@@ -15,6 +15,6 @@ export default (passport) => {
   });
       
   passport.deserializeUser((email, done) => {
-    StudentUser.findOne({email}).then((err, user) => {done(user, err);})
+    Student.findOne({email}).then((err, user) => {done(user, err);})
   }); 
 }
