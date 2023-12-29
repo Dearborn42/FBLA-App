@@ -7,112 +7,61 @@ const stringCheck = {
     validate: {validator: (value) => {return (typeof value === 'string')}}
 }
 
-const numCheck = {
-    type: Number, 
-    validate: {validator: (value) => {return (typeof value === 'number')}}
-}
-
-const letterGradeCheck = {
-    type: mongoose.Schema.Types.Mixed,
-    validate: {validator: (value) => {return (typeof value === 'number' || typeof value === 'string')}}
-}
-
-const gradeSchema = new Schema({
-    "math": letterGradeCheck,
-    "science": letterGradeCheck,
-    "english": letterGradeCheck,
-    "history": letterGradeCheck,
-})
-
-
 
 
 const studentSchema = new Schema({
     "name": { ...stringCheck, required: true, trim: true},
     "email":{ ...stringCheck, required: true, trim: true, unique: true},
     "password": { ...stringCheck, required: true, trim: true, unique: true},
-    "share-pin": { ...numCheck, required: true, trim: true},
+    "share-pin": { ...stringCheck, required: true, trim: true},
     "private": {
         type: Boolean, 
         validate: {validator: (value) => {return (typeof value === 'boolean')}}, 
         required: true,
     },
-    "grade_level": { ...numCheck, required: true, trim: true}, 
+    "grade_level": { ...stringCheck, required: true, trim: true}, 
     "school": { ...stringCheck, required: true, trim: true}, 
     "freshman-grades": {
-        type: gradeSchema,
+        type: Array,
+        validate: {validator: (value) => value.every(x => x.name != "" && x.grade != "")}
     }, 
     "sophomore-grades": {
-        type: gradeSchema,
+        type: Array,
+        validate: {validator: (value) => value.every(x => x.name != "" && x.grade != "")}
     },
     "junior-grades": {
-        type: gradeSchema,
+        type: Array,
+        validate: {validator: (value) => value.every(x => x.name != "" && x.grade != "")}
     },
     "senior-grades": {
-        type: gradeSchema,
+        type: Array,
+        validate: {validator: (value) => value.every(x => x.name != "" && x.grade != "")}
     },
     "clubs": {
         type: Array,
-        validate: {
-            validator: (value) => {
-                value.every(x => {
-                    let name = typeof x["name"] === "string";
-                    let desc = typeof x["desc"] === "string";
-                    return name && desc;
-                })
-            }
-        }
+        validate: {validator: (value) => value.every(x => x.name != "" && x.desc != "")}
     },
     "work": {
         type: Array,
-        validate: {
-            validator: (value) => {
-                value.every(x => {
-                    let company = typeof x["company"] === "string";
-                    let desc = typeof x["desc"] === "string";
-                    return company && desc;
-                })
-            }
-        }
+        validate: {validator: (value) => value.every(x => x.company != "" && x.desc != "")}
     },
     "community-service": { 
-        type: Array, 
-        validate: {
-            validator: (value) => {
-                value.every(x => {
-                    let name = typeof x["name"] === "string";
-                    let desc = typeof x["desc"] === "string";
-                    let hours = typeof x["hours"] === "number";
-                    return name && desc && hours && date
-                })
-            }
-        } 
+        type: Array,
+        validate: {validator: (value) => value.every(
+            x => x.name != "" && x.desc != "" && x.hours != ""
+        )}
     },
     "sports": { 
         type: Array,
-        validate: {
-            validator: (value) => {
-                value.every(x => {
-                    let sport = typeof x["name"] === "string";
-                    let desc = typeof x["desc"] === "string";
-                    let awards = typeof x["award"] === "string";
-                    return sport && desc && awards
-                })
-            }
-        }
+        validate: {validator: (value) => value.every(
+            x => x.name != "" && x.desc != "" && x.award != ""
+        )}
     },
     "perfrorming-arts": { 
         type: Array,
-        validate: {
-            validator: (value) => {
-                value.every(x => {
-                    let name = typeof x["name"] === "string";
-                    let desc = typeof x["desc"] === "string";
-                    let awards = typeof x["award"] === "string";
-                    return name && desc && awards
-                })
-            }
-        }
+        validate: {validator: (value) => value.every(
+            x => x.name != "" && x.desc != "" && x.award != ""
+        )}
      },
 }, {  database: 'ClusterDB', collection: 'students'})
 

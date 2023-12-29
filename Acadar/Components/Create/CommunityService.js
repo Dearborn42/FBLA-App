@@ -32,11 +32,11 @@ const CommunityService = ({mod, data}) => {
     const handleSubmit = async () => {
         var length = 0;
         var check = 0;
-        form["performing-arts"].forEach((art) => {
+        form["community-service"].forEach((art) => {
             length += 3;
             const values = Object.values(art);
             values.forEach((value) => {
-            if(value.trim() != "") check++;
+              if(value.trim() != "") check++;
             })
         })
         if(check === length){
@@ -47,7 +47,7 @@ const CommunityService = ({mod, data}) => {
             });
             var body1_response = await body1.json();
             if (body1_response.success){
-                Alert.alert("Welcom", "You have successfully created an account")
+                
             }
         }
     }
@@ -80,7 +80,7 @@ const CommunityService = ({mod, data}) => {
               <TextInput
                 style={styles.input}
                 value={service.award}
-                onChangeText={(text) => updateService(index, "hours", Number(text))}
+                onChangeText={(text) => updateService(index, "hours", text)}
                 placeholder="Enter amount of hours on this service"
                 required
                 id={"hours"}

@@ -65,7 +65,7 @@ const PerformingArts = ({mod, data}) => {
                 style={styles.input}
                 value={art.desc}
                 onChangeText={(text) => updateSport(index, "desc", text)}
-                placeholder="Enter sport experience"
+                placeholder="Enter art experience"
                 required
                 id={"desc"}
                 name={"desc"}
@@ -74,7 +74,7 @@ const PerformingArts = ({mod, data}) => {
                 style={styles.input}
                 value={art.award}
                 onChangeText={(text) => updateSport(index, "award", text)}
-                placeholder="Enter sport highest award/achievment"
+                placeholder="Enter highest award/achievment"
                 required
                 id={"award"}
                 name={"award"}

@@ -7,6 +7,7 @@ import Work from './Components/Create/Work';
 import Sports from './Components/Create/Sports';
 import PerformingArts from './Components/Create/PerformingArts';
 import CommunityService from './Components/Create/CommunityService';
+import Login from './Components/Login';
 
 
 const App = () => {
@@ -16,9 +17,10 @@ const App = () => {
   const CurrentForm = studentSetup[currentIndex]
   return (
     <View style={{height: "100%", width: "100%"}}>
-      {currentIndex != studentSetup.length-1 ? <CurrentForm mod={setCurrentIndex} data={setPrev}/> : 
+      <Login />
+      {/* {currentIndex != studentSetup.length-1 ? <CurrentForm mod={setCurrentIndex} data={setPrev}/> : 
         <CurrentForm mod={setCurrentIndex} data={prev}/>
-      }
+      } */}
       
     </View>
   )
