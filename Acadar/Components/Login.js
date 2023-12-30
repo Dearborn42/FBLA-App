@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet} from 'react-native';
 
 const Login = () => {  
-    const [form, setForm] = useState({email: "", password: "",});
+    const [form, setForm] = useState({'email': "", 'password': "",});
     var updateForm = (value) => setForm((prev) => {return { ...prev, ...value }});
-    async function handleSubmit(){
-        var login = await fetch("http://localhost:5000/login", {
+    var handleSubmit = async () => {
+        console.log(form);
+        var login = await fetch("http://localhost:5000//login", {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
-            body: JSON.stringify(form)
+            body: JSON.stringify({...form})
         })
         var login_response = await login.json();
         if(login_response.success){
@@ -22,7 +23,7 @@ const Login = () => {
         <TextInput
         style={styles.input}
         value={form.email}
-        onChangeText={(text) => updateForm({ email: text.trim() })}
+        onChangeText={(text) => updateForm({ 'email': text.trim() })}
         placeholder="Enter your email"
         required
         id={"email"}
@@ -32,7 +33,7 @@ const Login = () => {
         <TextInput
         style={styles.input}
         value={form.password}
-        onChangeText={(text) => updateForm({ password: text.trim() })}
+        onChangeText={(text) => updateForm({ 'password': text.trim() })}
         placeholder="Enter your password"
         required
         id={"password"}

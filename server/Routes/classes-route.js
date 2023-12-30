@@ -1,10 +1,10 @@
 import express from 'express';
-import {addElective, removeElective, updateElectiveGrade} from "../Controllers/04-updateElective.js"
+import {addClass, removeClass, updateClass} from "../Controllers/08-updateClasses.js"
 const router = express.Router();
 
 
-router.post("/add", addElective);
-router.delete("/remove/:name", removeElective);
-router.post("/update/:name", updateElectiveGrade)
+router.post("/add/:year", addClass);
+router.delete("/remove/:year/:name", removeClass);
+router.post("/update/:year/:name/:field", updateClass)
 
 export default router
