@@ -11,22 +11,17 @@ const UpdateStudent = ({user}) => {
     function updateForm(textValue) {
         return setForm({value: textValue});
     }
-    function handleBlur(){
-        updateForm("");
-    }
-
-    const handleSubmit = async () => {
-        console.log(`http://localhost:5000/studentInfo/update/${type}`);
-        console.log(form)
-        // var body1 = await fetch(`http://localhost:5000/studentInfo/update/${type}`, {
-        //     method: 'POST',
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({...form})
-        // });
-        // var body1_response = await body1.json();
-        // if (body1_response.success){
-            
-        // }
+    async function handleBlur(){
+      var body1 = await fetch(`http://localhost:5000/studentInfo/update/${type}`, {
+          method: 'POST',
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(form)
+      });
+      var body1_response = await body1.json();
+      if (body1_response.success){
+          
+      }
     }
 
     return (
@@ -35,12 +30,12 @@ const UpdateStudent = ({user}) => {
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
+        onBlur={()=>handleBlur()}
         placeholder={user.name}
         onFocus={() => handleType("name")}
         id={"name"}
         name={"name"}
         />
-        {type === "name" && (<Button title="Submit" onPress={handleSubmit} />)}
         <Text>Edit your Email</Text>
         <TextInput
         style={styles.input}
@@ -50,7 +45,6 @@ const UpdateStudent = ({user}) => {
         id={"email"}
         name={"email"}
         />
-        {type === "email" && (<Button title="Submit" onPress={handleSubmit} />)}
         <Text>Edit your Password</Text>
         <TextInput
         style={styles.input}
@@ -61,7 +55,6 @@ const UpdateStudent = ({user}) => {
         name={"password"}
         secureTextEntry={true}
         />
-        {type === "password" && (<Button title="Submit" onPress={handleSubmit} />)}
         <Text>Edit your share pin</Text>
         <TextInput
         style={styles.input}
@@ -72,7 +65,6 @@ const UpdateStudent = ({user}) => {
         name={"share-pin"}
         secureTextEntry={true}
         />
-        {type === "share-pin" && (<Button title="Submit" onPress={handleSubmit} />)}
         <Text>Edit your privacy</Text>
         <SelectDropdown
             data={["Yes", "No"]}
@@ -80,7 +72,6 @@ const UpdateStudent = ({user}) => {
             buttonTextAfterSelection={(selectedItem) => selectedItem}
             onFocus={() => handleType("private")}
         />
-        {type === "private" && (<Button title="Submit" onPress={handleSubmit} />)}
         <Text>Edit your Grade Level</Text>
         <TextInput
         style={styles.input}
@@ -90,7 +81,6 @@ const UpdateStudent = ({user}) => {
         id={"grade_level"}
         name={"grade_level"}
         />
-        {type === "grade_level" && (<Button title="Submit" onPress={handleSubmit} />)}
         <Text>Edit your School</Text>
         <TextInput
         style={styles.input}
@@ -101,7 +91,6 @@ const UpdateStudent = ({user}) => {
         id={"school"}
         name={"school"}
         />
-        {type === "school" && (<Button title="Submit" onPress={handleSubmit} />)}
     </View>
   )
 }
