@@ -1,13 +1,13 @@
 import { formatFOAU } from "./01-updateStudent.js";
 
 export async function updateClubsDesc(req, res){
-    const {name} = req.params;
+    const {name, field} = req.params;
     const {value} = req.body
     const studentDocument = req.user
     const clubIndex = studentDocument.clubs.findIndex(x => x[`club-name`] === name);
     await formatFOAU([
         {"email": studentDocument.email},
-        { $set: {[`clubs.${clubIndex}.club-desc`]: value}},
+        { $set: {[`clubs.${clubIndex}.${field}`]: value}},
         { returnOriginal: false }
     ], res)
 }

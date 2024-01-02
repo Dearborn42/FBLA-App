@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.post("/add", addClub);
 router.delete("/remove/:name", removeClub);
-router.post("/update/:name", updateClubsDesc);
+router.post("/update/:name/:field", updateClubsDesc);
 
 export default router

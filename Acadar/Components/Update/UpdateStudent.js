@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
 const UpdateStudent = ({user}) => {
