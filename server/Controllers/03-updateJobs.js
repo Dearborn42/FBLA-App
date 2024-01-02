@@ -26,11 +26,11 @@ export async function removeJob(req, res){
 
 export async function updateJobDesc(req, res){
     const user = req.user;
-    const {name} = req.params;
+    const {name, field} = req.params;
     const {value} = req.body;
     const index = user.work.findIndex(x => x.company === name);
     await formatFOAU([
         {"email": user.email},
-        { $set: {[`work.${index}.job_desc`]: value}}
+        { $set: {[`work.${index}.${field}`]: value}}
     ], res);
 }

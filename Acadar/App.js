@@ -10,6 +10,7 @@ import CommunityService from './Components/Create/CommunityService';
 import Login from './Components/Login';
 import UpdateStudent from './Components/Update/UpdateStudent';
 import UpdateClubs from './Components/Update/UpdateClubs';
+import UpdateJobs from './Components/Update/UpdateJobs';
 
 
 const App = () => {
@@ -158,7 +159,8 @@ const App = () => {
     }
   return (
     <View style={{height: "100%", width: "100%"}}>
-      <UpdateClubs user = {testObject} />
+      <UpdateJobs user={testObject} />
+      {/* <UpdateClubs user = {testObject} /> */}
       {/* <UpdateStudent user={testObject}/> */}
       {/* <Login /> */}
       {/* {currentIndex != studentSetup.length-1 ? <CurrentForm mod={setCurrentIndex} data={setPrev}/> : 

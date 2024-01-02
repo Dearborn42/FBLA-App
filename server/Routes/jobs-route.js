@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.post("/add", addJob);
 router.delete("/remove/:name", removeJob);
-router.post("/update/:name", updateJobDesc)
+router.post("/update/:name/:field", updateJobDesc)
 
 export default router

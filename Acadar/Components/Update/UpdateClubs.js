@@ -56,7 +56,6 @@ export default function UpdateClubs({user}){
     };
   return (
     <View style={styles.container}>
-        <Text style={styles.header}>Enter your clubs</Text>
         <View>
         {form.clubs.map((club, index ) => (
             <View key={index} style={styles.classContainer}>
