@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.post('/add', addService);
 router.delete('/remove/:name', removeService);
-router.post("/update/:name/:type", updateCommunityService);
+router.post("/update/:name/:field", updateCommunityService);
 
 export default router

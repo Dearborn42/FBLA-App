@@ -11,6 +11,7 @@ import Login from './Components/Login';
 import UpdateStudent from './Components/Update/UpdateStudent';
 import UpdateClubs from './Components/Update/UpdateClubs';
 import UpdateJobs from './Components/Update/UpdateJobs';
+import UpdateCommunityServce from './Components/Update/UpdateCommunityService';
 
 
 const App = () => {
@@ -159,7 +160,8 @@ const App = () => {
     }
   return (
     <View style={{height: "100%", width: "100%"}}>
-      <UpdateJobs user={testObject} />
+      <UpdateCommunityServce user={testObject} />
+      {/* <UpdateJobs user={testObject} /> */}
       {/* <UpdateClubs user = {testObject} /> */}
       {/* <UpdateStudent user={testObject}/> */}
       {/* <Login /> */}

@@ -59,7 +59,7 @@ export default function UpdateJobs({user}){
         <View>
         {form.work.map((job, index ) => (
             <View key={index} style={styles.classContainer}>
-              <Text>Club {index + 1}</Text>
+              <Text>Job {index + 1}</Text>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {handleValue(text); handleField("company")}}

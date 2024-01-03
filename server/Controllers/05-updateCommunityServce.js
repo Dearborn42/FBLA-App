@@ -2,12 +2,12 @@ import { formatFOAU } from "./01-updateStudent.js";
 
 export async function updateCommunityService(req, res){
     const user = req.user;
-    const {type, name} = req.params;
+    const {field, name} = req.params;
     const {value} = req.body;
     const Index = user["community-service"].findIndex(x => x["service-name"] === name);
     await formatFOAU([
         {"email": user.email},
-        { $set: {[`community-service.${Index}.${type}`]: value}},
+        { $set: {[`community-service.${Index}.${field}`]: value}},
         { returnOriginal: false }
     ], res)
 }
