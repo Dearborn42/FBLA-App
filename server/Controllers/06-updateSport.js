@@ -27,12 +27,12 @@ export async function removeSport(req, res) {
 
 export async function updateSport(req, res) {
     const user = req.user;
-    const {name, type} = req.params;
+    const {name, field} = req.params;
     const {value} = req.body;
     const Index = user["sports"].findIndex(x => x["sport"] === name);
     await formatFOAU([
         {"email": user.email},
-        { $set: {[`sports.${Index}.${type}`]: value}},
+        { $set: {[`sports.${Index}.${field}`]: value}},
         { returnOriginal: false }
     ], res)
 }
