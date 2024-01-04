@@ -28,13 +28,13 @@ export async function removeArt(res, req) {
 }
 
 export async function updateArt(req, res){
-    const {name, type} = req.params;
+    const {name, field} = req.params;
     const {value} = req.body
     const user = req.user
     const Index = user["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
     await formatFOAU([
         {"email": user.email},
-        { $set: {[`perfrorming-arts.${Index}.${type}`]: value}},
+        { $set: {[`perfrorming-arts.${Index}.${field}`]: value}},
         { returnOriginal: false }
     ], res)
 }

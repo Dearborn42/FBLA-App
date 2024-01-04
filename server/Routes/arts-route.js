@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post("/add", addArt);
 router.delete("/remove/:name", removeArt);
-router.post("/update/:name/:type", updateArt);
+router.post("/update/:name/:field", updateArt);
 
 
 export default router
