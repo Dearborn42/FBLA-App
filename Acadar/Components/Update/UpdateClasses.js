@@ -104,7 +104,7 @@ export default function UpdateClasses({user}) {
         <TextInput 
             style={styles.input} 
             type="text" 
-            placeholder="Year(Freshman, sophomore...)"
+            placeholder="Year (Freshman, sophomore...)"
             onChangeText={(text) => handleYear(text)}
             id={"year"}
             name={"year"} 

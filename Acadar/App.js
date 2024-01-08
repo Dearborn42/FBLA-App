@@ -163,7 +163,7 @@ const App = () => {
     }
   return (
     <View style={{height: "100%", width: "100%"}}>
-      <UpdateClasses user={testObject} />
+      {/* <UpdateClasses user={testObject} /> */}
       {/* <UpdateArts user={testObject} /> */}
       {/* <UpdateSports user={testObject} /> */}
       {/* <UpdateCommunityServce user={testObject} /> */}
