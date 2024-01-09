@@ -160,7 +160,7 @@ const App = () => {
                 "award": "2nd in region"
             }
         ],
-    }
+  }
   return (
     <View style={{height: "100%", width: "100%"}}>
       {/* <UpdateClasses user={testObject} /> */}
@@ -170,7 +170,7 @@ const App = () => {
       {/* <UpdateJobs user={testObject} /> */}
       {/* <UpdateClubs user = {testObject} /> */}
       {/* <UpdateStudent user={testObject}/> */}
-      {/* <Login /> */}
+      <Login />
       {/* {currentIndex != studentSetup.length-1 ? <CurrentForm mod={setCurrentIndex} data={setPrev}/> : 
         <CurrentForm mod={setCurrentIndex} data={prev}/>
       } */}
