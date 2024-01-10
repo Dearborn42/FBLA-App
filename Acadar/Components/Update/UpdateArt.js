@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-export default function UpdateArts({user}){
+export default function UpdateArts({route}){
+    const { user } = route.params;
     const [newForm, setNewForm] = useState(false);
     const [form, setForm] = useState({arts: user.perfrormingArts});
     const [art, setArt] = useState({"name": '', "desc": '', "award": ""});

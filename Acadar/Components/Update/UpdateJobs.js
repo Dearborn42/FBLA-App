@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-export default function UpdateJobs({user}){
+export default function UpdateJobs({route}){
+    const { user } = route.params;
     const [newForm, setNewForm] = useState(false);
     const [form, setForm] = useState({work: user.work});
     const [newJob, setNewJob] = useState({"company": '', "desc": ''});

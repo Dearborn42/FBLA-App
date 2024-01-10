@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import Classes from './Components/Create/Classes';
 import Account from './Components/Create/Account';
 import Clubs from './Components/Create/Clubs';
@@ -7,14 +8,8 @@ import Work from './Components/Create/Work';
 import Sports from './Components/Create/Sports';
 import PerformingArts from './Components/Create/PerformingArts';
 import CommunityService from './Components/Create/CommunityService';
+import UpdateTabs from './Components/UpdateTabs';
 import Login from './Components/Login';
-import UpdateStudent from './Components/Update/UpdateStudent';
-import UpdateClubs from './Components/Update/UpdateClubs';
-import UpdateJobs from './Components/Update/UpdateJobs';
-import UpdateCommunityServce from './Components/Update/UpdateCommunityService';
-import UpdateSports from './Components/Update/UpdateSport';
-import UpdateArts from './Components/Update/UpdateArt';
-import UpdateClasses from './Components/Update/UpdateClasses';
 
 
 const App = () => {
@@ -163,14 +158,10 @@ const App = () => {
   }
   return (
     <View style={{height: "100%", width: "100%"}}>
-      {/* <UpdateClasses user={testObject} /> */}
-      {/* <UpdateArts user={testObject} /> */}
-      {/* <UpdateSports user={testObject} /> */}
-      {/* <UpdateCommunityServce user={testObject} /> */}
-      {/* <UpdateJobs user={testObject} /> */}
-      {/* <UpdateClubs user = {testObject} /> */}
-      {/* <UpdateStudent user={testObject}/> */}
-      <Login />
+        <NavigationContainer>
+            <UpdateTabs user={testObject} />
+        </NavigationContainer>
+      {/* <Login /> */}
       {/* {currentIndex != studentSetup.length-1 ? <CurrentForm mod={setCurrentIndex} data={setPrev}/> : 
         <CurrentForm mod={setCurrentIndex} data={prev}/>
       } */}

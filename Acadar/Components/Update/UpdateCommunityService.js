@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-export default function UpdateCommunityServce({user}){
+export default function UpdateCommunityServce({route}){
+    const { user } = route.params;
     const [newForm, setNewForm] = useState(false);
     const [form, setForm] = useState({services: user.communityService});
     const [newService, setNewService] = useState({"name": '', "desc": '', "hours": ""});

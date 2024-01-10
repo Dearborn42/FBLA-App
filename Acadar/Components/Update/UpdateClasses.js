@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function UpdateClasses({user}) {
+export default function UpdateClasses({route}) {
+    const { user } = route.params;
     const [form, setForm] = useState({
         freshman: user.freshman,
         sophomore: user.sophomore,
