@@ -6,7 +6,7 @@ const Login = () => {
     var updateForm = (value) => setForm((prev) => {return { ...prev, ...value }});
     var handleSubmit = async () => {
         console.log(form);
-        var login = await fetch("http://localhost:5000//login", {
+        var login = await fetch("http://localhost:5000/login", {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
