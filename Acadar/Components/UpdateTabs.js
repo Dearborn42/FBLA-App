@@ -1,3 +1,5 @@
+import React, { useContext } from 'react';
+import UserContext from './UserContext';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import UpdateStudent from './Update/UpdateStudent';
 import UpdateClubs from './Update/UpdateClubs';
@@ -9,7 +11,8 @@ import UpdateClasses from './Update/UpdateClasses';
 
 const Tab = createBottomTabNavigator();
 
-export default function UpdateTabs({user}) {
+export default function UpdateTabs() {
+  const { user } = useContext(UserContext);
   return (
     <Tab.Navigator>
       <Tab.Screen name="student" component={UpdateStudent} initialParams={{ user }} />

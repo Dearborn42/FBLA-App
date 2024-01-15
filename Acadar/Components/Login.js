@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import UserContext from './UserContext';
 
-const Login = () => {  
+const Login = ({ navigation }) => {  
+    const { setUser } = useContext(UserContext);
     const [form, setForm] = useState({'email': "", 'password': "",});
     var updateForm = (value) => setForm((prev) => {return { ...prev, ...value }});
     var handleSubmit = async () => {
         console.log(form);
         var login = await fetch("http://localhost:5000/login", {
             method: 'POST',
+            // credentials: "include",
             headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({...form})
+            body: JSON.stringify(form)
         })
         var login_response = await login.json();
         if(login_response.success){
-            console.log(login_response.user)
+            setUser(login_response.user);
+            navigation.navigate('App');
         }
+    }
+    const handleSignUp = () => {
+      navigation.navigate('Create');
     }
   return (
     <View style={styles.container}> 
@@ -41,6 +47,7 @@ const Login = () => {
         secureTextEntry={true}
         />
         <Button title="Submit" onPress={handleSubmit} />
+        <Button title="Create Account" onPress={handleSignUp} />
     </View>
   )
 }

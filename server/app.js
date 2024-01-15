@@ -27,7 +27,7 @@ passportSetup(passport)
 const port = 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-app.use(cors({credentials: true, origin: '*', methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',}));
+app.use(cors({credentials: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

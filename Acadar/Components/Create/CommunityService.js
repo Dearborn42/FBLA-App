@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import UserContext from '../UserContext';
 
 
-const CommunityService = ({mod, data}) => {
+const CommunityService = ({ data, navigation}) => {
     const [form, setForm] = useState({"communityService": []});
-
+    const { setUser } = useContext(UserContext);
     const addService = () => {
         setForm((prev) => {
             const newService = { "name": '', "desc": '', "hours": ''};
@@ -47,7 +48,8 @@ const CommunityService = ({mod, data}) => {
             });
             var body1_response = await body1.json();
             if (body1_response.success){
-                
+                setUser(body1_response.user);
+                navigation.navigate('App');
             }
         }
     }

@@ -7,7 +7,7 @@ export async function createStudent(req, res){
         const studentObject = new Student(req.body)
         await studentObject.validate()
         await studentObject.save();
-        res.status(200).json({success: true});
+        res.status(200).json({success: true, user: studentObject});
     }catch(e){
         res.status(500).json({success: false, error: e.message})
     }

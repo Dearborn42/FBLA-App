@@ -7,6 +7,7 @@ export default (passport) => {
     async (email, password, done)=> {
       const user_account = await Student.findOne({email});
       if(!user_account.validPassword(password)) return done(null, false);
+      console.log(user_account);
       return done(null, user_account, false);
     })
   )
