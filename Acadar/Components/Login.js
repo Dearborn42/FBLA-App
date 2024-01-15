@@ -7,10 +7,9 @@ const Login = ({ navigation }) => {
     const [form, setForm] = useState({'email': "", 'password': "",});
     var updateForm = (value) => setForm((prev) => {return { ...prev, ...value }});
     var handleSubmit = async () => {
-        console.log(form);
         var login = await fetch("http://localhost:5000/login", {
             method: 'POST',
-            // credentials: "include",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(form)
         })
@@ -31,7 +30,6 @@ const Login = ({ navigation }) => {
         value={form.email}
         onChangeText={(text) => updateForm({ 'email': text.trim() })}
         placeholder="Enter your email"
-        required
         id={"email"}
         name={"email"}
         />
@@ -41,7 +39,6 @@ const Login = ({ navigation }) => {
         value={form.password}
         onChangeText={(text) => updateForm({ 'password': text.trim() })}
         placeholder="Enter your password"
-        required
         id={"password"}
         name={"password"}
         secureTextEntry={true}
