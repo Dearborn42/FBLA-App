@@ -10,20 +10,16 @@ export async function addArt(req, res) {
             "performing-art": name,
             "desc": desc,
             "awards/achievments": awards
-        }}},
-        { returnOriginal: false }
+        }}}
     ], res)
 }
 
 export async function removeArt(res, req) {
     const {name} = req.params
     const userName = req.user.name;
-    const studentDocument = await Student.findOne({ "name": userName });
-    const Index = studentDocument["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
     await formatFOAU([
         {"name": userName},
-        { $pull: {"perfrorming-arts": studentDocument["perfrorming-arts"][`${Index}`]}},
-        { returnOriginal: false }
+        { $pull: {"perfrorming-arts": {name: name}}}
     ], res)
 }
 
@@ -34,7 +30,6 @@ export async function updateArt(req, res){
     const Index = user["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
     await formatFOAU([
         {"email": user.email},
-        { $set: {[`perfrorming-arts.${Index}.${field}`]: value}},
-        { returnOriginal: false }
+        { $set: {[`perfrorming-arts.${Index}.${field}`]: value}}
     ], res)
 }

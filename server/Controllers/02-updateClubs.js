@@ -7,19 +7,16 @@ export async function updateClubsDesc(req, res){
     const clubIndex = studentDocument.clubs.findIndex(x => x[`club-name`] === name);
     await formatFOAU([
         {"email": studentDocument.email},
-        { $set: {[`clubs.${clubIndex}.${field}`]: value}},
-        { returnOriginal: false }
+        { $set: {[`clubs.${clubIndex}.${field}`]: value}}
     ], res)
 }
 
 export async function removeClub(req, res){
     const {name} = req.params;
     const user = req.user;
-    const clubIndex = user.clubs.findIndex(x => x[`club-name`] === name);
     await formatFOAU([
         {"email": user.email},
-        { $pull: {"clubs": user.clubs[clubIndex]}},
-        {returnOriginal: false}
+        { $pull: {"clubs": {name: name}}},
     ], res)
 }
 
@@ -27,7 +24,6 @@ export async function addClub(req, res){
     const {name, desc} = req.body;
     await formatFOAU([
         {"email": req.user.email},
-        {$push: {"clubs": {"club-name": name, "club-desc": desc}}},
-        {returnOriginal: false}
+        {$push: {"clubs": {"club-name": name, "club-desc": desc}}}
     ], res)
 }

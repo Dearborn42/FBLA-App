@@ -9,19 +9,16 @@ export async function addSport(req, res) {
             "sport": name,
             "sport-desc": desc,
             "awards/achievments": awards
-        }}},
-        { returnOriginal: false }
+        }}}
     ], res)
 }
 
 export async function removeSport(req, res) {
     const user = req.user;
     const {name} = req.params;
-    const Index = user["sports"].findIndex(x => x["sport"] === name);
     await formatFOAU([
         {"email": user.email},
-        { $pull: {"sports": user["sports"][`${Index}`]}},
-        { returnOriginal: false }
+        { $pull: {"sports": {name: name}}}
     ], res)
 }
 
@@ -32,7 +29,6 @@ export async function updateSport(req, res) {
     const Index = user["sports"].findIndex(x => x["sport"] === name);
     await formatFOAU([
         {"email": user.email},
-        { $set: {[`sports.${Index}.${field}`]: value}},
-        { returnOriginal: false }
+        { $set: {[`sports.${Index}.${field}`]: value}}
     ], res)
 }

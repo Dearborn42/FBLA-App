@@ -6,10 +6,10 @@ export async function formatFOAU(info, res){
         const result = await Student.findOneAndUpdate(
             info[0],
             info[1],
-            info[2]
+            {new:true}
         );
-        if (result.value) return res.status(200).json({success: true});
-        else return res.status(404).json({success: false});
+        if (result) return res.status(200).json({success: true});
+        return res.status(404).json({success: false});
     }catch(e){
         res.status(500).json({success: false, error: e.message});
     }
@@ -22,14 +22,12 @@ export async function updateStudent(req, res){
     if(type === 'password'){
         await formatFOAU([
             { "email": email },
-            { $set: { [`${type}`]: await hashPassword(value) } },
-            { returnOriginal: false }
+            { $set: { [`${type}`]: await hashPassword(value) } }
         ], res)
     }else{
         await formatFOAU([
             { "email": email },
-            { $set: { [`${type}`]: value } },
-            { returnOriginal: false }
+            { $set: { [`${type}`]: value } }
         ], res)
     }
 }

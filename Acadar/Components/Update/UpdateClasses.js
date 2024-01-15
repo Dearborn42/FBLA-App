@@ -39,6 +39,7 @@ export default function UpdateClasses({route}) {
             var body1_response = await body1.json();
             if (body1_response.success){
                 setYear("");
+                console.log("Yippe")
             }
         }
     };
@@ -51,7 +52,7 @@ export default function UpdateClasses({route}) {
         });
         var body1_response = await body1.json();
         if (body1_response.success){
-            
+            console.log("Yippe")
         }
     };
 
