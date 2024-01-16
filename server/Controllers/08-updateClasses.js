@@ -23,7 +23,7 @@ export async function updateClass(req, res){
     const user = req.user;
     const {name, year, field} = req.params;
     const {value} = req.body;
-    const Index = user[year].findIndex(x => x[name] === name);
+    const Index = user[year].findIndex(x => x["name"] === name);
     await formatFOAU([
         {"email": user.email},
         { $set: {[`${year}.${Index}.${field}`]: value}}

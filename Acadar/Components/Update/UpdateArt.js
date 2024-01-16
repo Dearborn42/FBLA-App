@@ -43,7 +43,7 @@ export default function UpdateArts({route}){
         }
     };
     const updateService = async (name) => {
-        if(value === "") return;
+        if(value.trim() === "") return;
         var body1 = await fetch(`http://localhost:5000/art/update/${name}/${field}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },

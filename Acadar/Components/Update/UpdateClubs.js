@@ -58,7 +58,7 @@ export default function UpdateClubs({route}){
   return (
     <View style={styles.container}>
         <View>
-        {form.clubs.map((club, index ) => (
+        {form.clubs.map((club, index) => (
             <View key={index} style={styles.classContainer}>
               <Text>Club {index + 1}</Text>
               <TextInput

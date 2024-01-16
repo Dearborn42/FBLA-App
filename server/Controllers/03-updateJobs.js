@@ -2,13 +2,12 @@ import { formatFOAU } from "./01-updateStudent.js";
 
 export async function addJob(req, res){
     const user = req.user;
-    const {name, desc, type} = req.body;
+    const {company, desc} = req.body;
     await formatFOAU([
         {"email": user.email},
         {$push: {"work": {
-            "company": name,
-            "job_desc": desc, 
-            "type": type
+            "company": company,
+            "desc": desc,
         }}},
     ], res)
 }

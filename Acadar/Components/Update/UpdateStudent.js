@@ -13,6 +13,7 @@ const UpdateStudent = ({route}) => {
         return setForm({value: textValue});
     }
     async function handleBlur(){
+      if(form.value.trim() === "") return;
       var body1 = await fetch(`http://localhost:5000/studentInfo/update/${type}`, {
           method: 'POST',
           headers: { "Content-Type": "application/json" },

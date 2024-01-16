@@ -7,9 +7,9 @@ export async function addArt(req, res) {
     await formatFOAU([
         {"name": userName},
         { $push: {"perfrorming-arts": {
-            "performing-art": name,
+            "name": name,
             "desc": desc,
-            "awards/achievments": awards
+            "award": awards
         }}}
     ], res)
 }
@@ -27,7 +27,7 @@ export async function updateArt(req, res){
     const {name, field} = req.params;
     const {value} = req.body
     const user = req.user
-    const Index = user["perfrorming-arts"].findIndex(x => x["performing-art"] === name);
+    const Index = user["perfrorming-arts"].findIndex(x => x["name"] === name);
     await formatFOAU([
         {"email": user.email},
         { $set: {[`perfrorming-arts.${Index}.${field}`]: value}}

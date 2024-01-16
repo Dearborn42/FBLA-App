@@ -4,7 +4,7 @@ export async function updateCommunityService(req, res){
     const user = req.user;
     const {field, name} = req.params;
     const {value} = req.body;
-    const Index = user["community-service"].findIndex(x => x["service-name"] === name);
+    const Index = user["community-service"].findIndex(x => x["name"] === name);
     await formatFOAU([
         {"email": user.email},
         { $set: {[`community-service.${Index}.${field}`]: value}}
@@ -21,15 +21,14 @@ export async function removeService(req, res) {
 }
 
 export async function addService(req, res) {
-    const {name, desc, hours, start, end} = req.body;
+    const {name, desc, hours} = req.body;
     const user = req.user.email
     await formatFOAU([
         {"email": user},
         { $push: {"community-service": {
-                    "service-name": name,
-                    "service-desc": desc, 
-                    "service-hours": hours,
-                    "service-date": `${start} - ${end}`
+                    "name": name,
+                    "desc": desc, 
+                    "hours": hours
                 }
             }
         }
