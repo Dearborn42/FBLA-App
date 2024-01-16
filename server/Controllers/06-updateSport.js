@@ -2,13 +2,13 @@ import { formatFOAU } from "./01-updateStudent.js";
 
 export async function addSport(req, res) {
     const user = req.user;
-    const {name, desc, awards} = req.body;
+    const {name, desc, award} = req.body;
     await formatFOAU([
         {"email": user.email},
         { $push: {"sports": {
             "name": name,
             "desc": desc,
-            "award": awards
+            "award": award
         }}}
     ], res)
 }

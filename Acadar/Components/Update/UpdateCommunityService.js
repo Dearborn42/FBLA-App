@@ -82,7 +82,7 @@ export default function UpdateCommunityServce({route}){
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {handleValue(text); handleField("hours")}}
-                onBlur={() => updateService(service.company)}
+                onBlur={() => updateService(service.name)}
                 placeholder={service.hours}
                 required
                 id={"hours"}
@@ -124,7 +124,7 @@ export default function UpdateCommunityServce({route}){
                 </View>
             )}
             {!newForm ? (
-                <Button title={`Add Job`} onPress={handleForm} />
+                <Button title={`Add Service`} onPress={handleForm} />
             ) : (
                 <Button title={`Cancel Job`} onPress={handleForm} />
             )}
