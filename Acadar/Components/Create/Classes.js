@@ -61,7 +61,7 @@ export default function Classes({ mod, data }) {
 
   return (
     <ImageBackground
-      source={{ uri: require('../../assets/blue.svg') }}
+      source={require('../../assets/blue.png')}
       style={styles.backgroundImage}>
       <View style={styles.container}>
         {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
@@ -157,24 +157,24 @@ const styles = StyleSheet.create({
   header: {
     color: 'black',
     fontFamily: 'ARCO',
-    fontSize: '2rem',
+    fontSize: 32,
     textAlign: 'center',
   },
   input: {
     width: Dimensions.get('window').width * 0.6,
-    height: '2rem',
+    height: 32,
     color: 'black',
     fontFamily: 'ARCO',
-    fontSize: '.75rem',
+    fontSize: 12,
     backgroundColor: 'white',
     padding: 10,
-    borderRadius: '2rem',
+    borderRadius: 32,
     marginBottom: 20,
   },
   text: {
     color: 'black',
     fontFamily: 'ARCO',
-    fontSize: '1rem',
+    fontSize: 16,
   },
   backgroundImage: {
     flex: 1,
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
   bText: {
     fontFamily: 'ARCO',
-    fontSize: '.75rem',
+    fontSize: 12,
     color: 'black',
   },
   button: {
@@ -191,8 +191,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '2rem',
-    padding: '.5rem',
-    marginBottom: '1rem',
+    borderRadius: 32,
+    padding: 8,
+    marginBottom: 16,
   },
 });

@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { View, ScrollView, Button, StyleSheet} from 'react-native';
+import { View, ScrollView, Button, StyleSheet,Dimensions,
+  ImageBackground,
+  TouchableOpacity } from 'react-native';
 import ProfileStudent from './ProfileStudent';
 import UpdateStudent from "../Update/UpdateStudent"
 import ProfileClasses from './ProfileClasses';
@@ -34,7 +36,11 @@ export default function Profile({route}){
     const handleBase = () => setBase((prev) => !prev)
 
     return(
+      
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ImageBackground
+      source={{ uri: require('../../assets/blue.png') }}
+      style={styles.backgroundImage}>
         <View style={styles.container}>
             {!base ? <ProfileStudent user={user}/> : <UpdateStudent user={user}/>}
             <Button onPress={() => handleBase()} title="Edit Section"></Button>
@@ -51,29 +57,69 @@ export default function Profile({route}){
             {!sport ? <ProfileSports user={user}/> : <UpdateSports user={user}/>}
             <Button onPress={() => handleSport()} title="Edit Section"></Button>
         </View>
+        </ImageBackground>
       </ScrollView>
+      
     )
 }
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
+  classContainer: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: 'none',
   },
   container: {
     flex: 1,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: 'none',
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
+    fontFamily: 'ARCO',
+    fontSize: '2rem',
+    textAlign: 'center',
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    width: Dimensions.get('window').width * 0.6,
+    height: '2rem',
+    color: 'black',
+    fontFamily: 'ARCO',
+    fontSize: '.75rem',
+    backgroundColor: 'white',
     padding: 10,
+    borderRadius: '2rem',
     marginBottom: 20,
+  },
+  text: {
+    color: 'black',
+    fontFamily: 'ARCO',
+    fontSize: '1rem',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  bText: {
+    fontFamily: 'ARCO',
+    fontSize: '.75rem',
+    color: 'black',
+  },
+  button: {
+    backgroundColor: 'white',
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '2rem',
+    padding: '.5rem',
+    marginBottom: '1rem',
   },
 });

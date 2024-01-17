@@ -16,17 +16,18 @@ const Landing = ({ navigation }) => {
   const signy = () => {
     navigation.navigate('Create');
   };
+  
   return (
-    <View style={styles.container}>
+      <View style={styles.container}>
       <Text style={styles.text}>Welcome to Acadar!</Text>
       <Text style={styles.text2}>We put you on the academic radar</Text>
 
       <Image
         style={styles.image}
-        source={{ uri: require('../assets/Lando2.svg') }}></Image>
+        source={ require('../assets/Lando.png') }></Image>
       <Image
         style={styles.image2}
-        source={{ uri: require('../assets/blimpy.svg') }}></Image>
+        source={require('../assets/blimpy.png')}></Image>
       <TouchableOpacity
         activeOpacity={0.7}
         style={styles.button}
@@ -40,6 +41,7 @@ const Landing = ({ navigation }) => {
         <Text style={styles.bText}>Login</Text>
       </TouchableOpacity>
     </View>
+    
   );
 };
 const styles = StyleSheet.create({
@@ -63,25 +65,25 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: Dimensions.get('window').height * 0.6,
     left: Dimensions.get('window').width * 0.1,
+    marginTop:-Dimensions.get('window').height * 0.2,
     zIndex: -1,
-    transform: 'translateY(-50%)',
   },
   text: {
     backgroundColor: 'transparent',
     fontFamily: 'ARCO',
-    fontSize: '1.5rem',
-    margin: '1rem',
+    fontSize: 24,
+    margin:16,
     textAlign: 'center',
   },
   text2: {
     backgroundColor: 'transparent',
     fontFamily: 'ARCO',
-    fontSize: '.8rem',
+    fontSize: 12.8,
     textAlign: 'center',
   },
   bText: {
     fontFamily: 'ARCO',
-    fontSize: '1rem',
+    fontSize: 16,
     color: 'white',
   },
   button: {
@@ -96,8 +98,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: Dimensions.get('window').height * 0.55,
     left: Dimensions.get('window').width * 0.5,
-    transform: 'translateY(-50%) translateX(-50%)',
-    borderRadius: '2rem',
+    marginLeft: -Dimensions.get('window').width * 0.3,
+    marginTop: -Dimensions.get('window').height * 0.025,
+    borderRadius: 32,
   },
   button2: {
     color: 'black',
@@ -111,8 +114,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: Dimensions.get('window').height * 0.625,
     left: Dimensions.get('window').width * 0.5,
-    transform: 'translateY(-50%) translateX(-50%)',
-    borderRadius: '2rem',
+    marginLeft: -Dimensions.get('window').width * 0.3,
+    marginTop: -Dimensions.get('window').height * 0.025,
+    borderRadius: 32,
   },
 });
 

@@ -48,7 +48,7 @@ const Account = ({ mod, data }) => {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={{ uri: require('../../assets/sky2.svg') }}></Image>
+        source={require('../../assets/sky.png')}></Image>
       <Text style={styles.text}>Name</Text>
       <TextInput
         style={styles.input}
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   drop: {
-    fontSize: '.75rem',
+    fontSize: 12,
     color: 'black',
     backgroundColor: 'white',
     fontFamily: 'ARCO',
@@ -146,11 +146,11 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     fontFamily: 'ARCO',
-    fontSize: '1rem',
+    fontSize: 16,
   },
   bText: {
     fontFamily: 'ARCO',
-    fontSize: '.75rem',
+    fontSize: 12,
     color: 'black',
   },
   button: {
@@ -159,9 +159,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '2rem',
-    padding: '.5rem',
-    marginBottom: '1rem',
+    borderRadius: 32,
+    padding: 8,
+    marginBottom: 16,
   },
   image: {
     width: Dimensions.get('window').width,
@@ -188,13 +188,13 @@ const styles = StyleSheet.create({
   },
   input: {
     width: Dimensions.get('window').width * 0.6,
-    height: '2rem',
+    height: 32,
     color: 'black',
     fontFamily: 'ARCO',
-    fontSize: '.75rem',
+    fontSize: 12,
     backgroundColor: 'white',
     padding: 10,
-    borderRadius: '2rem',
+    borderRadius: 32,
     marginBottom: 20,
   },
 });
