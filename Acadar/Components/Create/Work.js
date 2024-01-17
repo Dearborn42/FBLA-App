@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   header: {
     color: 'black',
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 32,
     textAlign: 'center',
   },
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.6,
     height: 32,
     color: 'black',
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 12,
     backgroundColor: 'white',
     padding: 10,
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 16,
   },
   backgroundImage: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   bText: {
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 12,
     color: 'black',
   },

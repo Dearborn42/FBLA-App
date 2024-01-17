@@ -76,7 +76,7 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   bText: {
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 12,
     color: 'black',
   },
@@ -115,14 +115,14 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 16,
   },
   input: {
     width: Dimensions.get('window').width * 0.6,
     height: 32,
     color: 'black',
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 12,
     backgroundColor: 'white',
     padding: 10,

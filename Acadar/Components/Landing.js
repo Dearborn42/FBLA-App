@@ -70,19 +70,19 @@ const styles = StyleSheet.create({
   },
   text: {
     backgroundColor: 'transparent',
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 24,
     margin:16,
     textAlign: 'center',
   },
   text2: {
     backgroundColor: 'transparent',
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 12.8,
     textAlign: 'center',
   },
   bText: {
-    fontFamily: 'ARCO',
+    // fontFamily: 'ARCO',
     fontSize: 16,
     color: 'white',
   },
