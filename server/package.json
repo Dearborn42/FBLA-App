@@ -5,7 +5,7 @@
   "main": "mongo.js",
   "scripts": {
     "global-install": "npm install && cd Acadar && npm install",
-    "start": "npx expo start --tunnel"
+    "start": "node app.js"
   },
   "author": "Andrew Murphy / Jonatham Lam",
   "license": "MIT",
