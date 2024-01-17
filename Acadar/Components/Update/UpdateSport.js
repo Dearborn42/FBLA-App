@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-export default function UpdateSports({route}){
-    const { user } = route.params;
+export default function UpdateSports({user}){
     const [newForm, setNewForm] = useState(false);
     const [form, setForm] = useState({sports: user.sports});
     const [sport, setSport] = useState({"name": '', "desc": '', "award": ""});

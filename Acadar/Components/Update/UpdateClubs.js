@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-export default function UpdateClubs({route}){
-    const { user } = route.params;
+export default function UpdateClubs({user}){
     const [newForm, setNewForm] = useState(false);
     const [form, setForm] = useState({clubs: user.clubs});
     const [newClub, setNewClub] = useState({"name": '', "desc": ''});

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
-const UpdateStudent = ({route}) => {
-    const { user } = route.params;
+const UpdateStudent = ({user}) => {
     const [form, setForm] = useState({value: ""});
     const [type, setType] = useState("");
     function handleType(text){

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
 
-export default function UpdateClasses({route}) {
-    const { user } = route.params;
+export default function UpdateClasses({user}) {
     const [form, setForm] = useState({
         freshman: user.freshman,
         sophomore: user.sophomore,
@@ -71,6 +70,7 @@ export default function UpdateClasses({route}) {
     };
 
   return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
       {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
         <View key={year}>
@@ -139,10 +139,14 @@ export default function UpdateClasses({route}) {
         <Button title={`Cancel Class`} onPress={handleForm} />
     )}
     </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     padding: 20,

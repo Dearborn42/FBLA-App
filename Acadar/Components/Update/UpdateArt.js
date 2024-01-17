@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
-export default function UpdateArts({route}){
-    const { user } = route.params;
+export default function UpdateArts({user}){
     const [newForm, setNewForm] = useState(false);
     const [form, setForm] = useState({arts: user.perfrormingArts});
     const [art, setArt] = useState({"name": '', "desc": '', "award": ""});
@@ -123,9 +122,9 @@ export default function UpdateArts({route}){
                 </View>
             )}
             {!newForm ? (
-                <Button title={`Add Sport`} onPress={handleForm} />
+                <Button title={`Add Art`} onPress={handleForm} />
             ) : (
-                <Button title={`Cancel Sport`} onPress={handleForm} />
+                <Button title={`Cancel Art`} onPress={handleForm} />
             )}
     </View> 
   )

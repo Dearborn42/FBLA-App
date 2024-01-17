@@ -32,7 +32,7 @@ const App = () => {
     <View style={{height: "100%", width: "100%"}}>
         <UserContext.Provider value={{ user, setUser }}>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Login">
+                <Stack.Navigator initialRouteName="App">
                     <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
                     <Stack.Screen name="Create" 
                         component={FormComponent} 

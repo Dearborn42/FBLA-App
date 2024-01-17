@@ -1,0 +1,42 @@
+import React from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
+
+export default function ProfileClasses({ user }) {
+  return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View style={styles.container}>
+      {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
+        <View key={year}>
+          <Text style={styles.header}>{year.charAt(0).toUpperCase() + year.slice(1)}</Text>
+          {user[year].map((classItem, index) => (
+            <View key={index} style={styles.classContainer}>
+              <Text>Class {index + 1}</Text>
+              <Text>Name: {classItem.name}</Text>
+              <Text>Grade: {classItem.grade}</Text>
+            </View>
+          ))}
+        </View>
+      ))}
+    </View>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  classContainer: {
+    marginBottom: 20,
+  },
+});
