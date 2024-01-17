@@ -49,7 +49,7 @@ const App = () => {
             />
             <Stack.Screen
               name='Create'
-              component={FormComponent}
+              component={Classes}
               options={{ headerShown: false }}
             />
             <Stack.Screen

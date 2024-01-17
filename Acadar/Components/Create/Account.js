@@ -120,6 +120,7 @@ const Account = ({ mod, data }) => {
         id={'school'}
         name={'school'}
       />
+
       <TouchableOpacity
         activeOpacity={0.7}
         style={styles.button}
