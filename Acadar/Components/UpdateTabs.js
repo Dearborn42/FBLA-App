@@ -1,19 +1,13 @@
 import React, { useContext } from 'react';
 import UserContext from './UserContext';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import UpdateStudent from './Update/UpdateStudent';
-import UpdateClubs from './Update/UpdateClubs';
-import UpdateJobs from './Update/UpdateJobs';
-import UpdateCommunityServce from './Update/UpdateCommunityService';
-import UpdateSports from './Update/UpdateSport';
-import UpdateArts from './Update/UpdateArt';
-import UpdateClasses from './Update/UpdateClasses';
 import Profile from './ProfileComponents/Profile';
 
 const Tab = createBottomTabNavigator();
 
 export default function UpdateTabs() {
-  const user = {
+   const { user } = useContext(UserContext);
+ {/* const user = {
   name: 'Jacoby Rigney',
   email: 'amurf26@outlook.com',
   password: '$2b$10$X/b3SW5We.wbHJLUEiiDauKqFWvvFY5mqtEf6wodf8LUuzq4FW5zW',
@@ -68,7 +62,7 @@ export default function UpdateTabs() {
     { name: 'Band', desc: 'Played percussion', award: '2nd in region' }
   ],
   __v: 0
-}
+}  */}
   return (
     <Tab.Navigator>
       <Tab.Screen name="Profile" component={Profile} initialParams={{user}} /> 
