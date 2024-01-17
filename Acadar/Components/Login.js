@@ -114,11 +114,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   text: {
-    color: 'white',
+    color: 'black',
     fontFamily: 'ARCO',
     fontSize: '1rem',
   },
   input: {
+    width: Dimensions.get('window').width * 0.6,
     height: '2rem',
     color: 'black',
     fontFamily: 'ARCO',
