@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,Dimensions,
+  ImageBackground,
+  TouchableOpacity } from 'react-native';
 
 const Work = ({mod, data}) => {
     const [form, setForm] = useState({work: []});
@@ -45,12 +47,15 @@ const Work = ({mod, data}) => {
     }
 
     return (
+      <ImageBackground
+      source={{ uri: require('../../assets/blue.svg') }}
+      style={styles.backgroundImage}>
     <View style={styles.container}>
         <Text style={styles.header}>Enter your jobs</Text>
         <View>
         {form.work.map((job, index ) => (
             <View key={index} style={styles.classContainer}>
-              <Text>Job {index + 1}</Text>
+              <Text style={styles.text}>Job {index + 1}</Text>
               <TextInput
                 style={styles.input}
                 value={job.company}
@@ -69,32 +74,89 @@ const Work = ({mod, data}) => {
                 id={"desc"}
                 name={"desc"}
               />
-              <Button title="Remove" onPress={() => removeField(index)} />
+              <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.button}
+              onPress={() => removeField(index)}>
+              <Text style={styles.bText}>Remove</Text>
+            </TouchableOpacity>
             </View>
         ))}
-            <Button title={`Add Job`} onPress={() => addJob()} />
+            <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.button}
+          onPress={()=>addJob()}>
+          <Text style={styles.bText}>Add Job</Text>
+        </TouchableOpacity>
         </View>
-        <Button title="Submit" onPress={handleSubmit} />
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.button}
+          onPress={handleSubmit}>
+          <Text style={styles.bText}>Submit</Text>
+        </TouchableOpacity>
     </View> 
+    </ImageBackground>
   )
 }
 const styles = StyleSheet.create({
+  classContainer: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: 'none',
+  },
   container: {
     flex: 1,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: 'none',
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'black',
+    fontFamily: 'ARCO',
+    fontSize: '2rem',
+    textAlign: 'center',
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    width: Dimensions.get('window').width * 0.6,
+    height: '2rem',
+    color: 'black',
+    fontFamily: 'ARCO',
+    fontSize: '.75rem',
+    backgroundColor: 'white',
     padding: 10,
+    borderRadius: '2rem',
     marginBottom: 20,
+  },
+  text: {
+    color: 'black',
+    fontFamily: 'ARCO',
+    fontSize: '1rem',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  bText: {
+    fontFamily: 'ARCO',
+    fontSize: '.75rem',
+    color: 'black',
+  },
+  button: {
+    backgroundColor: 'white',
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '2rem',
+    padding: '.5rem',
+    marginBottom: '1rem',
   },
 });
 

@@ -55,12 +55,15 @@ export default function Clubs({ mod, data }) {
     }
   }
   return (
+    <ImageBackground
+      source={{ uri: require('../../assets/blue.svg') }}
+      style={styles.backgroundImage}>
     <View style={styles.container}>
       <Text style={styles.header}>Enter your clubs</Text>
       <View>
         {form.clubs.map((club, index) => (
           <View key={index} style={styles.classContainer}>
-            <Text>Club {index + 1}</Text>
+            <Text style={styles.text}>Club {index + 1}</Text>
             <TextInput
               style={styles.input}
               value={club['name']}
@@ -79,13 +82,29 @@ export default function Clubs({ mod, data }) {
               id={'desc'}
               name={'desc'}
             />
-            <Button title='Remove' onPress={() => removeField(index)} />
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.button}
+              onPress={() => removeField(index)}>
+              <Text style={styles.bText}>Remove</Text>
+            </TouchableOpacity>
           </View>
         ))}
-        <Button title={`Add Club`} onPress={() => addClub()} />
+        <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.button}
+              onPress={() => addClub()}>
+              <Text style={styles.bText}>Add Club</Text>
+            </TouchableOpacity>
       </View>
-      <Button title='Submit' onPress={handleSubmit} />
+      <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.button}
+          onPress={handleSubmit}>
+          <Text style={styles.bText}>Submit</Text>
+        </TouchableOpacity>
     </View>
+    </ImageBackground>
   );
 }
 
