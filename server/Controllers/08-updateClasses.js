@@ -27,5 +27,5 @@ export async function updateClass(req, res){
     await formatFOAU([
         {"email": user.email},
         { $set: {[`${year}.${Index}.${field}`]: value}}
-    ]), res
+    ], res)
 }
