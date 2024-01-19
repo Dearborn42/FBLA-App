@@ -64,6 +64,9 @@ export default function Profile({route}){
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
   classContainer: {
     flex: 1,
     width: '100%',

@@ -8,6 +8,7 @@ import jobs from './Routes/jobs-route.js';
 import sports from './Routes/sport-route.js';
 import studentInfo from './Routes/student-route.js';
 import classes from './Routes/classes-route.js';
+import updateRoute from "./Routes/update-route.js"
 
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -49,6 +50,7 @@ app.use('/jobs', isAuthenticated, jobs);
 app.use('/sports', isAuthenticated, sports);
 app.use('/studentInfo', isAuthenticated, studentInfo);
 app.use('/classes', isAuthenticated, classes);
+app.use('/update', isAuthenticated, updateRoute);
 
 app.post('/login', login);
 app.get('/user', isAuthenticated, (req, res) => {

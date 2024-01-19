@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
 
 
 export default function UpdateClubs({user}){
@@ -18,7 +18,7 @@ export default function UpdateClubs({user}){
     };
 
     const addClub = async() => {
-        var body1 = await fetch(`http://localhost:5000/clubs/add`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/update/clubs`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -31,7 +31,7 @@ export default function UpdateClubs({user}){
     };
 
     const removeClub = async (name) => {
-        var body1 = await fetch(`http://localhost:5000/clubs/remove/${name}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/update/clubs/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -43,7 +43,7 @@ export default function UpdateClubs({user}){
     };
     const updateClub = async (name) => {
         if(value === "") return;
-        var body1 = await fetch(`http://localhost:5000/clubs/update/${name}/${field}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/clubs/update/${name}/${field}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -55,6 +55,7 @@ export default function UpdateClubs({user}){
         }
     };
   return (
+    <ScrollView>
     <View style={styles.container}>
         <View>
         {form.clubs.map((club, index) => (
@@ -112,10 +113,14 @@ export default function UpdateClubs({user}){
             )}
         </View>
     </View> 
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     padding: 20,

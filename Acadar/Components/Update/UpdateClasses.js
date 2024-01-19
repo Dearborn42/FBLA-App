@@ -29,7 +29,7 @@ export default function UpdateClasses({user}) {
 
     const addClass = async() => {
         if(year != ""){
-            var body1 = await fetch(`http://localhost:5000/classes/add/${year}`, {
+            var body1 = await fetch(`http://172.233.131.223:5000/update/${year}`, {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
@@ -44,7 +44,7 @@ export default function UpdateClasses({user}) {
     };
 
     const removeClass = async (year, name) => {
-        var body1 = await fetch(`http://localhost:5000/classes/remove/${year}/${name}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/update/${year}/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -57,7 +57,7 @@ export default function UpdateClasses({user}) {
 
     const updateClass = async (year, name) => {
         if(value.trim() === "") return;
-        var body1 = await fetch(`http://localhost:5000/classes/update/${year}/${name}/${field}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/classes/update/${year}/${name}/${field}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",

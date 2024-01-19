@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
 
 
 export default function UpdateArts({user}){
@@ -18,7 +18,7 @@ export default function UpdateArts({user}){
     };
 
     const addService = async() => {
-        var body1 = await fetch(`http://localhost:5000/art/add`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/update/perfrormingArts`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -31,7 +31,7 @@ export default function UpdateArts({user}){
     };
 
     const removeService = async (name) => {
-        var body1 = await fetch(`http://localhost:5000/art/remove/${name}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/update/perfrormingArts/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -43,7 +43,7 @@ export default function UpdateArts({user}){
     };
     const updateService = async (name) => {
         if(value.trim() === "") return;
-        var body1 = await fetch(`http://localhost:5000/art/update/${name}/${field}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/art/update/${name}/${field}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -55,6 +55,7 @@ export default function UpdateArts({user}){
         }
     };
   return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         {form.arts.map((art, index ) => (
             <View key={index} style={styles.classContainer}>
@@ -127,10 +128,14 @@ export default function UpdateArts({user}){
                 <Button title={`Cancel Art`} onPress={handleForm} />
             )}
     </View> 
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     padding: 20,

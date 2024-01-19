@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 export default function ProfileService({ user }) {
   return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         {user.communityService.map((service, index) => (
           <View key={index} style={styles.classContainer}>
@@ -13,10 +14,14 @@ export default function ProfileService({ user }) {
           </View>
         ))}
     </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     padding: 20,

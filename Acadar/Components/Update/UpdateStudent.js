@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown'
 
 const UpdateStudent = ({user}) => {
@@ -13,7 +13,7 @@ const UpdateStudent = ({user}) => {
     }
     async function handleBlur(){
       if(form.value.trim() === "") return;
-      var body1 = await fetch(`http://localhost:5000/studentInfo/update/${type}`, {
+      var body1 = await fetch(`http://172.233.131.223:5000/studentInfo/update/${type}`, {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -26,6 +26,7 @@ const UpdateStudent = ({user}) => {
     }
 
     return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}> 
         <Text style={{color: "black"}}>Edit your name</Text>
         <TextInput
@@ -93,10 +94,14 @@ const UpdateStudent = ({user}) => {
         name={"school"}
         />
     </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     padding: 20,
