@@ -1,8 +1,9 @@
 import express from 'express';
-import {remove, add} from '../Controllers/update-controller.js';
+import {remove, add, update} from '../Controllers/update-controller.js';
 const router = express.Router();
 
-router.delete("/:field/:name", remove);
-router.post("/:field", add);
+router.delete("/remove/:field/:name", remove);
+router.post("/add/:field", add);
+router.put("/update/:field/:name/:area", update)
 
 export default router

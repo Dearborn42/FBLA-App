@@ -18,7 +18,7 @@ export default function UpdateSports({user}){
     };
 
     const addService = async() => {
-        var body1 = await fetch(`http://172.233.131.223:5000/update/sports`, {
+        var body1 = await fetch(`http://localhost:5000/functions/add/sports`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -31,7 +31,7 @@ export default function UpdateSports({user}){
     };
 
     const removeService = async (name) => {
-        var body1 = await fetch(`http://172.233.131.223:5000/update/sports/${name}`, {
+        var body1 = await fetch(`http://localhost:5000/functions/remove/sports/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -43,7 +43,7 @@ export default function UpdateSports({user}){
     };
     const updateService = async (name) => {
         if(value.trim() === "") return;
-        var body1 = await fetch(`http://172.233.131.223:5000/sports/update/${name}/${field}`, {
+        var body1 = await fetch(`http://localhost:5000/functions/update/sports/${name}/${field}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",

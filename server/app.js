@@ -43,21 +43,14 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/art', isAuthenticated, art);
-app.use('/clubs', isAuthenticated, clubs);
-app.use('/community', isAuthenticated, community);
-app.use('/jobs', isAuthenticated, jobs);
-app.use('/sports', isAuthenticated, sports);
 app.use('/studentInfo', isAuthenticated, studentInfo);
-app.use('/classes', isAuthenticated, classes);
-app.use('/update', isAuthenticated, updateRoute);
+app.use('/functions', isAuthenticated, updateRoute);
 
 app.post('/login', login);
 app.get('/user', isAuthenticated, (req, res) => {
   console.log(req.user);
   res.status(200).json({ success: true, user: req.user });
 });
-// app.post("/create", createStudent)
 app.post('/create1', createStudent);
 
 app.listen(port, () => {

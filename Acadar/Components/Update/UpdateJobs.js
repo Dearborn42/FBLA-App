@@ -5,7 +5,7 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-nat
 export default function UpdateJobs({user}){
     const [newForm, setNewForm] = useState(false);
     const [form, setForm] = useState({work: user.work});
-    const [newJob, setNewJob] = useState({"company": '', "desc": ''});
+    const [newJob, setNewJob] = useState({"name": '', "desc": ''});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
 
@@ -13,12 +13,12 @@ export default function UpdateJobs({user}){
     var handleField = (textValue) => setField(textValue);
     var handleNewClub = (field, value) => setNewJob((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
-        setNewJob({"company": '', "desc": ''})
+        setNewJob({"name": '', "desc": ''})
         setNewForm((prev) => !prev);
     };
 
     const addJob = async() => {
-        var body1 = await fetch(`http://172.233.131.223:5000/update/work`, {
+        var body1 = await fetch(`http://localhost:5000/functions/add/work`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -31,7 +31,7 @@ export default function UpdateJobs({user}){
     };
 
     const removeJob = async (name) => {
-        var body1 = await fetch(`http://172.233.131.223:5000/update/work/${name}`, {
+        var body1 = await fetch(`http://localhost:5000/functions/remove/work/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -43,7 +43,7 @@ export default function UpdateJobs({user}){
     };
     const updateClub = async (name) => {
         if(value.trim() === "") return;
-        var body1 = await fetch(`http://172.233.131.223:5000/jobs/update/${name}/${field}`, {
+        var body1 = await fetch(`http://localhost:5000/functions/update/work/${name}/${field}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -63,12 +63,12 @@ export default function UpdateJobs({user}){
               <Text>Job {index + 1}</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("company")}}
+                onChangeText={(text) => {handleValue(text); handleField("name")}}
                 onBlur={() => updateClub(job.company)}
                 placeholder={job.company}
                 required
-                id={"company"}
-                name={"company"}
+                id={"name"}
+                name={"name"}
               />
               <TextInput
                 style={styles.input}
@@ -88,9 +88,9 @@ export default function UpdateJobs({user}){
                     style={styles.input} 
                     type="text" 
                     placeholder="Job Name"
-                    onChangeText={(text) => handleNewClub("company", text)}
-                    id={"company"}
-                    name={"company"} 
+                    onChangeText={(text) => handleNewClub("name", text)}
+                    id={"name"}
+                    name={"name"} 
                 />
                 <TextInput 
                     style={styles.input} 

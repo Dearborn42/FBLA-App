@@ -18,3 +18,14 @@ export async function remove(req, res){
         { $pull: {[field]: {name: name}}}
     ], res)
 }
+
+export async function update(req, res){
+    const user = req.user;
+    const {name, area, field} = req.params;
+    const {value} = req.body;
+    const Index = user[field].findIndex(x => x["name"] === name);
+    await formatFOAU([
+        {"email": user.email},
+        { $set: {[`${field}.${Index}.${area}`]: value}}
+    ], res)
+}
