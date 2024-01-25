@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Button, StyleSheet, ScrollView } from 'react-native';
+import ThreeAddForm from '../Forms/ThreeAddForm';
+import ThreeUpdateForm from '../Forms/ThreeUpdateForm';
 
 
 export default function UpdateSports({user}){
@@ -8,8 +10,7 @@ export default function UpdateSports({user}){
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
 
-    var handleValue = (text) => setValue(text);
-    var handleField = (textValue) => setField(textValue);
+    var handleUpdate = (text, category) => {setValue(text); setField(category)}
     var handleNewService = (field, value) => setSport((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
         setSport({"name": '', "desc": '', "award": ""})
@@ -58,69 +59,25 @@ export default function UpdateSports({user}){
     <View style={styles.container}>
         <View>
         {user.sports.map((sport, index ) => (
-            <View key={index} style={styles.classContainer}>
-              <Text>Sport {index + 1}</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("name")}}
-                onBlur={() => updateService(sport.name)}
-                placeholder={sport.name}
-                required
-                id={"name"}
-                name={"name"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("desc")}}
-                onBlur={() => updateService(sport.name)}
-                placeholder={sport.desc}
-                required
-                id={"desc"}
-                name={"desc"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("award")}}
-                onBlur={() => updateService(sport.name)}
-                placeholder={sport.award}
-                required
-                id={"hours"}
-                name={"hours"}
-              />
-              <Button title="Remove" onPress={() => removeService(sport.name)} />
-            </View>
+          <ThreeUpdateForm
+            key={index} 
+            index={index}
+            item={sport}
+            remove={removeService}
+            update={updateService}
+            onChange={handleUpdate}
+            categories={["name", "desc", "award"]}
+            styles={styles}
+          />
         ))} 
             {newForm && (
-                <View>
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Sport Name"
-                    onChangeText={(text) => handleNewService("name", text)}
-                    id={"name"}
-                    name={"name"} 
-                />
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Sport Description"
-                    onChangeText={(text) => handleNewService("desc", text)}
-                    id={"desc"}
-                    name={"desc"}  
-                />
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Sport award/highest achievment"
-                    onChangeText={(text) => handleNewService("award", text)}
-                    id={"award"}
-                    name={"award"}  
-                />
-                <Button 
-                    title="Submit"
-                    onPress={addService}
-                />
-                </View>
+              <ThreeAddForm 
+                key={0} 
+                styles={styles}
+                placeholders={["Sport Name", "Sport Description", "Sport award/highest achievment"]}
+                newFunc={handleNewService}
+                add={addService}
+              />
             )}
             {!newForm ? (
                 <Button title={`Add Sport`} onPress={handleForm} />

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Button, StyleSheet, ScrollView } from 'react-native';
+import TwoAddForm from '../Forms/TwoAddForm';
+import TwoUpdateForm from '../Forms/TwoUpdateForm';
 
 
 export default function UpdateJobs({user}){
@@ -8,17 +10,16 @@ export default function UpdateJobs({user}){
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
 
-    var handleValue = (text) => setValue(text);
-    var handleField = (textValue) => setField(textValue);
+    var handleUpdate = (text, category) => {setValue(text); setField(category)}
     var handleNewClub = (field, value) => setNewJob((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
         setNewJob({"name": '', "desc": ''})
         setNewForm((prev) => !prev);
     };
 
-    const addJob = async() => {
+    const addJob = async() => {      
         var body1 = await fetch(`http://localhost:5000/functions/add/work`, {
-            method: 'PUT',
+            method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify(newJob)
@@ -43,7 +44,7 @@ export default function UpdateJobs({user}){
     const updateClub = async (name) => {
         if(value.trim() === "") return;
         var body1 = await fetch(`http://localhost:5000/functions/update/work/${name}/${field}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({"value": value})
@@ -58,52 +59,25 @@ export default function UpdateJobs({user}){
     <View style={styles.container}>
         <View>
         {user.work.map((job, index ) => (
-            <View key={index} style={styles.classContainer}>
-              <Text>Job {index + 1}</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("name")}}
-                onBlur={() => updateClub(job.name)}
-                placeholder={job.name}
-                required
-                id={"name"}
-                name={"name"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("desc")}}
-                onBlur={() => updateClub(job.company)}
-                placeholder={job.desc}
-                required
-                id={"desc"}
-                name={"desc"}
-              />
-              <Button title="Remove" onPress={() => removeJob(job.company)} />
-            </View>
+          <TwoUpdateForm 
+            key={index}
+            index={index}
+            styles={styles}
+            onChange={handleUpdate}
+            item={job}
+            update={updateClub}
+            remove={removeJob}
+            categories={["name", "desc"]}
+          />
         ))} 
             {newForm && (
-                <View>
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Job Name"
-                    onChangeText={(text) => handleNewClub("name", text)}
-                    id={"name"}
-                    name={"name"} 
-                />
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Job Description"
-                    onChangeText={(text) => handleNewClub("desc", text)}
-                    id={"desc"}
-                    name={"desc"}  
-                />
-                <Button 
-                    title="Submit"
-                    onPress={addJob}
-                />
-                </View>
+              <TwoAddForm 
+                key={0}
+                styles={styles}
+                placeholders={["Job Name", "Job Description"]}
+                newFunc={handleNewClub}
+                add={addJob}
+              />
             )}
             {!newForm ? (
                 <Button title={`Add Job`} onPress={handleForm} />

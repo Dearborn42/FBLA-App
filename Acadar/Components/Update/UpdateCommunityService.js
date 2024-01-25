@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import ThreeAddForm from '../Forms/ThreeAddForm';
+import ThreeUpdateForm from '../Forms/ThreeUpdateForm';
 
 
 export default function UpdateCommunityServce({user}){
@@ -8,8 +10,7 @@ export default function UpdateCommunityServce({user}){
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
 
-    var handleValue = (text) => setValue(text);
-    var handleField = (textValue) => setField(textValue);
+    var handleUpdate = (text, category) => {setValue(text); setField(category)}
     var handleNewService = (field, value) => setNewService((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
         setNewService({"name": '', "desc": '', "hours": ""})
@@ -58,74 +59,30 @@ export default function UpdateCommunityServce({user}){
     <View style={styles.container}>
         <View>
         {user.communityService.map((service, index ) => (
-            <View key={index} style={styles.classContainer}>
-              <Text>Service {index + 1}</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("name")}}
-                onBlur={() => updateService(service.name)}
-                placeholder={service.name}
-                required
-                id={"name"}
-                name={"name"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("desc")}}
-                onBlur={() => updateService(service.name)}
-                placeholder={service.desc}
-                required
-                id={"desc"}
-                name={"desc"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("hours")}}
-                onBlur={() => updateService(service.name)}
-                placeholder={service.hours}
-                required
-                id={"hours"}
-                name={"hours"}
-              />
-              <Button title="Remove" onPress={() => removeService(service.name)} />
-            </View>
+          <ThreeUpdateForm
+            key={index} 
+            index={index}
+            item={service}
+            remove={removeService}
+            update={updateService}
+            onChange={handleUpdate}
+            categories={["name", "desc", "hours"]}
+            styles={styles}
+          />
         ))} 
             {newForm && (
-                <View>
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Service Name"
-                    onChangeText={(text) => handleNewService("name", text)}
-                    id={"company"}
-                    name={"company"} 
-                />
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Service Description"
-                    onChangeText={(text) => handleNewService("desc", text)}
-                    id={"desc"}
-                    name={"desc"}  
-                />
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Service hours"
-                    onChangeText={(text) => handleNewService("hours", text)}
-                    id={"hours"}
-                    name={"hours"}  
-                />
-                <Button 
-                    title="Submit"
-                    onPress={addService}
-                />
-                </View>
+              <ThreeAddForm 
+                key={0} 
+                styles={styles}
+                placeholders={["Service Name", "Service Description", "Service hours"]}
+                newFunc={handleNewService}
+                add={addService}
+              />
             )}
             {!newForm ? (
                 <Button title={`Add Service`} onPress={handleForm} />
             ) : (
-                <Button title={`Cancel Job`} onPress={handleForm} />
+                <Button title={`Cancel Service`} onPress={handleForm} />
             )}
         </View>
     </View> 

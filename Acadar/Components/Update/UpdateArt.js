@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-
+import { View, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import ThreeUpdateForm from '../Forms/ThreeUpdateForm';
+import ThreeAddForm from '../Forms/ThreeAddForm';
 
 export default function UpdateArts({user}){
     const [newForm, setNewForm] = useState(false);
     const [art, setArt] = useState({"name": '', "desc": '', "award": ""});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
-
-    var handleValue = (text) => setValue(text);
-    var handleField = (textValue) => setField(textValue);
+    
+    var handleUpdate = (text, category) => {setValue(text); setField(category)}
     var handleNewService = (field, value) => setArt((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
         setArt({"name": '', "desc": '', "award": ""})
@@ -57,75 +57,30 @@ export default function UpdateArts({user}){
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         {user.perfrormingArts.map((art, index ) => (
-            <View key={index} style={styles.classContainer}>
-              <Text>Art {index + 1}</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("name")}}
-                onBlur={() => updateService(art.name)}
-                placeholder={art.name}
-                required
-                id={"name"}
-                name={"name"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("desc")}}
-                onBlur={() => updateService(art.name)}
-                placeholder={art.desc}
-                required
-                id={"desc"}
-                name={"desc"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("award")}}
-                onBlur={() => updateService(art.name)}
-                placeholder={art.award}
-                required
-                id={"hours"}
-                name={"hours"}
-              />
-              <Button title="Remove" onPress={() => removeService(art.name)} />
-            </View>
+            <ThreeUpdateForm
+              key={index} 
+              index={index}
+              item={art}
+              remove={removeService}
+              update={updateService}
+              onChange={handleUpdate}
+              categories={["name", "desc", "award"]}
+              styles={styles}
+            />
         ))} 
-            {newForm && (
-                <View>
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Art Name"
-                    onChangeText={(text) => handleNewService("name", text)}
-                    id={"name"}
-                    name={"name"} 
-                />
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Art Description"
-                    onChangeText={(text) => handleNewService("desc", text)}
-                    id={"desc"}
-                    name={"desc"}  
-                />
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Art award/highest achievment"
-                    onChangeText={(text) => handleNewService("award", text)}
-                    id={"award"}
-                    name={"award"}  
-                />
-                <Button 
-                    title="Submit"
-                    onPress={addService}
-                />
-                </View>
-            )}
-            {!newForm ? (
-                <Button title={`Add Art`} onPress={handleForm} />
-            ) : (
-                <Button title={`Cancel Art`} onPress={handleForm} />
-            )}
+        {newForm && (
+          <ThreeAddForm 
+            styles={styles}
+            placeholders={["Art Name", "Art Description", "Art award/highest achievment"]}
+            newFunc={handleNewService}
+            add={addService}
+          />
+        )}
+        {!newForm ? (
+            <Button title={`Add Art`} onPress={handleForm} />
+        ) : (
+            <Button title={`Cancel Art`} onPress={handleForm} />
+        )}
     </View> 
     </ScrollView>
   )

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-
+import TwoAddForm from '../Forms/TwoAddForm';
+import TwoUpdateForm from '../Forms/TwoUpdateForm';
 
 export default function UpdateClubs({user}){
     const [newForm, setNewForm] = useState(false);
@@ -8,8 +9,7 @@ export default function UpdateClubs({user}){
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
 
-    var handleValue = (text) => setValue(text);
-    var handleField = (textValue) => setField(textValue);
+    var handleUpdate = (text, category) => {setValue(text); setField(category)}
     var handleNewClub = (field, value) => setNewClub((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
         setNewClub({"name": '', "desc": ''})
@@ -58,52 +58,25 @@ export default function UpdateClubs({user}){
     <View style={styles.container}>
         <View>
         {user.clubs.map((club, index) => (
-            <View key={index} style={styles.classContainer}>
-              <Text>Club {index + 1}</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("name")}}
-                onBlur={() => updateClub(club.name)}
-                placeholder={club.name}
-                required
-                id={"name"}
-                name={"name"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {handleValue(text); handleField("desc")}}
-                onBlur={() => updateClub(club.name)}
-                placeholder={club.desc}
-                required
-                id={"desc"}
-                name={"desc"}
-              />
-              <Button title="Remove" onPress={() => removeClub(club.name)} />
-            </View>
+          <TwoUpdateForm 
+            key={index}
+            index={index}
+            styles={styles}
+            onChange={handleUpdate}
+            item={club}
+            update={updateClub}
+            remove={removeClub}
+            categories={["name", "desc"]}
+          />
         ))} 
             {newForm && (
-                <View>
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Club Name"
-                    onChangeText={(text) => handleNewClub("name", text)}
-                    id={"name"}
-                    name={"name"} 
-                />
-                <TextInput 
-                    style={styles.input} 
-                    type="text" 
-                    placeholder="Club Description"
-                    onChangeText={(text) => handleNewClub("desc", text)}
-                    id={"desc"}
-                    name={"desc"}  
-                />
-                <Button 
-                    title="Submit"
-                    onPress={addClub}
-                />
-                </View>
+              <TwoAddForm 
+                key={0}
+                styles={styles}
+                placeholders={["Club Name", "Club Description"]}
+                newFunc={handleNewClub}
+                add={addClub}
+              />
             )}
             {!newForm ? (
                 <Button title={`Add Club`} onPress={handleForm} />
