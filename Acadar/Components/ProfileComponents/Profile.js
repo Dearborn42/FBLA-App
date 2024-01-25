@@ -6,13 +6,8 @@ import ProfileStudent from './ProfileStudent';
 import UpdateStudent from "../Update/UpdateStudent"
 import ProfileClasses from './ProfileClasses';
 import UpdateClasses from '../Update/UpdateClasses';
-import ProfileClubs from './ProfileClubs';
-import ProfileJobs from './ProfileJobs';
-import ProfileService from './ProfileService';
-import ProfileArt from './ProfileArt';
-import ProfileSports from './ProfileSports';
-import UpdateTwo from '../Update/UpdateTwo';
-import UpdateThree from '../Update/UpdateThree';
+import Display from './Display';
+import UpdateComponent from '../Update/UpdateComponent';
 
 export default function Profile({route}){
     const { user } = route.params;
@@ -44,57 +39,97 @@ export default function Profile({route}){
             {!classes ? <ProfileClasses user={user}/> : <UpdateClasses user={user}/>}
             <Button onPress={() => handleClasses()} title="Edit Section"></Button>
             {!clubs ? 
-              <ProfileClubs user={user}/> : 
-              <UpdateTwo 
+              <Display
                 user={user}
                 userField={"clubs"}
+                componentFields={["name" ,"desc"]}
+                nameCounter={"Club"}
+                nameFields={["Name", "Description"]}
+              /> : 
+              <UpdateComponent 
+                user={user}
+                userField={"clubs"}
+                name={"Club"}
                 categories={["name", "desc"]}
                 placeholders={["Club Name", "Club Description"]}
                 buttonNames={["Add Club", "Cancel new club"]}
+                newFormObj={{"name": "", "desc": ""}}
               />
             }
             <Button onPress={() => handleClubs()} title="Edit Section"></Button>
             {!jobs ? 
-              <ProfileJobs user={user}/> : 
-              <UpdateTwo
+              <Display
                 user={user}
                 userField={"work"}
+                componentFields={["name" ,"desc"]}
+                nameCounter={"Job"}
+                nameFields={["Company", "Description"]}
+              /> : 
+              <UpdateComponent
+                user={user}
+                userField={"work"}
+                name={"Job"}
                 categories={["name", "desc"]}
                 placeholders={["Job Name", "Job Description"]}
                 buttonNames={["Add Job", "Cancel new job"]}
+                newFormObj={{"name": "", "desc": ""}}
               />
             }
             <Button onPress={() => handleJobs()} title="Edit Section"></Button>
             {!community ? 
-              <ProfileService user={user}/> : 
-              <UpdateThree 
+              <Display
                 user={user}
                 userField={"communityService"}
+                componentFields={["name" ,"desc", "hours"]}
+                nameCounter={"Service"}
+                nameFields={["Name", "Description", "Hours"]}
+              /> : 
+              <UpdateComponent 
+                user={user}
+                userField={"communityService"}
+                name={"Service"}
                 categories={["name", "desc", "hours"]}
                 placeholders={["Service Name", "Service Description", "Service hours"]}
                 buttonNames={["Add Service", "Cancel new service"]}
+                newFormObj={{"name": "", "desc": "", "hours": ""}}
               />
             }
             <Button onPress={() => handleService()} title="Edit Section"></Button>
             {!art ? 
-              <ProfileArt user={user}/> : 
-              <UpdateThree 
+              <Display
                 user={user}
                 userField={"perfrormingArts"}
+                componentFields={["name" ,"desc", "award"]}
+                nameCounter={"Art"}
+                nameFields={["Name", "Description", "Award"]}
+              /> : 
+              <UpdateComponent 
+                user={user}
+                userField={"perfrormingArts"}
+                name={"Art"}
                 categories={["name", "desc", "award"]}
                 placeholders={["Art Name", "Art Description", "Art award/highest achievment"]}
                 buttonNames={["Add Art", "Cancel new art"]}
+                newFormObj={{"name": "", "desc": "", "award": ""}}
               />
             }
             <Button onPress={() => handleArt()} title="Edit Section"></Button>
             {!sport ? 
-              <ProfileSports user={user}/> : 
-              <UpdateThree 
+              <Display
                 user={user}
                 userField={"sports"}
-                categories={["name", "desc", "hours"]}
+                componentFields={["name" ,"desc", "award"]}
+                nameCounter={"Sport"}
+                nameFields={["Name", "Description", "Award"]}
+              /> : 
+              <UpdateComponent 
+                user={user}
+                userField={"sports"}
+                name={"Sport"}
+                categories={["name", "desc", "award"]}
                 placeholders={["Sport Name", "Sport Description", "Sport award/highest achievment"]}
                 buttonNames={["Add Sport", "Cancel new sport"]}
+                newFormObj={{"name": "", "desc": "", "award": ""}}
               />
             }
             <Button onPress={() => handleSport()} title="Edit Section"></Button>

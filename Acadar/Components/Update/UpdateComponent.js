@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react'
 import { View, Button, StyleSheet, ScrollView } from 'react-native';
-import TwoAddForm from '../Forms/TwoAddForm';
-import TwoUpdateForm from '../Forms/TwoUpdateForm';
+import UpdateForm from '../Forms/UpdateForm';
+import AddForm from '../Forms/AddForm';
 
-const UpdateTwo = ({user, userField, categories, placeholders, buttonNames}) => {
+const UpdateComponent = ({user, userField, categories, placeholders, buttonNames, name, newFormObj}) => {
     const [newForm, setNewForm] = useState(false);
-    const [newClub, setNewClub] = useState({"name": '', "desc": ''});
+    const [newService, setNewService] = useState(newFormObj);
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
 
     var handleUpdate = (text, category) => {setValue(text); setField(category)}
-    var handleNewForm = (field, value) => setNewClub((prev) => {return {...prev, ...{[field]: value}}});
+    var handleNewService = (field, value) => setNewService((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
-        setNewClub({"name": '', "desc": ''});
+        setNewService(newFormObj)
         setNewForm((prev) => !prev);
     };
+
     const add = async() => {
         var body1 = await fetch(`http://localhost:5000/functions/add/${userField}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
-            body: JSON.stringify(newClub)
+            body: JSON.stringify(newService)
         });
         var body1_response = await body1.json();
         if (body1_response.success){
@@ -39,7 +40,7 @@ const UpdateTwo = ({user, userField, categories, placeholders, buttonNames}) => 
         }
     };
     const update = async (name) => {
-        if(value === "") return;
+        if(value.trim() === "") return;
         var body1 = await fetch(`http://localhost:5000/functions/update/${userField}/${name}/${field}`, {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
@@ -52,28 +53,29 @@ const UpdateTwo = ({user, userField, categories, placeholders, buttonNames}) => 
         }
     };
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         <View>
-        {user[userField].map((x, index) => (
-          <TwoUpdateForm 
-            key={index}
+        {user[userField].map((x, index ) => (
+          <UpdateForm
+            key={index} 
             index={index}
-            styles={styles}
-            onChange={handleUpdate}
             item={x}
-            update={update}
+            name={name}
             remove={remove}
+            update={update}
+            onChange={handleUpdate}
             categories={categories}
+            styles={styles}
           />
         ))} 
             {newForm && (
-              <TwoAddForm 
-                key={0}
+              <AddForm 
+                key={0} 
                 styles={styles}
                 placeholders={placeholders}
-                // placeholders={["Club Name", "Club Description"]}
-                newFunc={handleNewForm}
+                newFunc={handleNewService}
+                categories={categories}
                 add={add}
               />
             )}
@@ -111,5 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-export default UpdateTwo
+export default UpdateComponent

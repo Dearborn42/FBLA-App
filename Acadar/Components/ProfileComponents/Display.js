@@ -1,23 +1,23 @@
-import React from 'react';
+import React from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-export default function ProfileSports({ user }) {
+
+const Display = ({user, userField, componentFields, nameCounter, nameFields}) => {
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
-      {user.sports.map((sport, index) => (
+      {user[userField].map((x, index) => (
         <View key={index} style={styles.classContainer}>
-          <Text>Sport {index + 1}</Text>
-          <Text>Name: {sport.name}</Text>
-          <Text>Description: {sport.desc}</Text>
-          <Text>Award: {sport.award}</Text>
+            <Text>{nameCounter} {index + 1}</Text>
+            {componentFields.map((y, i) => (
+                <Text>{nameFields[i]}: {x[y]}</Text>
+            ))}
         </View>
       ))}
     </View>
     </ScrollView>
-  );
+  )
 }
-
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
@@ -40,3 +40,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+export default Display
