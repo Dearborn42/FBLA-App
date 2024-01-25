@@ -4,7 +4,6 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-nat
 
 export default function UpdateClubs({user}){
     const [newForm, setNewForm] = useState(false);
-    const [form, setForm] = useState({clubs: user.clubs});
     const [newClub, setNewClub] = useState({"name": '', "desc": ''});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
@@ -58,7 +57,7 @@ export default function UpdateClubs({user}){
     <ScrollView>
     <View style={styles.container}>
         <View>
-        {form.clubs.map((club, index) => (
+        {user.clubs.map((club, index) => (
             <View key={index} style={styles.classContainer}>
               <Text>Club {index + 1}</Text>
               <TextInput

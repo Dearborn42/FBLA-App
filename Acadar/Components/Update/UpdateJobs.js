@@ -4,7 +4,6 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-nat
 
 export default function UpdateJobs({user}){
     const [newForm, setNewForm] = useState(false);
-    const [form, setForm] = useState({work: user.work});
     const [newJob, setNewJob] = useState({"name": '', "desc": ''});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
@@ -58,14 +57,14 @@ export default function UpdateJobs({user}){
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         <View>
-        {form.work.map((job, index ) => (
+        {user.work.map((job, index ) => (
             <View key={index} style={styles.classContainer}>
               <Text>Job {index + 1}</Text>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {handleValue(text); handleField("name")}}
-                onBlur={() => updateClub(job.company)}
-                placeholder={job.company}
+                onBlur={() => updateClub(job.name)}
+                placeholder={job.name}
                 required
                 id={"name"}
                 name={"name"}

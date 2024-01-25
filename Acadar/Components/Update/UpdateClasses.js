@@ -2,12 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
 
 export default function UpdateClasses({user}) {
-    const [form, setForm] = useState({
-        freshman: user.freshman,
-        sophomore: user.sophomore,
-        junior: user.junior,
-        senior: user.senior
-    });
     const [newForm, setNewForm] = useState(false);
     const [newClub, setNewClub] = useState({"name": '', "grade": ''});
     const [field, setField] = useState("");
@@ -75,7 +69,7 @@ export default function UpdateClasses({user}) {
       {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
         <View key={year}>
           <Text style={styles.header}>{year.charAt(0).toUpperCase() + year.slice(1)}</Text>
-          {form[year].map((classItem, index) => (
+          {user[year].map((classItem, index) => (
             <View key={index} style={styles.classContainer}>
               <Text>Class {index + 1}</Text>
               <TextInput

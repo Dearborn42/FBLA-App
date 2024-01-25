@@ -4,7 +4,6 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-nat
 
 export default function UpdateArts({user}){
     const [newForm, setNewForm] = useState(false);
-    const [form, setForm] = useState({arts: user.perfrormingArts});
     const [art, setArt] = useState({"name": '', "desc": '', "award": ""});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
@@ -57,7 +56,7 @@ export default function UpdateArts({user}){
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
-        {form.arts.map((art, index ) => (
+        {user.perfrormingArts.map((art, index ) => (
             <View key={index} style={styles.classContainer}>
               <Text>Art {index + 1}</Text>
               <TextInput

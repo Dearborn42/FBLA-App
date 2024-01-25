@@ -4,7 +4,6 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-nat
 
 export default function UpdateSports({user}){
     const [newForm, setNewForm] = useState(false);
-    const [form, setForm] = useState({sports: user.sports});
     const [sport, setSport] = useState({"name": '', "desc": '', "award": ""});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
@@ -58,7 +57,7 @@ export default function UpdateSports({user}){
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         <View>
-        {form.sports.map((sport, index ) => (
+        {user.sports.map((sport, index ) => (
             <View key={index} style={styles.classContainer}>
               <Text>Sport {index + 1}</Text>
               <TextInput

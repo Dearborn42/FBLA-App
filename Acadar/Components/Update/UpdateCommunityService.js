@@ -4,7 +4,6 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-nat
 
 export default function UpdateCommunityServce({user}){
     const [newForm, setNewForm] = useState(false);
-    const [form, setForm] = useState({services: user.communityService});
     const [newService, setNewService] = useState({"name": '', "desc": '', "hours": ""});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
@@ -58,7 +57,7 @@ export default function UpdateCommunityServce({user}){
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         <View>
-        {form.services.map((service, index ) => (
+        {user.communityService.map((service, index ) => (
             <View key={index} style={styles.classContainer}>
               <Text>Service {index + 1}</Text>
               <TextInput
