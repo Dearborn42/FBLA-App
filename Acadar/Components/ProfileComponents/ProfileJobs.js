@@ -8,7 +8,7 @@ export default function ProfileJobs({ user }) {
         {user.work.map((job, index) => (
           <View key={index} style={styles.classContainer}>
             <Text>Job {index + 1}</Text>
-            <Text>Company: {job.company}</Text>
+            <Text>Company: {job.name}</Text>
             <Text>Description: {job.desc}</Text>
           </View>
         ))}

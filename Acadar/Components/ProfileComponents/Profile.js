@@ -7,15 +7,12 @@ import UpdateStudent from "../Update/UpdateStudent"
 import ProfileClasses from './ProfileClasses';
 import UpdateClasses from '../Update/UpdateClasses';
 import ProfileClubs from './ProfileClubs';
-import UpdateClubs from '../Update/UpdateClubs';
 import ProfileJobs from './ProfileJobs';
-import UpdateJobs from '../Update/UpdateJobs';
 import ProfileService from './ProfileService';
-import UpdateCommunityServce from '../Update/UpdateCommunityService';
 import ProfileArt from './ProfileArt';
-import UpdateArts from '../Update/UpdateArt';
 import ProfileSports from './ProfileSports';
-import UpdateSports from '../Update/UpdateSport';
+import UpdateTwo from '../Update/UpdateTwo';
+import UpdateThree from '../Update/UpdateThree';
 
 export default function Profile({route}){
     const { user } = route.params;
@@ -46,15 +43,60 @@ export default function Profile({route}){
             <Button onPress={() => handleBase()} title="Edit Section"></Button>
             {!classes ? <ProfileClasses user={user}/> : <UpdateClasses user={user}/>}
             <Button onPress={() => handleClasses()} title="Edit Section"></Button>
-            {!clubs ? <ProfileClubs user={user}/> : <UpdateClubs user={user}/>}
+            {!clubs ? 
+              <ProfileClubs user={user}/> : 
+              <UpdateTwo 
+                user={user}
+                userField={"clubs"}
+                categories={["name", "desc"]}
+                placeholders={["Club Name", "Club Description"]}
+                buttonNames={["Add Club", "Cancel new club"]}
+              />
+            }
             <Button onPress={() => handleClubs()} title="Edit Section"></Button>
-            {!jobs ? <ProfileJobs user={user}/> : <UpdateJobs user={user}/>}
+            {!jobs ? 
+              <ProfileJobs user={user}/> : 
+              <UpdateTwo
+                user={user}
+                userField={"work"}
+                categories={["name", "desc"]}
+                placeholders={["Job Name", "Job Description"]}
+                buttonNames={["Add Job", "Cancel new job"]}
+              />
+            }
             <Button onPress={() => handleJobs()} title="Edit Section"></Button>
-            {!community ? <ProfileService user={user}/> : <UpdateCommunityServce user={user}/>}
+            {!community ? 
+              <ProfileService user={user}/> : 
+              <UpdateThree 
+                user={user}
+                userField={"communityService"}
+                categories={["name", "desc", "hours"]}
+                placeholders={["Service Name", "Service Description", "Service hours"]}
+                buttonNames={["Add Service", "Cancel new service"]}
+              />
+            }
             <Button onPress={() => handleService()} title="Edit Section"></Button>
-            {!art ? <ProfileArt user={user}/> : <UpdateArts user={user}/>}
+            {!art ? 
+              <ProfileArt user={user}/> : 
+              <UpdateThree 
+                user={user}
+                userField={"perfrormingArts"}
+                categories={["name", "desc", "award"]}
+                placeholders={["Art Name", "Art Description", "Art award/highest achievment"]}
+                buttonNames={["Add Art", "Cancel new art"]}
+              />
+            }
             <Button onPress={() => handleArt()} title="Edit Section"></Button>
-            {!sport ? <ProfileSports user={user}/> : <UpdateSports user={user}/>}
+            {!sport ? 
+              <ProfileSports user={user}/> : 
+              <UpdateThree 
+                user={user}
+                userField={"sports"}
+                categories={["name", "desc", "hours"]}
+                placeholders={["Sport Name", "Sport Description", "Sport award/highest achievment"]}
+                buttonNames={["Add Sport", "Cancel new sport"]}
+              />
+            }
             <Button onPress={() => handleSport()} title="Edit Section"></Button>
         </View>
         </ImageBackground>

@@ -4,34 +4,35 @@ import ThreeAddForm from '../Forms/ThreeAddForm';
 import ThreeUpdateForm from '../Forms/ThreeUpdateForm';
 
 
-export default function UpdateSports({user}){
+export default function UpdateThree({user, userField, categories, placeholders, buttonNames}){
     const [newForm, setNewForm] = useState(false);
-    const [sport, setSport] = useState({"name": '', "desc": '', "award": ""});
+    const [newService, setNewService] = useState({
+        [categories[0]]: '', [categories[1]]: '', [categories[2]]: ""
+    });
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
 
     var handleUpdate = (text, category) => {setValue(text); setField(category)}
-    var handleNewService = (field, value) => setSport((prev) => {return {...prev, ...{[field]: value}}});
+    var handleNewService = (field, value) => setNewService((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
-        setSport({"name": '', "desc": '', "award": ""})
+        setNewService({[categories[0]]: '', [categories[1]]: '', [categories[2]]: ""})
         setNewForm((prev) => !prev);
     };
 
-    const addService = async() => {
-        var body1 = await fetch(`http://localhost:5000/functions/add/sports`, {
-            method: 'PUT',
+    const add = async() => {
+        var body1 = await fetch(`http://localhost:5000/functions/add/${userField}`, {
+            method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
-            body: JSON.stringify(sport)
+            body: JSON.stringify(newService)
         });
         var body1_response = await body1.json();
         if (body1_response.success){
             
         }
     };
-
-    const removeService = async (name) => {
-        var body1 = await fetch(`http://localhost:5000/functions/remove/sports/${name}`, {
+    const remove = async (name) => {
+        var body1 = await fetch(`http://localhost:5000/functions/remove/${userField}/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -41,10 +42,10 @@ export default function UpdateSports({user}){
             
         }
     };
-    const updateService = async (name) => {
+    const update = async (name) => {
         if(value.trim() === "") return;
-        var body1 = await fetch(`http://localhost:5000/functions/update/sports/${name}/${field}`, {
-            method: 'POST',
+        var body1 = await fetch(`http://localhost:5000/functions/update/${userField}/${name}/${field}`, {
+            method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({"value": value})
@@ -58,15 +59,15 @@ export default function UpdateSports({user}){
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         <View>
-        {user.sports.map((sport, index ) => (
+        {user[userField].map((x, index ) => (
           <ThreeUpdateForm
             key={index} 
             index={index}
-            item={sport}
-            remove={removeService}
-            update={updateService}
+            item={x}
+            remove={remove}
+            update={update}
             onChange={handleUpdate}
-            categories={["name", "desc", "award"]}
+            categories={categories}
             styles={styles}
           />
         ))} 
@@ -74,15 +75,15 @@ export default function UpdateSports({user}){
               <ThreeAddForm 
                 key={0} 
                 styles={styles}
-                placeholders={["Sport Name", "Sport Description", "Sport award/highest achievment"]}
+                placeholders={placeholders}
                 newFunc={handleNewService}
-                add={addService}
+                add={add}
               />
             )}
             {!newForm ? (
-                <Button title={`Add Sport`} onPress={handleForm} />
+                <Button title={buttonNames[0]} onPress={handleForm} />
             ) : (
-                <Button title={`Cancel Sport`} onPress={handleForm} />
+                <Button title={buttonNames[1]} onPress={handleForm} />
             )}
         </View>
     </View> 

@@ -3,35 +3,32 @@ import { View, Button, StyleSheet, ScrollView } from 'react-native';
 import TwoAddForm from '../Forms/TwoAddForm';
 import TwoUpdateForm from '../Forms/TwoUpdateForm';
 
-
-export default function UpdateJobs({user}){
+const UpdateTwo = ({user, userField, categories, placeholders, buttonNames}) => {
     const [newForm, setNewForm] = useState(false);
-    const [newJob, setNewJob] = useState({"name": '', "desc": ''});
+    const [newClub, setNewClub] = useState({"name": '', "desc": ''});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
 
     var handleUpdate = (text, category) => {setValue(text); setField(category)}
-    var handleNewClub = (field, value) => setNewJob((prev) => {return {...prev, ...{[field]: value}}});
+    var handleNewForm = (field, value) => setNewClub((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
-        setNewJob({"name": '', "desc": ''})
+        setNewClub({"name": '', "desc": ''});
         setNewForm((prev) => !prev);
     };
-
-    const addJob = async() => {      
-        var body1 = await fetch(`http://localhost:5000/functions/add/work`, {
+    const add = async() => {
+        var body1 = await fetch(`http://localhost:5000/functions/add/${userField}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
-            body: JSON.stringify(newJob)
+            body: JSON.stringify(newClub)
         });
         var body1_response = await body1.json();
         if (body1_response.success){
             
         }
     };
-
-    const removeJob = async (name) => {
-        var body1 = await fetch(`http://localhost:5000/functions/remove/work/${name}`, {
+    const remove = async (name) => {
+        var body1 = await fetch(`http://localhost:5000/functions/remove/${userField}/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -41,9 +38,9 @@ export default function UpdateJobs({user}){
             
         }
     };
-    const updateClub = async (name) => {
-        if(value.trim() === "") return;
-        var body1 = await fetch(`http://localhost:5000/functions/update/work/${name}/${field}`, {
+    const update = async (name) => {
+        if(value === "") return;
+        var body1 = await fetch(`http://localhost:5000/functions/update/${userField}/${name}/${field}`, {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -55,34 +52,35 @@ export default function UpdateJobs({user}){
         }
     };
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <ScrollView>
     <View style={styles.container}>
         <View>
-        {user.work.map((job, index ) => (
+        {user[userField].map((x, index) => (
           <TwoUpdateForm 
             key={index}
             index={index}
             styles={styles}
             onChange={handleUpdate}
-            item={job}
-            update={updateClub}
-            remove={removeJob}
-            categories={["name", "desc"]}
+            item={x}
+            update={update}
+            remove={remove}
+            categories={categories}
           />
         ))} 
             {newForm && (
               <TwoAddForm 
                 key={0}
                 styles={styles}
-                placeholders={["Job Name", "Job Description"]}
-                newFunc={handleNewClub}
-                add={addJob}
+                placeholders={placeholders}
+                // placeholders={["Club Name", "Club Description"]}
+                newFunc={handleNewForm}
+                add={add}
               />
             )}
             {!newForm ? (
-                <Button title={`Add Job`} onPress={handleForm} />
+                <Button title={buttonNames[0]} onPress={handleForm} />
             ) : (
-                <Button title={`Cancel Job`} onPress={handleForm} />
+                <Button title={buttonNames[1]} onPress={handleForm} />
             )}
         </View>
     </View> 
@@ -112,3 +110,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+
+export default UpdateTwo
