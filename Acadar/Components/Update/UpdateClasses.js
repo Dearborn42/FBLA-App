@@ -58,7 +58,7 @@ export default function UpdateClasses({user}) {
     const updateClass = async (year, name) => {
         if(value.trim() === "") return;
         var body1 = await fetch(`http://localhost:5000/functions/update/${year}/${name}/${field}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({"value": value})

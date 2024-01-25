@@ -44,7 +44,7 @@ export default function UpdateArts({user}){
     const updateService = async (name) => {
         if(value.trim() === "") return;
         var body1 = await fetch(`http://localhost:5000/functions/update/perfrormingArts/${name}/${field}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({"value": value})

@@ -19,7 +19,7 @@ export default function UpdateJobs({user}){
 
     const addJob = async() => {
         var body1 = await fetch(`http://localhost:5000/functions/add/work`, {
-            method: 'POST',
+            method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify(newJob)

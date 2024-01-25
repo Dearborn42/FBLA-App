@@ -44,7 +44,7 @@ export default function UpdateClubs({user}){
     const updateClub = async (name) => {
         if(value === "") return;
         var body1 = await fetch(`http://localhost:5000/clubs/update/${name}/${field}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({"value": value})

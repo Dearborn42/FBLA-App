@@ -19,7 +19,7 @@ export default function UpdateCommunityServce({user}){
 
     const addService = async() => {
         var body1 = await fetch(`http://localhost:5000/functions/add/communityService`, {
-            method: 'POST',
+            method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify(newService)
