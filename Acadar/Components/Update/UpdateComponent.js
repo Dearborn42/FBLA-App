@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
-import { View, Button, StyleSheet, ScrollView } from 'react-native';
-import UpdateForm from '../Forms/UpdateForm';
-import AddForm from '../Forms/AddForm';
+import { View, Button, StyleSheet, ScrollView, Text, TextInput } from 'react-native';
 
 const UpdateComponent = ({user, userField, categories, placeholders, buttonNames, name, newFormObj}) => {
     const [newForm, setNewForm] = useState(false);
@@ -57,27 +55,34 @@ const UpdateComponent = ({user, userField, categories, placeholders, buttonNames
     <View style={styles.container}>
         <View>
         {user[userField].map((x, index ) => (
-          <UpdateForm
-            key={index} 
-            index={index}
-            item={x}
-            name={name}
-            remove={remove}
-            update={update}
-            onChange={handleUpdate}
-            categories={categories}
-            styles={styles}
-          />
+            <View key={index} style={styles.classContainer}>
+                <Text>{name} {index + 1}</Text>
+                {categories.map(y => (
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(text) => {handleUpdate(text, y)}}
+                        onBlur={() => update(x.name)}
+                        placeholder={x[y]}
+                    />
+                ))}
+                <Button title="Remove" onPress={() => remove(x.name)} />
+            </View>
         ))} 
             {newForm && (
-              <AddForm 
-                key={0} 
-                styles={styles}
-                placeholders={placeholders}
-                newFunc={handleNewService}
-                categories={categories}
-                add={add}
-              />
+                <View>
+                    {placeholders.map((x, i) => (
+                        <TextInput 
+                            style={styles.input} 
+                            type="text" 
+                            placeholder={x}
+                            onChangeText={(text) => handleNewService(categories[i], text)} 
+                        />
+                    ))}
+                    <Button 
+                        title="Submit"
+                        onPress={() => add()}
+                    />
+                </View>
             )}
             {!newForm ? (
                 <Button title={buttonNames[0]} onPress={handleForm} />
