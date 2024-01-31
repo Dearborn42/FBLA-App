@@ -4,4 +4,4 @@ const router = express.Router();
 
 router.post("/update/:type", updateStudent)
 
-export default router
+export default router;

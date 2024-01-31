@@ -29,3 +29,4 @@ export async function update(req, res){
         { $set: {[`${field}.${Index}.${area}`]: value}}
     ], res)
 }
+

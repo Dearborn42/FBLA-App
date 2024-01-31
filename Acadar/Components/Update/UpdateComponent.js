@@ -15,7 +15,7 @@ const UpdateComponent = ({user, userField, categories, placeholders, buttonNames
     };
 
     const add = async() => {
-        var body1 = await fetch(`http://localhost:5000/functions/add/${userField}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/functions/add/${userField}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -27,7 +27,7 @@ const UpdateComponent = ({user, userField, categories, placeholders, buttonNames
         }
     };
     const remove = async (name) => {
-        var body1 = await fetch(`http://localhost:5000/functions/remove/${userField}/${name}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/functions/remove/${userField}/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -39,7 +39,7 @@ const UpdateComponent = ({user, userField, categories, placeholders, buttonNames
     };
     const update = async (name) => {
         if(value.trim() === "") return;
-        var body1 = await fetch(`http://localhost:5000/functions/update/${userField}/${name}/${field}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/functions/update/${userField}/${name}/${field}`, {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",

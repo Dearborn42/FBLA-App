@@ -32,6 +32,7 @@ export async function updateStudent(req, res){
     }
 }
 
+
 /*
 await createStudent(Fill in at least Full Name, grade, and school)
 await createStudent("Andrew Murphy", 12, "Thunderbird");
