@@ -9,10 +9,10 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import UserContext from './UserContext';
+import {UserContext} from './UserContent';
 
 const Login = ({ navigation }) => {
-  const { setUser } = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext);
   const [form, setForm] = useState({ email: '', password: '' });
   var updateForm = (value) =>
     setForm((prev) => {
@@ -27,7 +27,7 @@ const Login = ({ navigation }) => {
     });
     var login_response = await login.json();
     if (login_response.success) {
-      setUser(login_response.user);
+      setCurrentUser(login_response.user);
       navigation.navigate('App');
     }
   };

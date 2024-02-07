@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import { UserContext } from '../UserContent';
 
-export default function UpdateClasses({user}) {
+export default function UpdateClasses() {
+    const {currentUser} = useContext(UserContext)
     const [newForm, setNewForm] = useState(false);
     const [newClub, setNewClub] = useState({"name": '', "grade": ''});
     const [field, setField] = useState("");
@@ -69,7 +71,7 @@ export default function UpdateClasses({user}) {
       {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
         <View key={year}>
           <Text style={styles.header}>{year.charAt(0).toUpperCase() + year.slice(1)}</Text>
-          {user[year].map((classItem, index) => (
+          {currentUser[year].map((classItem, index) => (
             <View key={index} style={styles.classContainer}>
               <Text>Class {index + 1}</Text>
               <TextInput

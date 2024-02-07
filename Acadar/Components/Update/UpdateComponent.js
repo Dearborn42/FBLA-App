@@ -1,71 +1,34 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { View, Button, StyleSheet, ScrollView, Text, TextInput } from 'react-native';
+import { UserContext } from '../UserContent';
 
-const UpdateComponent = ({user, userField, categories, placeholders, buttonNames, name, newFormObj}) => {
+const UpdateComponent = ({userField, categories, placeholders, buttonNames, name, newFormObj}) => {
+    const {currentUser, add, remove, update, handleUpdate} = useContext(UserContext)
     const [newForm, setNewForm] = useState(false);
     const [newService, setNewService] = useState(newFormObj);
-    const [field, setField] = useState("");
-    const [value, setValue] = useState("");
 
-    var handleUpdate = (text, category) => {setValue(text); setField(category)}
     var handleNewService = (field, value) => setNewService((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
         setNewService(newFormObj)
         setNewForm((prev) => !prev);
     };
 
-    const add = async() => {
-        var body1 = await fetch(`http://172.233.131.223:5000/functions/add/${userField}`, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify(newService)
-        });
-        var body1_response = await body1.json();
-        if (body1_response.success){
-            
-        }
-    };
-    const remove = async (name) => {
-        var body1 = await fetch(`http://172.233.131.223:5000/functions/remove/${userField}/${name}`, {
-            method: 'DELETE',
-            headers: { "Content-Type": "application/json" },
-            credentials: "include"
-        });
-        var body1_response = await body1.json();
-        if (body1_response.success){
-            
-        }
-    };
-    const update = async (name) => {
-        if(value.trim() === "") return;
-        var body1 = await fetch(`http://172.233.131.223:5000/functions/update/${userField}/${name}/${field}`, {
-            method: 'PUT',
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({"value": value})
-        });
-        var body1_response = await body1.json();
-        if (body1_response.success){
-            
-        }
-    };
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         <View>
-        {user[userField].map((x, index ) => (
+        {currentUser[userField].map((x, index ) => (
             <View key={index} style={styles.classContainer}>
                 <Text>{name} {index + 1}</Text>
                 {categories.map(y => (
                     <TextInput
                         style={styles.input}
                         onChangeText={(text) => {handleUpdate(text, y)}}
-                        onBlur={() => update(x.name)}
+                        onBlur={() => update(userField, x.name)}
                         placeholder={x[y]}
                     />
                 ))}
-                <Button title="Remove" onPress={() => remove(x.name)} />
+                <Button title="Remove" onPress={() => remove(userField, x.name)} />
             </View>
         ))} 
             {newForm && (
@@ -80,7 +43,7 @@ const UpdateComponent = ({user, userField, categories, placeholders, buttonNames
                     ))}
                     <Button 
                         title="Submit"
-                        onPress={() => add()}
+                        onPress={() => add(userField, newService)}
                     />
                 </View>
             )}

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react'
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { UserContext } from '../UserContent';
 
-export default function ProfileClasses({ user }) {
+export default function ProfileClasses() {
+  const {currentUser} = useContext(UserContext)
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
       {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
         <View key={year}>
           <Text style={styles.header}>{year.charAt(0).toUpperCase() + year.slice(1)}</Text>
-          {user[year].map((classItem, index) => (
+          {currentUser[year].map((classItem, index) => (
             <View key={index} style={styles.classContainer}>
               <Text>Class {index + 1}</Text>
               <Text>Name: {classItem.name}</Text>

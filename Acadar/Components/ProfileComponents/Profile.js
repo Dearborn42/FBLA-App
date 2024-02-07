@@ -8,9 +8,11 @@ import ProfileClasses from './ProfileClasses';
 import UpdateClasses from '../Update/UpdateClasses';
 import Display from './Display';
 import UpdateComponent from '../Update/UpdateComponent';
+import { UserContext } from '../UserContent';
 
-export default function Profile({route}){
-    const { user } = route.params;
+export default function Profile(){
+    const { currentUser } = useContext(UserContext);
+    console.log(currentUser);
     const [art, setArt] = useState(false)
     const [classes, setClasses] = useState(false)
     const [clubs, setClubs] = useState(false)
@@ -34,20 +36,18 @@ export default function Profile({route}){
       source={{ uri: require('../../assets/blue.png') }}
       style={styles.backgroundImage}>
         <View style={styles.container}>
-            {!base ? <ProfileStudent user={user}/> : <UpdateStudent user={user}/>}
+            {!base ? <ProfileStudent /> : <UpdateStudent />}
             <Button onPress={() => handleBase()} title="Edit Section"></Button>
-            {!classes ? <ProfileClasses user={user}/> : <UpdateClasses user={user}/>}
+            {!classes ? <ProfileClasses /> : <UpdateClasses />}
             <Button onPress={() => handleClasses()} title="Edit Section"></Button>
             {!clubs ? 
               <Display
-                user={user}
                 userField={"clubs"}
                 componentFields={["name" ,"desc"]}
                 nameCounter={"Club"}
                 nameFields={["Name", "Description"]}
               /> : 
-              <UpdateComponent 
-                user={user}
+              <UpdateComponent
                 userField={"clubs"}
                 name={"Club"}
                 categories={["name", "desc"]}
@@ -59,14 +59,12 @@ export default function Profile({route}){
             <Button onPress={() => handleClubs()} title="Edit Section"></Button>
             {!jobs ? 
               <Display
-                user={user}
                 userField={"work"}
                 componentFields={["name" ,"desc"]}
                 nameCounter={"Job"}
                 nameFields={["Company", "Description"]}
               /> : 
               <UpdateComponent
-                user={user}
                 userField={"work"}
                 name={"Job"}
                 categories={["name", "desc"]}
@@ -78,14 +76,12 @@ export default function Profile({route}){
             <Button onPress={() => handleJobs()} title="Edit Section"></Button>
             {!community ? 
               <Display
-                user={user}
                 userField={"communityService"}
                 componentFields={["name" ,"desc", "hours"]}
                 nameCounter={"Service"}
                 nameFields={["Name", "Description", "Hours"]}
               /> : 
-              <UpdateComponent 
-                user={user}
+              <UpdateComponent
                 userField={"communityService"}
                 name={"Service"}
                 categories={["name", "desc", "hours"]}
@@ -97,14 +93,12 @@ export default function Profile({route}){
             <Button onPress={() => handleService()} title="Edit Section"></Button>
             {!art ? 
               <Display
-                user={user}
                 userField={"perfrormingArts"}
                 componentFields={["name" ,"desc", "award"]}
                 nameCounter={"Art"}
                 nameFields={["Name", "Description", "Award"]}
               /> : 
-              <UpdateComponent 
-                user={user}
+              <UpdateComponent
                 userField={"perfrormingArts"}
                 name={"Art"}
                 categories={["name", "desc", "award"]}
@@ -116,14 +110,12 @@ export default function Profile({route}){
             <Button onPress={() => handleArt()} title="Edit Section"></Button>
             {!sport ? 
               <Display
-                user={user}
                 userField={"sports"}
                 componentFields={["name" ,"desc", "award"]}
                 nameCounter={"Sport"}
                 nameFields={["Name", "Description", "Award"]}
               /> : 
-              <UpdateComponent 
-                user={user}
+              <UpdateComponent
                 userField={"sports"}
                 name={"Sport"}
                 categories={["name", "desc", "award"]}

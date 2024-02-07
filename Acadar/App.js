@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import UserContext from './Components/UserContext';
+import UserContent from './Components/UserContent'
 import Classes from './Components/Create/Classes';
 import Account from './Components/Create/Account';
 import Clubs from './Components/Create/Clubs';
@@ -14,10 +14,10 @@ import UpdateTabs from './Components/UpdateTabs';
 import Login from './Components/Login';
 import Landing from './Components/Landing';
 
+
 const Stack = createStackNavigator();
 
 const App = () => {
-  const [user, setUser] = useState(null);
   const studentSetup = [
     Account,
     Classes,
@@ -38,34 +38,34 @@ const App = () => {
     );
   };
   return (
-    <View style={{ height: '100%', width: '100%' }}>
-      <UserContext.Provider value={{ user, setUser }}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName='Landing'>
-            <Stack.Screen
-              name='Login'
-              component={Login}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name='Create'
-              component={FormComponent}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name='App'
-              component={UpdateTabs}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name='Landing'
-              component={Landing}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </UserContext.Provider>
-    </View>
+    <UserContent>
+      <View style={{ height: '100%', width: '100%' }}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName='Landing'>
+              <Stack.Screen
+                name='Login'
+                component={Login}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name='Create'
+                component={FormComponent}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name='App'
+                component={UpdateTabs}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name='Landing'
+                component={Landing}
+                options={{ headerShown: false }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+      </View>
+    </UserContent>
   );
 };
 

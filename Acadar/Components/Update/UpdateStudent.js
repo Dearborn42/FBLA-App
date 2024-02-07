@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown'
+import SelectDropdown from 'react-native-select-dropdown';
+import { UserContext } from '../UserContent';
 
-const UpdateStudent = ({user}) => {
+const UpdateStudent = () => {
+    const {currentUser} = useContext(UserContext);
     const [form, setForm] = useState({value: ""});
     const [type, setType] = useState("");
     function handleType(text){
@@ -33,7 +35,7 @@ const UpdateStudent = ({user}) => {
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
         onBlur={()=>handleBlur()}
-        placeholder={user.name}
+        placeholder={currentUser.name}
         onFocus={() => handleType("name")}
         id={"name"}
         name={"name"}
@@ -42,7 +44,7 @@ const UpdateStudent = ({user}) => {
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
-        placeholder={user.email}
+        placeholder={currentUser.email}
         onFocus={() => handleType("email")}
         id={"email"}
         name={"email"}
@@ -78,7 +80,7 @@ const UpdateStudent = ({user}) => {
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
-        placeholder={user.grade_level}
+        placeholder={currentUser.grade_level}
         onFocus={() => handleType("grade_level")}
         id={"grade_level"}
         name={"grade_level"}
@@ -87,7 +89,7 @@ const UpdateStudent = ({user}) => {
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
-        placeholder={user.school}
+        placeholder={currentUser.school}
         onFocus={() => handleType("school")}
         onBlur={() => handleBlur()}
         id={"school"}

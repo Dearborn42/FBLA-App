@@ -1,12 +1,13 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { UserContext } from '../UserContent';
 
-
-const Display = ({user, userField, componentFields, nameCounter, nameFields}) => {
+const Display = ({userField, componentFields, nameCounter, nameFields}) => {
+  const {currentUser} = useContext(UserContext)
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
-      {user[userField].map((x, index) => (
+      {currentUser[userField].map((x, index) => (
         <View key={index} style={styles.classContainer}>
             <Text>{nameCounter} {index + 1}</Text>
             {componentFields.map((y, i) => (
