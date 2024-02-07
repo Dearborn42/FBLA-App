@@ -2,7 +2,7 @@ import {useState, createContext, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const UserContext = createContext();
 
-function UserContent({children, navigation}){
+function UserContent({children}){
     const [currentUser, setCurrentUser] = useState("");
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
@@ -46,16 +46,6 @@ function UserContent({children, navigation}){
             
         }
     };
-
-    useEffect(async() => {
-      if(currentUser != ""){
-        navigation.navigate('App');
-      }
-      return () => {
-        second
-      }
-    }, [third])
-    
 
     return (
         <UserContext.Provider value={{handleUpdate, currentUser, setCurrentUser, field, value, add, remove, update}}>
