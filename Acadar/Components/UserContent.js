@@ -2,7 +2,7 @@ import {useState, createContext, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const UserContext = createContext();
 
-function UserContent({children}){
+function UserContent({children, navigation}){
     const [currentUser, setCurrentUser] = useState("");
     const [field, setField] = useState("");
     const [value, setValue] = useState("");

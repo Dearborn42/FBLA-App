@@ -38,34 +38,34 @@ const App = () => {
     );
   };
   return (
-    <UserContent>
       <View style={{ height: '100%', width: '100%' }}>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName='Landing'>
-              <Stack.Screen
-                name='Login'
-                component={Login}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name='Create'
-                component={FormComponent}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name='App'
-                component={UpdateTabs}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name='Landing'
-                component={Landing}
-                options={{ headerShown: false }}
-              />
-            </Stack.Navigator>
+            <UserContent>
+              <Stack.Navigator initialRouteName='Landing'>
+                <Stack.Screen
+                  name='Login'
+                  component={Login}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name='Create'
+                  component={FormComponent}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name='App'
+                  component={UpdateTabs}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name='Landing'
+                  component={Landing}
+                  options={{ headerShown: false }}
+                />
+              </Stack.Navigator>
+            </UserContent>
           </NavigationContainer>
       </View>
-    </UserContent>
   );
 };
 
