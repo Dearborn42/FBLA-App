@@ -8,26 +8,22 @@ import ProfileClasses from './ProfileClasses';
 import UpdateClasses from '../Update/UpdateClasses';
 import Display from './Display';
 import UpdateComponent from '../Update/UpdateComponent';
-import { UserContext } from '../UserContent';
 
 export default function Profile(){
-    const { currentUser } = useContext(UserContext);
-    console.log(currentUser);
-    const [art, setArt] = useState(false)
-    const [classes, setClasses] = useState(false)
-    const [clubs, setClubs] = useState(false)
-    const [community, setCommunity] = useState(false)
-    const [jobs, setJobs] = useState(false)
-    const [sport, setSport] = useState(false)
-    const [base, setBase] = useState(false)
-
-    const handleArt = () => setArt((prev) => !prev)
-    const handleClasses = () => setClasses((prev) => !prev)
-    const handleClubs = () => setClubs((prev) => !prev)
-    const handleService = () => setCommunity((prev) => !prev)
-    const handleJobs= () => setJobs((prev) => !prev)
-    const handleSport = () => setSport((prev) => !prev)
-    const handleBase = () => setBase((prev) => !prev)
+    const [sections, setSections] = useState({
+      "art": false,
+      "classes": false,
+      "clubs": false,
+      "community": false,
+      "jobs": false,
+      "sport": false,
+      "base": false
+    })
+    function handleSection(section) {
+      setSections((prev) => {
+        return {...prev, [section]: !prev[section]}
+      })
+    }
 
     return(
       
@@ -36,95 +32,105 @@ export default function Profile(){
       source={{ uri: require('../../assets/blue.png') }}
       style={styles.backgroundImage}>
         <View style={styles.container}>
-            {!base ? <ProfileStudent /> : <UpdateStudent />}
-            <Button onPress={() => handleBase()} title="Edit Section"></Button>
-            {!classes ? <ProfileClasses /> : <UpdateClasses />}
-            <Button onPress={() => handleClasses()} title="Edit Section"></Button>
-            {!clubs ? 
-              <Display
-                userField={"clubs"}
-                componentFields={["name" ,"desc"]}
-                nameCounter={"Club"}
-                nameFields={["Name", "Description"]}
+            {!sections.base ? <ProfileStudent /> : <UpdateStudent />}
+            <Button onPress={() => handleSection("base")} title="Edit Section"></Button>
+            {!sections.classes ? <ProfileClasses /> : <UpdateClasses />}
+            <Button onPress={() => handleSection("classes")} title="Edit Section"></Button>
+            {!sections.clubs ? 
+              <Display data={{
+                  userField: "clubs",
+                  componentFields: ["name" ,"desc"],
+                  nameCounter: "Club",
+                  nameFields: ["Name", "Description"]
+                }}
               /> : 
-              <UpdateComponent
-                userField={"clubs"}
-                name={"Club"}
-                categories={["name", "desc"]}
-                placeholders={["Club Name", "Club Description"]}
-                buttonNames={["Add Club", "Cancel new club"]}
-                newFormObj={{"name": "", "desc": ""}}
+              <UpdateComponent data={{
+                  userField:"clubs", 
+                  name:"Club", 
+                  categories: ["name", "desc"],
+                  placeholders:["Club Name", "Club Description"],
+                  buttonNames:["Add Club", "Cancel new club"],
+                  newFormObj:{"name": "", "desc": ""}
+                }}
               />
             }
-            <Button onPress={() => handleClubs()} title="Edit Section"></Button>
-            {!jobs ? 
-              <Display
-                userField={"work"}
-                componentFields={["name" ,"desc"]}
-                nameCounter={"Job"}
-                nameFields={["Company", "Description"]}
+            <Button onPress={() => handleSection("clubs")} title="Edit Section"></Button>
+            {!sections.jobs ? 
+              <Display data={{
+                userField: "work",
+                componentFields: ["name" ,"desc"],
+                nameCounter: "Job",
+                nameFields: ["Company", "Description"]
+              }}
               /> : 
-              <UpdateComponent
-                userField={"work"}
-                name={"Job"}
-                categories={["name", "desc"]}
-                placeholders={["Job Name", "Job Description"]}
-                buttonNames={["Add Job", "Cancel new job"]}
-                newFormObj={{"name": "", "desc": ""}}
+              <UpdateComponent data={{
+                userField:"work", 
+                name:"Job", 
+                categories: ["name", "desc"],
+                placeholders:["Job Name", "Job Description"],
+                buttonNames:["Add Job", "Cancel new job"],
+                newFormObj:{"name": "", "desc": ""}
+              }}
               />
             }
-            <Button onPress={() => handleJobs()} title="Edit Section"></Button>
-            {!community ? 
-              <Display
-                userField={"communityService"}
-                componentFields={["name" ,"desc", "hours"]}
-                nameCounter={"Service"}
-                nameFields={["Name", "Description", "Hours"]}
+            <Button onPress={() => handleSection("jobs")} title="Edit Section"></Button>
+            {!sections.community ? 
+              <Display data={{
+                  userField: "communityService",
+                  componentFields: ["name" ,"desc", "hours"],
+                  nameCounter: "Service",
+                  nameFields: ["Name", "Description", "Hours"]
+                }}
               /> : 
-              <UpdateComponent
-                userField={"communityService"}
-                name={"Service"}
-                categories={["name", "desc", "hours"]}
-                placeholders={["Service Name", "Service Description", "Service hours"]}
-                buttonNames={["Add Service", "Cancel new service"]}
-                newFormObj={{"name": "", "desc": "", "hours": ""}}
+              <UpdateComponent data={{
+                  userField:"communityService", 
+                  name:"Service", 
+                  categories: ["name", "desc", "hours"],
+                  placeholders:["Service Name", "Service Description", "Service hours"],
+                  buttonNames:["Add Service", "Cancel new service"],
+                  newFormObj:{"name": "", "desc": "", "hours": ""}
+                }}
               />
             }
-            <Button onPress={() => handleService()} title="Edit Section"></Button>
-            {!art ? 
-              <Display
-                userField={"perfrormingArts"}
-                componentFields={["name" ,"desc", "award"]}
-                nameCounter={"Art"}
-                nameFields={["Name", "Description", "Award"]}
+            <Button onPress={() => handleSection("community")} title="Edit Section"></Button>
+            {!sections.art ? 
+              <Display data={{
+                  userField: "perfrormingArts",
+                  componentFields: ["name" ,"desc", "award"],
+                  nameCounter: "Art",
+                  nameFields: ["Name", "Description", "Award"]
+                }}
               /> : 
-              <UpdateComponent
-                userField={"perfrormingArts"}
-                name={"Art"}
-                categories={["name", "desc", "award"]}
-                placeholders={["Art Name", "Art Description", "Art award/highest achievment"]}
-                buttonNames={["Add Art", "Cancel new art"]}
-                newFormObj={{"name": "", "desc": "", "award": ""}}
+              <UpdateComponent data={{
+                  userField:"perfrormingArts", 
+                  name:"Art", 
+                  categories: ["name", "desc", "award"],
+                  placeholders:["Art Name", "Art Description", "Art award/highest achievment"],
+                  buttonNames:["Add Art", "Cancel new art"],
+                  newFormObj:{"name": "", "desc": "", "award": ""}
+                }}
               />
             }
-            <Button onPress={() => handleArt()} title="Edit Section"></Button>
-            {!sport ? 
-              <Display
-                userField={"sports"}
-                componentFields={["name" ,"desc", "award"]}
-                nameCounter={"Sport"}
-                nameFields={["Name", "Description", "Award"]}
+            <Button onPress={() => handleSection("art")} title="Edit Section"></Button>
+            {!sections.sport ? 
+              <Display data={{
+                  userField: "sports",
+                  componentFields: ["name" ,"desc", "award"],
+                  nameCounter: "Sport",
+                  nameFields: ["Name", "Description", "Award"]
+                }}
               /> : 
-              <UpdateComponent
-                userField={"sports"}
-                name={"Sport"}
-                categories={["name", "desc", "award"]}
-                placeholders={["Sport Name", "Sport Description", "Sport award/highest achievment"]}
-                buttonNames={["Add Sport", "Cancel new sport"]}
-                newFormObj={{"name": "", "desc": "", "award": ""}}
+              <UpdateComponent data={{
+                  userField:"sports", 
+                  name:"Sport", 
+                  categories: ["name", "desc", "award"],
+                  placeholders:["Sport Name", "Sport Description", "Sport award/highest achievment"],
+                  buttonNames:["Add Sport", "Cancel new sport"],
+                  newFormObj:{"name": "", "desc": "", "award": ""}
+                }}
               />
             }
-            <Button onPress={() => handleSport()} title="Edit Section"></Button>
+            <Button onPress={() => handleSection("sport")} title="Edit Section"></Button>
         </View>
         </ImageBackground>
       </ScrollView>

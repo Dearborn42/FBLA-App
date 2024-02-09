@@ -8,7 +8,7 @@ const Work = ({mod, data}) => {
 
     const addJob = () => {
         setForm((prev) => {
-            const newJob = { "company": '', "desc": ''};
+            const newJob = { "name": '', "desc": ''};
             return { ...prev, work: [...prev.work, newJob]};
         });
     };
@@ -59,7 +59,7 @@ const Work = ({mod, data}) => {
               <TextInput
                 style={styles.input}
                 value={job.company}
-                onChangeText={(text) => updateJob(index, "company", text)}
+                onChangeText={(text) => updateJob(index, "name", text)}
                 placeholder="Enter company name"
                 required
                 id={"company"}

@@ -2,14 +2,14 @@ import React, {useState, useContext} from 'react'
 import { View, Button, StyleSheet, ScrollView, Text, TextInput } from 'react-native';
 import { UserContext } from '../UserContent';
 
-const UpdateComponent = ({userField, categories, placeholders, buttonNames, name, newFormObj}) => {
+const UpdateComponent = ({data}) => {
     const {currentUser, add, remove, update, handleUpdate} = useContext(UserContext)
     const [newForm, setNewForm] = useState(false);
-    const [newService, setNewService] = useState(newFormObj);
+    const [newService, setNewService] = useState(data.newFormObj);
 
     var handleNewService = (field, value) => setNewService((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
-        setNewService(newFormObj)
+        setNewService(data.newFormObj)
         setNewForm((prev) => !prev);
     };
 
@@ -17,40 +17,40 @@ const UpdateComponent = ({userField, categories, placeholders, buttonNames, name
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         <View>
-        {currentUser[userField].map((x, index ) => (
+        {currentUser[data.userField].map((x, index ) => (
             <View key={index} style={styles.classContainer}>
-                <Text>{name} {index + 1}</Text>
-                {categories.map(y => (
+                <Text>{data.name} {index + 1}</Text>
+                {data.categories.map(y => (
                     <TextInput
                         style={styles.input}
                         onChangeText={(text) => {handleUpdate(text, y)}}
-                        onBlur={() => update(userField, x.name)}
+                        onBlur={() => update(data.userField, x.data.name)}
                         placeholder={x[y]}
                     />
                 ))}
-                <Button title="Remove" onPress={() => remove(userField, x.name)} />
+                <Button title="Remove" onPress={() => remove(data.userField, x.data.name)} />
             </View>
         ))} 
             {newForm && (
                 <View>
-                    {placeholders.map((x, i) => (
+                    {data.placeholders.map((x, i) => (
                         <TextInput 
                             style={styles.input} 
                             type="text" 
                             placeholder={x}
-                            onChangeText={(text) => handleNewService(categories[i], text)} 
+                            onChangeText={(text) => handleNewService(data.categories[i], text)} 
                         />
                     ))}
                     <Button 
                         title="Submit"
-                        onPress={() => add(userField, newService)}
+                        onPress={() => add(data.userField, newService)}
                     />
                 </View>
             )}
             {!newForm ? (
-                <Button title={buttonNames[0]} onPress={handleForm} />
+                <Button title={data.buttonNames[0]} onPress={handleForm} />
             ) : (
-                <Button title={buttonNames[1]} onPress={handleForm} />
+                <Button title={data.buttonNames[1]} onPress={handleForm} />
             )}
         </View>
     </View> 

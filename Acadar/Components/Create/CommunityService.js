@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert,Dimensions,
   ImageBackground,
   TouchableOpacity, } from 'react-native';
-import {UserContext} from '../UserContent';
+import {UserContext} from "../UserContent";
 
 
 const CommunityService = ({ data, navigation}) => {
