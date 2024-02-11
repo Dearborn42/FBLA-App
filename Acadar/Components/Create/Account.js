@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   Alert,
   Dimensions,
@@ -13,34 +12,23 @@ import {
 import SelectDropdown from 'react-native-select-dropdown';
 
 const Account = ({ mod, data }) => {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: '',
-    'share-pin': '',
-    private: false,
-    grade_level: '',
-    school: '',
-  });
   function updateForm(value) {
-    return setForm((prev) => {
+    return data.setCreateForm((prev) => {
       return { ...prev, ...value };
     });
   }
   function handleSubmit() {
-    const values = Object.values(form);
-    var check = 0;
-    values.forEach((value) => {
-      if (value === false || value === true) {
-        check++;
-        return;
-      }
-      if (value != '') check++;
-    });
-    if (check === values.length) {
-      data((prev) => {
-        return { ...prev, ...form };
-      });
+    const {createForm} = data;
+    const values = [
+      createForm.name, 
+      createForm.email, 
+      createForm.password, 
+      createForm["share-pin"], 
+      createForm.private, 
+      createForm.grade_level, 
+      createForm.school
+    ]
+    if(values.every(x => x !== "")) {
       mod((prev) => (prev += 1));
     }
   }
@@ -52,7 +40,7 @@ const Account = ({ mod, data }) => {
       <Text style={styles.text}>Name</Text>
       <TextInput
         style={styles.input}
-        value={form.name}
+        value={data.createForm.name}
         onChangeText={(text) => updateForm({ name: text })}
         placeholder='Enter your full name'
         required
@@ -62,7 +50,7 @@ const Account = ({ mod, data }) => {
       <Text style={styles.text}>Email</Text>
       <TextInput
         style={styles.input}
-        value={form.email}
+        value={data.createForm.email}
         onChangeText={(text) => updateForm({ email: text })}
         placeholder='Enter your email'
         required
@@ -72,7 +60,7 @@ const Account = ({ mod, data }) => {
       <Text style={styles.text}>Password</Text>
       <TextInput
         style={styles.input}
-        value={form.password}
+        value={data.createForm.password}
         onChangeText={(text) => updateForm({ password: text })}
         placeholder='Enter your password'
         required
@@ -83,7 +71,7 @@ const Account = ({ mod, data }) => {
       <Text style={styles.text}>Pin to share with others</Text>
       <TextInput
         style={styles.input}
-        value={form['share-pin']}
+        value={data.createForm['share-pin']}
         onChangeText={(text) => updateForm({ 'share-pin': text })}
         placeholder='Enter your share-pin'
         required
@@ -103,7 +91,7 @@ const Account = ({ mod, data }) => {
       <Text style={styles.text}>Grade Level</Text>
       <TextInput
         style={styles.input}
-        value={form.grade_level}
+        value={data.createForm.grade_level}
         onChangeText={(text) => updateForm({ grade_level: text })}
         placeholder='Enter your grade level'
         required
@@ -113,7 +101,7 @@ const Account = ({ mod, data }) => {
       <Text style={styles.text}>School</Text>
       <TextInput
         style={styles.input}
-        value={form.school}
+        value={data.createForm.school}
         onChangeText={(text) => updateForm({ school: text })}
         placeholder='Enter your high school'
         required

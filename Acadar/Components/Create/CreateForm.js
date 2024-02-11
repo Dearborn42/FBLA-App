@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {UserContext} from '../UserContent';
 import {
   View,
@@ -11,24 +11,23 @@ import {
 } from 'react-native';
 
 const CreateForm = ({data}) => {
-    const [form, setForm] = useState({[data.userField]: []});
     const { setCurrentUser } = useContext(UserContext);
-
+    console.log(data.userField);
     const addFunc = () => {
-        setForm((prev) => {
+        data.setCreateForm((prev) => {
             const newJob = data.object;
             return { ...prev, [data.userField]: [...prev[data.userField], newJob]};
         });
     };
     const removeFunc = (index) => {
-        setForm((prev) => {
+        data.setCreateForm((prev) => {
             const updated = [...prev[data.userField]];
             updated.splice(index, 1);
             return { ...prev, [data.userField]: updated };
         });
     };
     const updateFunc = (index, field, value) => {
-        setForm((prev) => {
+        data.setCreateForm((prev) => {
             const updatedList = [...prev[data.userField]];
             const updated = { ...updatedList[index] };
             updated[field] = value;
@@ -38,7 +37,7 @@ const CreateForm = ({data}) => {
     };
     async function handleSubmit(){
       var [length, check] = [0, 0];
-      form[data.userField].forEach((job) => {
+      data.createForm[data.userField].forEach((job) => {
         length += Object.keys(data.object).length;
         const values = Object.values(job);
         values.forEach((value) => {
@@ -47,13 +46,12 @@ const CreateForm = ({data}) => {
       })
       if(check === length){
         if(!data.last){
-            data.setPrev((prev) => {return { ...prev, ...form }});
             data.mod((prev) => prev += 1);
         }else{
             var body1 = await fetch("http://172.233.131.223:5000/create1", {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({...data.prev, ...form})
+                body: JSON.stringify(data.createForm)
             });
             var body1_response = await body1.json();
             if (body1_response.success){
@@ -63,7 +61,6 @@ const CreateForm = ({data}) => {
         }
       }
     };
- 
     return (
       <ImageBackground
       source={require('../../assets/blue.png')}
@@ -71,7 +68,7 @@ const CreateForm = ({data}) => {
     <View style={styles.container}>
         <Text style={styles.header}>Enter your {data.name}</Text>
         <View>
-        {form[data.userField].map((x, i) => (
+        {data.createForm[data.userField].map((x, i) => (
             <View key={i} style={styles.classContainer}>
                 <Text style={styles.text}>Job {i + 1}</Text>
                     {data.categories.map((y, ph) => (

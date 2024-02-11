@@ -16,25 +16,31 @@ const Stack = createStackNavigator();
 const App = () => {
   const FormComponent = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [prev, setPrev] = useState({});
+    const [createForm, setCreateForm] = useState({
+      name: '',
+      email: '',
+      password: '',
+      'share-pin': '',
+      private: false,
+      grade_level: '',
+      school: '',
+      freshman: [],
+      sophomore: [],
+      junior: [],
+      senior: [],
+      clubs: [],
+      communityService: [],
+      perfrormingArts: [],
+      sports: [],
+      work: [],
+    });
     const studentSetup = [
       Account,
       Classes,
       {
         "mod":setCurrentIndex,
-        setPrev,
-        prev,
-        userField: "clubs",
-        name: "clubs",
-        categories: ["name", "desc"],
-        object: { "name": '', "desc": ''},
-        placeholders: ['Enter club name', 'Enter club description'],
-        last: false
-      },
-      {
-        "mod":setCurrentIndex,
-        setPrev,
-        prev,
+        setCreateForm,
+        createForm,
         userField: "work",
         name: "jobs",
         categories: ["name", "desc"],
@@ -44,8 +50,19 @@ const App = () => {
       },
       {
         "mod":setCurrentIndex,
-        setPrev,
-        prev,
+        setCreateForm,
+        createForm,
+        userField: "clubs",
+        name: "clubs",
+        categories: ["name", "desc"],
+        object: { "name": '', "desc": ''},
+        placeholders: ['Enter club name', 'Enter club description'],
+        last: false
+      },
+      {
+        "mod":setCurrentIndex,
+        setCreateForm,
+        createForm,
         userField: "sports",
         name: "sports",
         categories: ["name", "desc", "award"],
@@ -55,9 +72,9 @@ const App = () => {
       },
       {
         "mod":setCurrentIndex,
-        setPrev,
-        prev,
-        userField: "performingArts",
+        setCreateForm,
+        createForm,
+        userField: "perfrormingArts",
         name: "arts",
         categories: ["name", "desc", "award"],
         object: { "name": '', "desc": '', "award": ''},
@@ -66,7 +83,8 @@ const App = () => {
       },
       {
         "mod":navigation,
-        prev,
+        setCreateForm,
+        createForm,
         userField: "communityService",
         name: "services",
         categories: ["name", "desc", "hours"],
@@ -76,10 +94,10 @@ const App = () => {
       }
     ];
     const CurrentForm = studentSetup[currentIndex];
-    return currentIndex !== 2 ? (
-      <CurrentForm mod={setCurrentIndex} data={setPrev} />
+    return currentIndex < 2 ? (
+      <CurrentForm mod={setCurrentIndex} data={{createForm, setCreateForm}} />
     ) : (
-      <CreateForm data={studentSetup[currentIndex]}/>
+      <CreateForm data={CurrentForm} />
     );
   };
   return (

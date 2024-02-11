@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   Dimensions,
   ImageBackground,
@@ -11,22 +10,15 @@ import {
 } from 'react-native';
 
 export default function Classes({ mod, data }) {
-  const [form, setForm] = useState({
-    freshman: [],
-    sophomore: [],
-    junior: [],
-    senior: [],
-  });
-
   const addClass = (year) => {
-    setForm((prev) => {
+    data.setCreateForm((prev) => {
       const newClass = { name: '', grade: '' };
       return { ...prev, [year]: [...prev[year], newClass] };
     });
   };
 
   const removeClass = (year, index) => {
-    setForm((prev) => {
+    data.setCreateForm((prev) => {
       const updatedYear = [...prev[year]];
       updatedYear.splice(index, 1);
       return { ...prev, [year]: updatedYear };
@@ -34,7 +26,7 @@ export default function Classes({ mod, data }) {
   };
 
   const updateClass = (year, index, field, value) => {
-    setForm((prev) => {
+    data.setCreateForm((prev) => {
       const updatedYear = [...prev[year]];
       updatedYear[index][field] = value;
       return { ...prev, [year]: updatedYear };
@@ -42,19 +34,17 @@ export default function Classes({ mod, data }) {
   };
 
   function handleSubmit() {
-    var check = 0;
-    var length = 0;
-    for (let year in form) {
-      form[year].forEach((hour) => {
-        length += 2;
-        const values = Object.values(hour);
-        values.forEach((value) => {
-          if (value.trim() != '') check++;
-        });
-      });
-    }
-    if (check == length) {
-      data((prev) => {return { ...prev, ...form };});
+    const {createForm} = data;
+    const values = [
+      createForm.freshman,
+      createForm.sophomore,
+      createForm.junior,
+      createForm.senior
+    ]
+    const check = values.every(value => 
+      value.length === 0 || value.every(x => x.name !== "" && x.grade !== "")
+    );
+    if (check) {
       mod((prev) => (prev += 1));
     }
   }
@@ -69,7 +59,7 @@ export default function Classes({ mod, data }) {
             <Text style={styles.header}>
               {year.charAt(0).toUpperCase() + year.slice(1)}
             </Text>
-            {form[year].map((classItem, index) => (
+            {data.createForm[year].map((classItem, index) => (
               <View key={index} style={styles.classContainer}>
                 <Text style={styles.text}>Class {index + 1}</Text>
                 <TextInput
