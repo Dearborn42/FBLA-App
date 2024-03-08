@@ -1,5 +1,4 @@
-import { isAuthenticated } from './Middleware/auth.js';
-import { login } from './Middleware/login.js';
+import { login, authTokenCheck } from './Middleware/login.js';
 import { createStudent } from './Schema/studentCreation.js';
 import studentInfo from './Routes/student-route.js';
 import updateRoute from "./Routes/update-route.js"
@@ -10,13 +9,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import session from 'express-session';
 import mongoose from 'mongoose';
-import passport from 'passport';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import passportSetup from './Config/passportSetup.js';
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI);
-passportSetup(passport);
 
 const port = 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -35,16 +31,10 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(passport.initialize());
-app.use(passport.session());
-app.use('/studentInfo', isAuthenticated, studentInfo);
-app.use('/functions', isAuthenticated, updateRoute);
+app.use('/studentInfo', authTokenCheck, studentInfo);
+app.use('/functions', authTokenCheck, updateRoute);
 
 app.post('/login', login);
-app.get('/user', isAuthenticated, (req, res) => {
-  console.log(req.user);
-  res.status(200).json({ success: true, user: req.user });
-});
 app.post('/create1', createStudent);
 
 app.listen(port, () => {
