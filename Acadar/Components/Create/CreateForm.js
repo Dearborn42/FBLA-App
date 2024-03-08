@@ -48,7 +48,7 @@ const CreateForm = ({data}) => {
         if(!data.last){
             data.mod((prev) => prev += 1);
         }else{
-            var body1 = await fetch("http://localhost:5000/create1", {
+            var body1 = await fetch("http://172.233.131.223:5000/create1", {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data.createForm)

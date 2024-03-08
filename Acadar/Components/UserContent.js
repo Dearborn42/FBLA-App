@@ -11,7 +11,7 @@ function UserContent({children, navigation}){
         setField(category);
     }
     async function add(userField, value){
-        var body1 = await fetch(`http://localhost:5000/functions/add/${userField}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/functions/add/${userField}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -24,7 +24,7 @@ function UserContent({children, navigation}){
     };
     async function remove(userField, name){
         if(name.includes(" ")) name = name.split(" ").join("%20")
-        var body1 = await fetch(`http://localhost:5000/functions/remove/${userField}/${name}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/functions/remove/${userField}/${name}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             credentials: "include"
@@ -37,7 +37,7 @@ function UserContent({children, navigation}){
     async function update(userField, name){
         if(value.trim() === "") return;
         if(name.includes(" ")) name = name.split(" ").join("%20")
-        var body1 = await fetch(`http://localhost:5000/functions/update/${userField}/${name}/${field}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/functions/update/${userField}/${name}/${field}`, {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             credentials: "include",
