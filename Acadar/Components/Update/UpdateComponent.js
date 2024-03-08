@@ -12,25 +12,24 @@ const UpdateComponent = ({data}) => {
         setNewService(data.newFormObj)
         setNewForm((prev) => !prev);
     };
-
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
         <View>
-        {currentUser[data.userField].map((x, index ) => (
+        {currentUser[data.userField].map((x, index ) => { console.log(x.name, data.userField); return(
             <View key={index} style={styles.classContainer}>
                 <Text>{data.name} {index + 1}</Text>
                 {data.categories.map(y => (
                     <TextInput
                         style={styles.input}
                         onChangeText={(text) => {handleUpdate(text, y)}}
-                        onBlur={() => update(data.userField, x.data.name)}
+                        onBlur={() => update(data.userField, x.name)}
                         placeholder={x[y]}
                     />
                 ))}
-                <Button title="Remove" onPress={() => remove(data.userField, x.data.name)} />
+                <Button title="Remove" onPress={() => remove(data.userField, x.name)} />
             </View>
-        ))} 
+        )})} 
             {newForm && (
                 <View>
                     {data.placeholders.map((x, i) => (

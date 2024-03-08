@@ -19,7 +19,7 @@ const Login = ({ navigation }) => {
       return { ...prev, ...value };
     });
   var handleSubmit = async () => {
-    var login = await fetch('http://172.233.131.223:5000/login', {
+    var login = await fetch('http://localhost:5000/login', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

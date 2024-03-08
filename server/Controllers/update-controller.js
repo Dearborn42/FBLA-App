@@ -1,4 +1,7 @@
 import { formatFOAU } from "./01-updateStudent.js";
+import jwt from "jsonwebtoken"
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 export async function add(req, res){
@@ -21,6 +24,7 @@ export async function remove(req, res){
 
 export async function update(req, res){
     const decodedToken = jwt.verify(req.session.token, process.env.SECRET_KEY);
+    console.log(decodedToken);
     const {name, area, field} = req.params;
     const {value} = req.body;
     const Index = decodedToken.user[field].findIndex(x => x["name"] === name);

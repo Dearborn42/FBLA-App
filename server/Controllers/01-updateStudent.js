@@ -1,5 +1,8 @@
 import Student  from '../Schema/mongoSchema.js';
 import { hashPassword } from '../Middleware/login.js';
+import jwt from "jsonwebtoken"
+import dotenv from 'dotenv';
+dotenv.config();
 
 export async function formatFOAU(info, res){
     try{
@@ -18,15 +21,15 @@ export async function formatFOAU(info, res){
 export async function updateStudent(req, res){
     const {type} = req.params;
     const {value} = req.body
-    const email = req.user.email
+    const decodedToken = jwt.verify(req.session.token, process.env.SECRET_KEY);
     if(type === 'password'){
         await formatFOAU([
-            { "email": email },
+            { "email": decodedToken.user.email },
             { $set: { [`${type}`]: await hashPassword(value) } }
         ], res)
     }else{
         await formatFOAU([
-            { "email": email },
+            { "email": decodedToken.user.email },
             { $set: { [`${type}`]: value } }
         ], res)
     }
