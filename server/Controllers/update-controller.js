@@ -24,7 +24,6 @@ export async function remove(req, res){
 
 export async function update(req, res){
     const decodedToken = jwt.verify(req.session.token, process.env.SECRET_KEY);
-    console.log(decodedToken);
     const {name, area, field} = req.params;
     const {value} = req.body;
     const Index = decodedToken.user[field].findIndex(x => x["name"] === name);
