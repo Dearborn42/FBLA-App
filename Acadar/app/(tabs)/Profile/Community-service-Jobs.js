@@ -22,6 +22,24 @@ export default function Page(){
             <View style={styles.container}>
                 {!show ? 
                 <Display data={{
+                    userField: "communityService",
+                    componentFields: ["name" ,"desc", "hours"],
+                    nameCounter: "Service",
+                    nameFields: ["Name", "Description", "Hours"]
+                    }}
+                /> : 
+                <UpdateComponent data={{
+                    userField:"communityService", 
+                    name:"Service", 
+                    categories: ["name", "desc", "hours"],
+                    placeholders:["Service Name", "Service Description", "Service hours"],
+                    buttonNames:["Add Service", "Cancel new service"],
+                    newFormObj:{"name": "", "desc": "", "hours": ""}
+                    }}
+                />
+                }
+                {!show ? 
+                <Display data={{
                     userField: "work",
                     componentFields: ["name" ,"desc"],
                     nameCounter: "Job",

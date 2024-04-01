@@ -27,9 +27,9 @@ export default function Page(){
         var login_response = await login.json();
         if (login_response.success) {
             setCurrentUser(login_response.user);
-            router.replace('/(tabs)/(drawer)/Account');
+            router.replace('/(tabs)/Profile/Account');
         }else{
-          
+
         }
     };
     return (
