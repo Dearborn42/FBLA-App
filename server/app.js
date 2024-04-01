@@ -29,8 +29,14 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
+    cookie:{
+      maxAge: 60 * 60 * 1000,
+      secure: false,
+      httpOnly: true,
+    }
   })
 );
+
 app.use('/studentInfo', authTokenCheck, studentInfo);
 app.use('/functions', authTokenCheck, updateRoute);
 

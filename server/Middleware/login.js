@@ -14,18 +14,24 @@ export async function login(req, res) {
     const user = await Student.findOne({email});
     if(!user) 
       return res.status(400).json({success: false, message: "Wrong email or password"});
-    if(!user.validPassword(password)) 
+    const samePass = await user.validPassword(password);
+    if(!samePass) 
       return res.status(400).json({success: false, message: "Wrong email or password"});
-    const token = jwt.sign({ user }, process.env.SECRET_KEY, { expiresIn: "1h" });
-    req.session.token = token;
+    else{
+      const token = jwt.sign({ user }, process.env.SECRET_KEY, { expiresIn: "1h" });
+      req.session.user = {email, token};
+      console.log(req.session);
+    }
     return res.status(200).json({success: true, user });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({success: false, message: error.message});
   }
 }
 
 export async function authTokenCheck(req, res, next) {
-  if(req.session.token)
+  console.log(req.session);
+  if(req.session.user)
     return next()
   return res.status(401).json({success: false, message: "Not logged in"});
 }

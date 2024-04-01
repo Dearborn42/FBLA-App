@@ -5,7 +5,7 @@ dotenv.config();
 
 
 export async function add(req, res){
-    const decodedToken = jwt.verify(req.session.token, process.env.SECRET_KEY);
+    const decodedToken = jwt.verify(req.session.user.token, process.env.SECRET_KEY);
     const {field} = req.params;
     await formatFOAU([
         {"email": decodedToken.user.email},
@@ -14,7 +14,7 @@ export async function add(req, res){
 }
 
 export async function remove(req, res){
-    const decodedToken = jwt.verify(req.session.token, process.env.SECRET_KEY);
+    const decodedToken = jwt.verify(req.session.user.token, process.env.SECRET_KEY);
     const {name, field} = req.params;
     await formatFOAU([
         {"email": decodedToken.user.email},
@@ -23,7 +23,7 @@ export async function remove(req, res){
 }
 
 export async function update(req, res){
-    const decodedToken = jwt.verify(req.session.token, process.env.SECRET_KEY);
+    const decodedToken = jwt.verify(req.session.user.token, process.env.SECRET_KEY);
     const {name, area, field} = req.params;
     const {value} = req.body;
     const Index = decodedToken.user[field].findIndex(x => x["name"] === name);

@@ -7,6 +7,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import blimpy from "../assets/blimpy.png"
 
 
 const Page = () => {
@@ -20,7 +21,7 @@ const Page = () => {
             source={ require('../assets/Lando.png') }></Image>
         <Image
             style={styles.image2}
-            source={require('../assets/blimpy.png')}></Image>
+            source={blimpy}></Image>
         <Link 
                 activeOpacity={0.7}
                 style={{...styles.button, ...styles.bText}}

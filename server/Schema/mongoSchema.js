@@ -65,7 +65,7 @@ const studentSchema = new Schema({
      },
 }, {  database: 'ClusterDB', collection: 'students'})
 
-studentSchema.method("validPassword", function (password) {
+studentSchema.method("validPassword", async function (password) {
   return bcrypt.compare(password, this.password);
 });
 

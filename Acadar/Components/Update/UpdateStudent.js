@@ -18,12 +18,13 @@ const UpdateStudent = () => {
       var body1 = await fetch(`http://localhost:5000/studentInfo/update/${type}`, {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
-          credentials: "include",
           body: JSON.stringify(form)
       });
       var body1_response = await body1.json();
       if (body1_response.success){
           
+      }else{
+        console.log(body1_response.message)
       }
     }
 

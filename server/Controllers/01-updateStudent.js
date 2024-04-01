@@ -21,15 +21,15 @@ export async function formatFOAU(info, res){
 export async function updateStudent(req, res){
     const {type} = req.params;
     const {value} = req.body
-    const decodedToken = jwt.verify(req.session.token, process.env.SECRET_KEY);
+    const decodedToken = jwt.verify(req.session.user.token, process.env.SECRET_KEY);
     if(type === 'password'){
         await formatFOAU([
-            { "email": decodedToken.user.email },
+            { "email": req.session.user.email },
             { $set: { [`${type}`]: await hashPassword(value) } }
         ], res)
     }else{
         await formatFOAU([
-            { "email": decodedToken.user.email },
+            { "email": req.session.user.email },
             { $set: { [`${type}`]: value } }
         ], res)
     }
