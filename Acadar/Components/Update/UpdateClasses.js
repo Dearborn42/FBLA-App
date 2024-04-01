@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-import { UserContext } from '../UserContent';
+import { UserContext } from '../../app/_layout';
 
 export default function UpdateClasses() {
     const {currentUser} = useContext(UserContext)

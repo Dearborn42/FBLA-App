@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI);
 const port = 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-app.use(cors({ credentials: true, origin: 'http://localhost:19006' }));
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

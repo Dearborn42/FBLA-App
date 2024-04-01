@@ -1,20 +1,9 @@
+import Classes from '../Components/Create/Classes';
+import Account from '../Components/Create/Account';
+import CreateForm from '../Components/Create/CreateForm';
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import UserContent from './Components/UserContent'
-import Classes from './Components/Create/Classes';
-import Account from './Components/Create/Account';
-import UpdateTabs from './Components/UpdateTabs';
-import Login from './Components/Login';
-import Landing from './Components/Landing';
-import CreateForm from './Components/Create/CreateForm';
 
-
-const Stack = createStackNavigator();
-
-const App = () => {
-  const FormComponent = ({ navigation }) => {
+export default function Page(){
     const [currentIndex, setCurrentIndex] = useState(0);
     const [createForm, setCreateForm] = useState({
       name: '',
@@ -99,37 +88,4 @@ const App = () => {
     ) : (
       <CreateForm data={CurrentForm} />
     );
-  };
-  return (
-      <View style={{ height: '100%', width: '100%' }}>
-          <NavigationContainer>
-            <UserContent>
-              <Stack.Navigator initialRouteName='Landing'>
-                <Stack.Screen
-                  name='Login'
-                  component={Login}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name='Create'
-                  component={FormComponent}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name='App'
-                  component={UpdateTabs}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name='Landing'
-                  component={Landing}
-                  options={{ headerShown: false }}
-                />
-              </Stack.Navigator>
-            </UserContent>
-          </NavigationContainer>
-      </View>
-  );
-};
-
-export default App;
+}

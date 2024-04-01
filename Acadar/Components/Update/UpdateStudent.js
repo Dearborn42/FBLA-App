@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import { UserContext } from '../UserContent';
+import { UserContext } from '../../app/_layout';
 
 const UpdateStudent = () => {
     const {currentUser} = useContext(UserContext);

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { UserContext } from '../UserContent';
+import { UserContext } from '../../app/_layout';
 
 export default function ProfileClasses() {
   const {currentUser} = useContext(UserContext)

@@ -1,8 +1,8 @@
-import {useState, createContext, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Slot } from 'expo-router';
+import {useState, createContext } from 'react';
 const UserContext = createContext();
 
-function UserContent({children, navigation}){
+export default function Root(){
     const [currentUser, setCurrentUser] = useState("");
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
@@ -49,13 +49,20 @@ function UserContent({children, navigation}){
             console.log(body1_response);
         }
     };
-
     return (
-        <UserContext.Provider value={{handleUpdate, currentUser, setCurrentUser, field, value, add, remove, update}}>
-            {children}
-        </UserContext.Provider>
-    )
+    <UserContext.Provider value={{
+        handleUpdate, 
+        currentUser, 
+        setCurrentUser, 
+        field, 
+        value, 
+        add, 
+        remove, 
+        update
+    }}>
+        <Slot />
+    </UserContext.Provider>
+  );
 }
 
-export default UserContent;
-export { UserContext };
+export {UserContext}

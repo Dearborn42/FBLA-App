@@ -1,63 +1,43 @@
-import React, { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import UserContent from '../Components/UserContent'
-import Classes from '../Components/Create/Classes';
-import Account from '../Components/Create/Account';
-import UpdateTabs from '../Components/UpdateTabs';
-import Login from '../Components/Login';
-import Landing from '../Components/Landing';
-import CreateForm from '../Components/Create/CreateForm';
+import React from 'react';
 import { Link } from 'expo-router';
 import {
   View,
   Text,
-  TextInput,
-  Button,
   StyleSheet,
   Image,
   Dimensions,
-  TouchableOpacity,
 } from 'react-native';
 
 
-const Stack = createStackNavigator();
-
 const Page = () => {
-    const loggy = () => {
-    navigation.navigate('Login');
-  };
-  const signy = () => {
-    navigation.navigate('Create');
-  };
-  
-  return (
-      <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Acadar!</Text>
-      <Text style={styles.text2}>We put you on the academic radar</Text>
+    return (
+        <View style={styles.container}>
+        <Text style={styles.text}>Welcome to Acadar!</Text>
+        <Text style={styles.text2}>We put you on the academic radar</Text>
 
-      <Image
-        style={styles.image}
-        source={ require('../assets/Lando.png') }></Image>
-      <Image
-        style={styles.image2}
-        source={require('../assets/blimpy.png')}></Image>
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={styles.button}
-        onPress={signy}>
-        <Text style={styles.bText}>Sign Up</Text>
-      </TouchableOpacity>
+        <Image
+            style={styles.image}
+            source={ require('../assets/Lando.png') }></Image>
+        <Image
+            style={styles.image2}
+            source={require('../assets/blimpy.png')}></Image>
         <Link 
-            activeOpacity={0.7}
-            style={styles.button2}
-            href="/login"
-        >
-            Login
-        </Link>
-    </View>
-    
-  );
+                activeOpacity={0.7}
+                style={{...styles.button, ...styles.bText}}
+                href="/Create"
+            >
+                Sign up
+            </Link>
+            <Link 
+                activeOpacity={0.7}
+                style={{...styles.button2, ...styles.bText}}
+                href="/Login"
+            >
+                Login
+            </Link>
+        </View>
+        
+    );
 //   const FormComponent = ({ navigation }) => {
 //     const [currentIndex, setCurrentIndex] = useState(0);
 //     const [createForm, setCreateForm] = useState({

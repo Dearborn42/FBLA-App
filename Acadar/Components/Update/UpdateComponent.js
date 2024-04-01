@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { View, Button, StyleSheet, ScrollView, Text, TextInput } from 'react-native';
-import { UserContext } from '../UserContent';
+import { UserContext } from '../../app/_layout';
 
 const UpdateComponent = ({data}) => {
     const {currentUser, add, remove, update, handleUpdate} = useContext(UserContext)

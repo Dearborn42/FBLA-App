@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import {UserContext} from '../UserContent';
+import { router } from 'expo-router';
+import {UserContext} from "../../app/_layout"
 import {
   View,
   Text,
@@ -56,7 +57,7 @@ const CreateForm = ({data}) => {
             var body1_response = await body1.json();
             if (body1_response.success){
                 setCurrentUser(body1_response.user);
-                data.mod.navigate('App');
+                router.replace('/login');
             }
         }
       }
