@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   Image,
+  ImageBackground,
   Dimensions,
 } from 'react-native';
 import blimpy from "../assets/blimpy.png"
@@ -12,13 +13,12 @@ import blimpy from "../assets/blimpy.png"
 
 const Page = () => {
     return (
+      <ImageBackground
+            style={styles.container}
+            source={ require('../assets/Lando.png') }>
         <View style={styles.container}>
         <Text style={styles.text}>Welcome to Acadar!</Text>
         <Text style={styles.text2}>We put you on the academic radar</Text>
-
-        <Image
-            style={styles.image}
-            source={ require('../assets/Lando.png') }></Image>
         <Image
             style={styles.image2}
             source={blimpy}></Image>
@@ -37,7 +37,7 @@ const Page = () => {
                 Login
             </Link>
         </View>
-        
+        </ImageBackground>
     );
 //   const FormComponent = ({ navigation }) => {
 //     const [currentIndex, setCurrentIndex] = useState(0);
@@ -159,15 +159,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-  },
-  image: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-    resizeMode: 'cover',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: -1,
   },
   image2: {
     width: Dimensions.get('window').width * 0.8,

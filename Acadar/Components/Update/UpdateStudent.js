@@ -25,7 +25,9 @@ const UpdateStudent = () => {
       });
       var body1_response = await body1.json();
       if (body1_response.success){
-          
+        if(type !== "password")
+          currentUser[`${type}`] = form.value;
+        currentUser.password = "***********";
       }else{
         console.log(body1_response.message)
       }

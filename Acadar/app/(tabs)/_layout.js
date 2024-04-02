@@ -23,9 +23,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="(drawer)/Profile-base"
+        name="Profile"
         options={{
-          title: '(drawer)/Profile-base',
+          title: 'Profile',
           headerShown: false,
           tabBarIcon: () => <Text>Profile</Text>,
         }}
