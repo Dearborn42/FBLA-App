@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { UserContext } from '../../app/_layout';
+import * as SecureStore from 'expo-secure-store';
 
 const UpdateStudent = () => {
     const {currentUser} = useContext(UserContext);
@@ -15,9 +16,11 @@ const UpdateStudent = () => {
     }
     async function handleBlur(){
       if(form.value.trim() === "") return;
-      var body1 = await fetch(`http://localhost:5000/studentInfo/update/${type}`, {
+      const token = await SecureStore.getItemAsync("authToken");
+      if(!token) return;
+      var body1 = await fetch(`http://172.233.131.223:5000/studentInfo/update/${type}`, {
           method: 'POST',
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "auth": token },
           body: JSON.stringify(form)
       });
       var body1_response = await body1.json();

@@ -21,7 +21,7 @@ export async function formatFOAU(info, res){
 export async function updateStudent(req, res){
     const {type} = req.params;
     const {value} = req.body
-    const decodedToken = jwt.verify(req.session.user.token, process.env.SECRET_KEY);
+    console.log(type, value);
     if(type === 'password'){
         await formatFOAU([
             { "email": req.session.user.email },

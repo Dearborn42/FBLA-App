@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, router } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
 import {
   View,
   Text,
@@ -19,7 +20,7 @@ export default function Page(){
         return { ...prev, ...value };
         });
     var handleSubmit = async () => {
-        var login = await fetch('http://localhost:5000/login', {
+        var login = await fetch('http://172.233.131.223:5000/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -27,6 +28,7 @@ export default function Page(){
         var login_response = await login.json();
         if (login_response.success) {
             setCurrentUser(login_response.user);
+            await SecureStore.setItemAsync("authToken", login_response.token);
             router.replace('/(tabs)/Profile/Account');
         }else{
 

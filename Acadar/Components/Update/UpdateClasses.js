@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
 import { UserContext } from '../../app/_layout';
+import * as SecureStore from 'expo-secure-store';
 
 export default function UpdateClasses() {
     const {currentUser} = useContext(UserContext)
@@ -24,11 +25,12 @@ export default function UpdateClasses() {
     }
 
     const addClass = async() => {
+        const token = await SecureStore.getItemAsync("authToken");
+        if(!token) return;
         if(year != ""){
-            var body1 = await fetch(`http://localhost:5000/functions/add/${year}`, {
+            var body1 = await fetch(`http://172.233.131.223:5000/functions/add/${year}`, {
                 method: 'POST',
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
+                headers: { "Content-Type": "application/json", "auth": token },
                 body: JSON.stringify(newClub)
             });
             var body1_response = await body1.json();
@@ -40,10 +42,11 @@ export default function UpdateClasses() {
     };
 
     const removeClass = async (year, name) => {
-        var body1 = await fetch(`http://localhost:5000/functions/remove/${year}/${name}`, {
+        const token = await SecureStore.getItemAsync("authToken");
+        if(!token) return;
+        var body1 = await fetch(`http://172.233.131.223:5000/functions/remove/${year}/${name}`, {
             method: 'DELETE',
-            headers: { "Content-Type": "application/json" },
-            credentials: "include"
+            headers: { "Content-Type": "application/json", "auth": token },
         });
         var body1_response = await body1.json();
         if (body1_response.success){
@@ -52,11 +55,12 @@ export default function UpdateClasses() {
     };
 
     const updateClass = async (year, name) => {
+        const token = await SecureStore.getItemAsync("authToken");
+        if(!token) return;
         if(value.trim() === "") return;
-        var body1 = await fetch(`http://localhost:5000/functions/update/${year}/${name}/${field}`, {
+        var body1 = await fetch(`http://172.233.131.223:5000/functions/update/${year}/${name}/${field}`, {
             method: 'PUT',
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
+            headers: { "Content-Type": "application/json", "auth": token },
             body: JSON.stringify({"value": value})
         });
         var body1_response = await body1.json();
