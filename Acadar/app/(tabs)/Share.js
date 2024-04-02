@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Button, Platform, Text } from 'react-native';
 import * as Print from 'expo-print';
-import { shareAsync } from 'expo-sharing';
+import * as Sharing from 'expo-sharing';
 
 const html = `
 <html>
@@ -22,7 +22,7 @@ const html = `
 export default function Page(){
     const [selectedPrinter, setSelectedPrinter] = React.useState();
 
-  const print = async () => {
+  async function print(){
     // On iOS/android prints the given html. On web prints the HTML from the current page.
     await Print.printAsync({
       html,
@@ -30,31 +30,41 @@ export default function Page(){
     });
   };
 
-  const printToFile = async () => {
+  async function printToFile(){
     // On iOS/android prints the given html. On web prints the HTML from the current page.
     const { uri } = await Print.printToFileAsync({ html });
     console.log('File has been saved to:', uri);
-    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+    await Sharing.shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
   };
 
-  const selectPrinter = async () => {
+  async function selectPrinter(){
     const printer = await Print.selectPrinterAsync(); // iOS only
     setSelectedPrinter(printer);
   };
 
+  async function execute() {
+    const { uri } = await Print.printToFileAsync({ html });
+    Sharing.shareAsync(uri);
+  }
+
   return (
     <View style={styles.container}>
       <Button title="Print" onPress={print} />
-      <View style={styles.spacer} />
-      <Button title="Print to PDF file" onPress={printToFile} />
       {Platform.OS === 'ios' && (
         <>
-          <View style={styles.spacer} />
-          <Button title="Select printer" onPress={selectPrinter} />
-          <View style={styles.spacer} />
-          {selectedPrinter ? (
-            <Text style={styles.printer}>{`Selected printer: ${selectedPrinter.name}`}</Text>
-          ) : undefined}
+            <View style={styles.spacer} />
+            <Button title="Select printer" onPress={selectPrinter} />
+            <View style={styles.spacer} />
+            {selectedPrinter ? (
+                <>
+                    <Text style={styles.printer}>{`Selected printer: ${selectedPrinter.name}`}</Text>
+                    <View style={styles.spacer} />
+                </>
+            ) : undefined}
+            <Button
+                title="Share"
+                onPress={() => execute()}
+            />
         </>
       )}
     </View>
