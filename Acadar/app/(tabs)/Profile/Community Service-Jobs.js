@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   bText: {
     fontFamily:"MontHeavyDemo",
-    fontSize: '.75rem',
+    fontSize: 20,
     color: 'black',
   },
   button: {

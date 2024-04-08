@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import { View, Button, StyleSheet, ScrollView, Text, TextInput } from 'react-native';
+import { View, Button, StyleSheet, ScrollView, Text, TextInput,TouchableOpacity } from 'react-native';
 import { UserContext } from '../../app/_layout';
 
 const UpdateComponent = ({data}) => {
@@ -18,7 +18,7 @@ const UpdateComponent = ({data}) => {
         <View>
         {currentUser[data.userField].map((x, index ) => { console.log(x.name, data.userField); return(
             <View key={index} style={styles.classContainer}>
-                <Text>{data.name} {index + 1}</Text>
+                <Text style={styles.header}>{data.name} {index + 1}</Text>
                 {data.categories.map(y => (
                     <TextInput
                         style={styles.input}
@@ -60,23 +60,56 @@ const UpdateComponent = ({data}) => {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
+  },bText: {
+    // fontFamily: 'ARCO',
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+
+  },
+  button: {
+    fontFamily: 'MontHeavyDemo',
+    
+    backgroundColor: 'white',
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 32,
+    padding: 10,
+    marginBottom: 16,
   },
   container: {
+    
     flex: 1,
+    width: '100%',
+    height: '100%',
     padding: 20,
     backgroundColor: '#fff',
+    
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 0,
+  },
+  text: {
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+    fontSize: 20,
   },
   input: {
+    width: "100%",
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+    fontSize: 14,
+    backgroundColor: 'white',
     padding: 10,
-    marginBottom: 20,
+    borderStyle:"solid",
+    borderWidth:1,
+    borderColor:"black",
+    marginBottom: 8,
   },
 });
 

@@ -36,7 +36,7 @@ const UpdateStudent = () => {
     return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}> 
-        <Text style={{color: "black"}}>Edit your name</Text>
+        <Text style={styles.text}>Edit your name</Text>
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
@@ -46,7 +46,7 @@ const UpdateStudent = () => {
         id={"name"}
         name={"name"}
         />
-        <Text>Edit your Email</Text>
+        <Text style={styles.text}>Edit your Email</Text>
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
@@ -55,7 +55,7 @@ const UpdateStudent = () => {
         id={"email"}
         name={"email"}
         />
-        <Text>Edit your Password</Text>
+        <Text style={styles.text}>Edit your Password</Text>
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
@@ -66,7 +66,7 @@ const UpdateStudent = () => {
         secureTextEntry={true}
         />
         
-        <Text>Edit your Grade Level</Text>
+        <Text style={styles.text}>Edit your Grade Level</Text>
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
@@ -75,7 +75,7 @@ const UpdateStudent = () => {
         id={"grade_level"}
         name={"grade_level"}
         />
-        <Text>Edit your School</Text>
+        <Text style={styles.text}>Edit your School</Text>
         <TextInput
         style={styles.input}
         onChangeText={(text) => updateForm(text)}
@@ -94,22 +94,56 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
   },
+  bText: {
+    // fontFamily: 'ARCO',
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+
+  },
+  button: {
+    fontFamily: 'MontHeavyDemo',
+    
+    backgroundColor: 'white',
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 32,
+    padding: 10,
+    marginBottom: 16,
+  },
   container: {
+    
     flex: 1,
+    width: '100%',
+    height: '100%',
     padding: 20,
     backgroundColor: '#fff',
+    
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 0,
+  },
+  text: {
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+    fontSize: 20,
   },
   input: {
+    width: "100%",
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+    fontSize: 14,
+    backgroundColor: 'white',
     padding: 10,
-    marginBottom: 20,
+    borderStyle:"solid",
+    borderWidth:1,
+    borderColor:"black",
+    marginBottom: 8,
   },
 });
 
