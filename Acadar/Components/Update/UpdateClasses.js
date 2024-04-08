@@ -96,7 +96,12 @@ export default function UpdateClasses() {
                 id={year+"_classGrade"}
                 name={year+"_classGrade"}
               />
-              <Button title="Remove" onPress={() => removeClass(year, classItem.name)} />
+              <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={() => removeClass(year, classItem.name)}>
+                      <Text style={styles.bText}>Remove</Text>
+                    </TouchableOpacity>
             </View>
           ))}
         </View>
@@ -127,16 +132,28 @@ export default function UpdateClasses() {
             id={"grade"}
             name={"grade"}  
         />
-        <Button 
-            title="Submit"
-            onPress={addClass}
-        />
+        <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={addClass}>
+                      <Text style={styles.bText}>Submit</Text>
+                    </TouchableOpacity>
         </View>
     )}
     {!newForm ? (
-        <Button title={`Add Class`} onPress={handleForm} />
+        <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={handleForm}>
+                      <Text style={styles.bText}>Add Class</Text>
+                    </TouchableOpacity>
     ) : (
-        <Button title={`Cancel Class`} onPress={handleForm} />
+        <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={handleForm}>
+                      <Text style={styles.bText}>Cancel Class</Text>
+                    </TouchableOpacity>
     )}
     </View>
     </ScrollView>
@@ -162,7 +179,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 32,
     padding: 10,
     marginBottom: 16,
   },

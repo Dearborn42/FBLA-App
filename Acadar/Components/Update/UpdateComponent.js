@@ -40,16 +40,28 @@ const UpdateComponent = ({data}) => {
                             onChangeText={(text) => handleNewService(data.categories[i], text)} 
                         />
                     ))}
-                    <Button 
-                        title="Submit"
-                        onPress={() => add(data.userField, newService)}
-                    />
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={() => add(data.userField, newService)}>
+                      <Text style={styles.bText}>Submit</Text>
+                    </TouchableOpacity>
                 </View>
             )}
             {!newForm ? (
-                <Button title={data.buttonNames[0]} onPress={handleForm} />
+                <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={handleForm}>
+                      <Text style={styles.bText}>{data.buttonNames[0]}</Text>
+                    </TouchableOpacity>
             ) : (
-                <Button title={data.buttonNames[1]} onPress={handleForm} />
+                <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={handleForm}>
+                      <Text style={styles.bText}>{data.buttonNames[1]}</Text>
+                    </TouchableOpacity>
             )}
         </View>
     </View> 
@@ -75,7 +87,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 32,
     padding: 10,
     marginBottom: 16,
   },
