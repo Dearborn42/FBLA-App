@@ -61,12 +61,12 @@ export default function Page(){
                     <View style={styles.spacer} />
                 </>
             ) : undefined}
-            <Button
-                title="Share"
-                onPress={() => execute()}
-            />
         </>
       )}
+      <Button
+          title="Share"
+          onPress={() => execute()}
+      />
     </View>
   );
 }
