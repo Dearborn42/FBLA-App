@@ -12,7 +12,7 @@ import {useFonts} from "expo-font"
 
 const Page = () => {
     const [loaded] = useFonts({
-      Comicy: require("../assets/fonts/Comicy.ttf")
+      LikeSnow: require("../assets/fonts/Like Snow.ttf")
     })
     if(!loaded){
       return null
@@ -178,25 +178,25 @@ const styles = StyleSheet.create({
   text: {
     backgroundColor: 'transparent',
     // fontFamily: 'ARCO',
-    fontSize: 24,
+    fontSize: 30,
     marginTop:40,
     textAlign: 'center',
-    fontFamily:"Comicy"
+    fontFamily:"LikeSnow"
   },
   text2: {
     backgroundColor: 'transparent',
     // fontFamily: 'ARCO',
-    fontSize: 10,
-    marginTop:10,
+    fontSize: 14,
+    marginTop:0,
     textAlign: 'center',
-    fontFamily:"Comicy"
+    fontFamily:"LikeSnow"
   },
   bText: {
     // fontFamily: 'ARCO',
-    fontSize: 16,
+    fontSize: 20,
     color: 'white',
     textAlign:"center",
-    fontFamily:"Comicy"
+    fontFamily:"LikeSnow"
   },
   button: {
     color: 'black',

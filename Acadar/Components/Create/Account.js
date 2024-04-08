@@ -14,7 +14,7 @@ import {useFonts} from "expo-font"
 
 const Account = ({ mod, data }) => {
   const [loaded] = useFonts({
-      Comicy: require("../../assets/fonts/Comicy.ttf")
+      LikeSnow: require("../../assets/fonts/Like Snow.ttf")
     })
     if(!loaded){
       return null
@@ -119,20 +119,20 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: 'black',
     backgroundColor: 'white',
-    fontFamily: 'Comicy',
+    fontFamily: 'LikeSnow',
     // fontFamily: 'ARCO',
     
   },
   text: {
     color: 'black',
-    fontFamily: 'Comicy',
+    fontFamily: 'LikeSnow',
     // fontFamily: 'ARCO',
-    fontSize: 16,
+    fontSize: 20,
   },
   bText: {
-    fontFamily: 'Comicy',
+    fontFamily: 'LikeSnow',
     // fontFamily: 'ARCO',
-    fontSize: 10,
+    fontSize: 20,
     color: 'black',
   },
   button: {
@@ -170,15 +170,15 @@ const styles = StyleSheet.create({
   },
   input: {
     width: Dimensions.get('window').width * 0.6,
-    height: 32,
+    height: 40,
     color: 'black',
-    fontFamily: 'Comicy',
+    fontFamily: 'LikeSnow',
     // fontFamily: 'ARCO',
-    fontSize: 10,
+    fontSize: 14,
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 32,
-    marginBottom: 20,
+    marginBottom: 8,
   },
 });
 

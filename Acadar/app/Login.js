@@ -15,8 +15,8 @@ import {UserContext} from './_layout';
 import {useFonts} from "expo-font"
 
 export default function Page(){
-  const [loaded] = useFonts({
-      Comicy: require("../assets/fonts/Comicy.ttf")
+    const [loaded] = useFonts({
+      LikeSnow: require("../assets/fonts/Like Snow.ttf")
     })
     if(!loaded){
       return null
@@ -87,21 +87,21 @@ export default function Page(){
 const styles = StyleSheet.create({
   bText: {
     // fontFamily: 'ARCO',
-    fontSize: 12,
+    fontSize: 20,
     color: 'black',
-    fontFamily: 'Comicy',
+    fontFamily: 'LikeSnow',
 
   },
   button: {
-    fontFamily: 'Comicy',
-
+    fontFamily: 'LikeSnow',
+    
     backgroundColor: 'white',
     opacity: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 32,
-    padding: 8,
+    padding: 10,
     marginBottom: 16,
   },
   container: {
@@ -131,21 +131,20 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontFamily: 'Comicy',
-    fontSize: 16,
+    fontFamily: 'LikeSnow',
+    fontSize: 20,
   },
   input: {
     width: Dimensions.get('window').width * 0.6,
-    height: 32,
-    maxHeight:32,
+    height: 40,
     color: 'black',
-    fontFamily: 'Comicy',
-    fontSize: 10,
+    fontFamily: 'LikeSnow',
+    fontSize: 14,
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 32,
-    marginBottom: 20,
+    marginBottom: 8,
     position:"relative",
-    top:0
+    top:0,
   },
 });

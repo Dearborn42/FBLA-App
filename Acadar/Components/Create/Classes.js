@@ -7,9 +7,16 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
-
+import {useFonts} from "expo-font"
 export default function Classes({ mod, data }) {
+  const [loaded] = useFonts({
+      LikeSnow: require("../../assets/fonts/Like Snow.ttf")
+    })
+    if(!loaded){
+      return null
+    }
   const addClass = (year) => {
     data.setCreateForm((prev) => {
       const newClass = { name: '', grade: '' };
@@ -53,7 +60,7 @@ export default function Classes({ mod, data }) {
     <ImageBackground
       source={require('../../assets/blue.png')}
       style={styles.backgroundImage}>
-      <View style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={["justifyContent"]}>
         {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
           <View key={year}>
             <Text style={styles.header}>
@@ -121,59 +128,63 @@ export default function Classes({ mod, data }) {
           onPress={handleSubmit}>
           <Text style={styles.bText}>Submit</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   classContainer: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: 'none',
+    textAlign:"center"
   },
   container: {
     flex: 1,
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
     padding: 20,
     backgroundColor: 'none',
+    overflow:"visible",
+    marginTop:20,
+    marginBottom:40,
+    
   },
   header: {
     color: 'black',
-    // fontFamily: 'ARCO',
+    fontFamily: 'LikeSnow',
     
     fontSize: 32,
     textAlign: 'center',
   },
   input: {
-    width: Dimensions.get('window').width * 0.6,
-    height: 32,
+    width: "100%",
+    height: 40,
     color: 'black',
-    // // fontFamily: 'ARCO',
-    fontSize: 10,
+    fontFamily: 'LikeSnow',
+    fontSize: 14,
     backgroundColor: 'white',
-    padding: 10,
     borderRadius: 32,
     marginBottom: 20,
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 32,
+    padding: 8,
+    marginBottom: 16,
   },
   text: {
     color: 'black',
-    // fontFamily: 'ARCO',
-    fontSize: 16,
+    fontFamily: 'LikeSnow',
+    fontSize: 20,
+    textAlign:"center"
   },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
   },
   bText: {
-    // fontFamily: 'ARCO',
-    fontSize: 10,
+    fontFamily: 'LikeSnow',
+    fontSize: 14,
     color: 'black',
   },
   button: {
