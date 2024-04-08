@@ -11,7 +11,7 @@ export default function TabLayout() {
         options={{
           title: 'Share',
           headerShown: false,
-          tabBarIcon: () => <Text>Share</Text>,
+          tabBarIcon: () => <Text></Text>,
         }}
       />
       <Tabs.Screen

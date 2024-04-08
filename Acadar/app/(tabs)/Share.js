@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Button, Platform, Text } from 'react-native';
+import { View, StyleSheet, Button, Platform, Text, ImageBackground, } from 'react-native';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 
@@ -48,7 +48,9 @@ export default function Page(){
   }
 
   return (
-    <View style={styles.container}>
+    <ImageBackground style={styles.container} source={ require('../../assets/skyo.png') }>
+      
+      <View>
       <Button title="Print" onPress={print} />
       {Platform.OS === 'ios' && (
         <>
@@ -68,6 +70,8 @@ export default function Page(){
           onPress={() => execute()}
       />
     </View>
+    </ImageBackground>
+    
   );
 }
 

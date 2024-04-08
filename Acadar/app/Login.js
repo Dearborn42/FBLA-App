@@ -9,7 +9,6 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  KeyboardAvoidingView
 } from 'react-native';
 import {UserContext} from './_layout';
 import {useFonts} from "expo-font"

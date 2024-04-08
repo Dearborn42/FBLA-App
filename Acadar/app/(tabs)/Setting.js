@@ -1,4 +1,4 @@
-import {View, Button} from "react-native"
+import {View, Button,ImageBackground,StyleSheet} from "react-native"
 import { UserContext } from "../_layout";
 import { useContext } from "react";
 import * as SecureStore from 'expo-secure-store';
@@ -24,11 +24,28 @@ export default function Page(){
         }
     }
     return (
+        <ImageBackground style={styles.container} source={ require('../../assets/skyo.png') }>
         <View>
             <Button 
                 title="Turn on simple mode for performance and accessability" 
                 onPress={()=>changeMode()}
             />
         </View>
+        </ImageBackground>
     )
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+    flexDirection: 'column',
+    padding: 8,
+  },
+  spacer: {
+    height: 8,
+  },
+  printer: {
+    textAlign: 'center',
+  },
+});
