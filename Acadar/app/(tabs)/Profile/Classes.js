@@ -15,7 +15,7 @@ export default function Page(){
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ImageBackground
-            source={{ uri: require('../../../assets/blue.png') }}
+            source={require('../../../assets/blue.png')}
             style={styles.backgroundImage}
         >
             <View style={styles.container}>
