@@ -65,23 +65,7 @@ const UpdateStudent = () => {
         name={"password"}
         secureTextEntry={true}
         />
-        <Text>Edit your share pin</Text>
-        <TextInput
-        style={styles.input}
-        onChangeText={(text) => updateForm(text)}
-        placeholder="Edit your share pin"
-        onFocus={() => handleType("share-pin")}
-        id={"share-pin"}
-        name={"share-pin"}
-        secureTextEntry={true}
-        />
-        <Text>Edit your privacy</Text>
-        <SelectDropdown
-            data={["Yes", "No"]}
-            onSelect={(itemValue) => updateForm(itemValue === 'Yes')}
-            buttonTextAfterSelection={(selectedItem) => selectedItem}
-            onFocus={() => handleType("private")}
-        />
+        
         <Text>Edit your Grade Level</Text>
         <TextInput
         style={styles.input}

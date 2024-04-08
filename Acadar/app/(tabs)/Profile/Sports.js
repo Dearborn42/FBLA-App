@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontFamily: 'ARCO',
     fontSize: '1rem',
   },
   backgroundImage: {
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   bText: {
-    fontFamily: 'ARCO',
+    fontFamily:"MontHeavyDemo",
     fontSize: '.75rem',
     color: 'black',
   },
@@ -104,7 +103,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '2rem',
     padding: '.5rem',
     marginBottom: '1rem',
   },

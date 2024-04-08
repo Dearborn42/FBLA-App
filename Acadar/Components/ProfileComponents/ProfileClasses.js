@@ -12,9 +12,9 @@ export default function ProfileClasses() {
           <Text style={styles.header}>{year.charAt(0).toUpperCase() + year.slice(1)}</Text>
           {currentUser[year].map((classItem, index) => (
             <View key={index} style={styles.classContainer}>
-              <Text>Class {index + 1}</Text>
-              <Text>Name: {classItem.name}</Text>
-              <Text>Grade: {classItem.grade}</Text>
+              <Text style={styles.text}>Class {index + 1}</Text>
+              <Text style={styles.text}>Name: {classItem.name}</Text>
+              <Text style={styles.text}>Grade: {classItem.grade}</Text>
             </View>
           ))}
         </View>
@@ -33,12 +33,54 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
   },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  bText: {
+    // fontFamily: 'ARCO',
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+
   },
-  classContainer: {
-    marginBottom: 20,
+  button: {
+    fontFamily: 'MontHeavyDemo',
+    
+    backgroundColor: 'white',
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 32,
+    padding: 10,
+    marginBottom: 16,
+  },
+  container: {
+    
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    padding: 20,
+    backgroundColor: '#fff',
+    
+  },
+  header: {
+    fontFamily: 'MontHeavyDemo',
+    fontSize: 32,
+    marginBottom: 0,
+    
+  },
+  text: {
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+    fontSize: 20,
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+    fontSize: 14,
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 32,
+    marginBottom: 8,
   },
 });

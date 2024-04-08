@@ -1,4 +1,4 @@
-import {View, Button,ImageBackground,StyleSheet} from "react-native"
+import {View,Text, Button,ImageBackground,StyleSheet,TouchableOpacity} from "react-native"
 import { UserContext } from "../_layout";
 import { useContext } from "react";
 import * as SecureStore from 'expo-secure-store';
@@ -24,12 +24,14 @@ export default function Page(){
         }
     }
     return (
-        <ImageBackground style={styles.container} source={ require('../../assets/skyo.png') }>
+        <ImageBackground style={styles.container} source={ (currentUser.simpleMode==="1")?null:require('../../assets/skyo.png') }>
         <View>
-            <Button 
-                title="Turn on simple mode for performance and accessability" 
-                onPress={()=>changeMode()}
-            />
+            <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.button}
+            onPress={() => changeMode()}>
+            <Text style={styles.bText}>Accessibility Toggle</Text>
+        </TouchableOpacity>
         </View>
         </ImageBackground>
     )
@@ -47,5 +49,23 @@ const styles = StyleSheet.create({
   },
   printer: {
     textAlign: 'center',
+  },bText: {
+    // fontFamily: 'ARCO',
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+
+  },
+  button: {
+    fontFamily: 'MontHeavyDemo',
+    
+    backgroundColor: 'white',
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 32,
+    padding: 10,
+    marginBottom: 16,
   },
 });

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { View, StyleSheet, Button, Platform, Text, ImageBackground, } from 'react-native';
+import { View, StyleSheet, Button, Platform, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
-
+import { UserContext } from "../_layout";
+import { useContext } from "react";
 const html = `
 <html>
   <head>
@@ -21,6 +22,7 @@ const html = `
 
 export default function Page(){
     const [selectedPrinter, setSelectedPrinter] = React.useState();
+const {currentUser} = useContext(UserContext)
 
   async function print(){
     // On iOS/android prints the given html. On web prints the HTML from the current page.
@@ -48,10 +50,15 @@ export default function Page(){
   }
 
   return (
-    <ImageBackground style={styles.container} source={ require('../../assets/skyo.png') }>
+    <ImageBackground style={styles.container} source={ (currentUser.simpleMode==="1")?null:require('../../assets/skyo.png') }>
       
       <View>
-      <Button title="Print" onPress={print} />
+      <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.button}
+            onPress={print}>
+            <Text style={styles.bText}>Print</Text>
+        </TouchableOpacity>
       {Platform.OS === 'ios' && (
         <>
             <View style={styles.spacer} />
@@ -65,10 +72,12 @@ export default function Page(){
             ) : undefined}
         </>
       )}
-      <Button
-          title="Share"
-          onPress={() => execute()}
-      />
+      <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.button}
+            onPress={() => execute()}>
+            <Text style={styles.bText}>Share</Text>
+        </TouchableOpacity>
     </View>
     </ImageBackground>
     
@@ -88,5 +97,23 @@ const styles = StyleSheet.create({
   },
   printer: {
     textAlign: 'center',
+  },bText: {
+    // fontFamily: 'ARCO',
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'MontHeavyDemo',
+
+  },
+  button: {
+    fontFamily: 'MontHeavyDemo',
+    
+    backgroundColor: 'white',
+    opacity: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 32,
+    padding: 10,
+    marginBottom: 16,
   },
 });

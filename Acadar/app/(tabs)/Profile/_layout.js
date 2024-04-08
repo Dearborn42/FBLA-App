@@ -11,7 +11,7 @@ export default function DrawerLayout() {
           <Drawer.Screen name="Clubs" />
           <Drawer.Screen name="Arts" />
           <Drawer.Screen name="Sports" />
-          <Drawer.Screen name="Community-service-Jobs" />
+          <Drawer.Screen name="Community Service-Jobs" />
         </Drawer>
     </GestureHandlerRootView>
   );
