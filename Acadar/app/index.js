@@ -12,7 +12,7 @@ import {useFonts} from "expo-font"
 
 const Page = () => {
     const [loaded] = useFonts({
-      LikeSnow: require("../assets/fonts/Like Snow.ttf")
+      MontHeavyDemo: require("../assets/fonts/HWYGOTH.ttf")
     })
     if(!loaded){
       return null
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop:40,
     textAlign: 'center',
-    fontFamily:"LikeSnow"
+    fontFamily:"MontHeavyDemo"
   },
   text2: {
     backgroundColor: 'transparent',
@@ -189,14 +189,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop:0,
     textAlign: 'center',
-    fontFamily:"LikeSnow"
+    fontFamily:"MontHeavyDemo"
   },
   bText: {
     // fontFamily: 'ARCO',
     fontSize: 20,
     color: 'white',
     textAlign:"center",
-    fontFamily:"LikeSnow"
+    fontFamily:"MontHeavyDemo"
   },
   button: {
     color: 'black',

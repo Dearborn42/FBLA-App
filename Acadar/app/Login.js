@@ -16,7 +16,7 @@ import {useFonts} from "expo-font"
 
 export default function Page(){
     const [loaded] = useFonts({
-      LikeSnow: require("../assets/fonts/Like Snow.ttf")
+      MontHeavyDemo: require("../assets/fonts/HWYGOTH.ttf")
     })
     if(!loaded){
       return null
@@ -74,7 +74,7 @@ export default function Page(){
         </TouchableOpacity>
         <Link 
             activeOpacity={0.7}
-            style={{textDecorationLine: 'underline', ...styles.bText}}
+            style={{ ...styles.bText}}
             href="/Create"
         >
             No Account? Sign Up
@@ -89,11 +89,11 @@ const styles = StyleSheet.create({
     // fontFamily: 'ARCO',
     fontSize: 20,
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
 
   },
   button: {
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     
     backgroundColor: 'white',
     opacity: 1,
@@ -131,14 +131,14 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 20,
   },
   input: {
     width: Dimensions.get('window').width * 0.6,
     height: 40,
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 14,
     backgroundColor: 'white',
     padding: 10,

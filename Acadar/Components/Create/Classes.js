@@ -12,7 +12,7 @@ import {
 import {useFonts} from "expo-font"
 export default function Classes({ mod, data }) {
   const [loaded] = useFonts({
-      LikeSnow: require("../../assets/fonts/Like Snow.ttf")
+      MontHeavyDemo: require("../../assets/fonts/HWYGOTH.ttf")
     })
     if(!loaded){
       return null
@@ -126,7 +126,7 @@ export default function Classes({ mod, data }) {
           activeOpacity={0.7}
           style={styles.button}
           onPress={handleSubmit}>
-          <Text style={styles.bText}>Submit</Text>
+          <Text style={styles.bText}>Skip/Submit</Text>
         </TouchableOpacity>
       </ScrollView>
     </ImageBackground>
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   },
   header: {
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     
     fontSize: 32,
     textAlign: 'center',
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 40,
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 14,
     backgroundColor: 'white',
     borderRadius: 32,
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 20,
     textAlign:"center"
   },
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   bText: {
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 14,
     color: 'black',
   },

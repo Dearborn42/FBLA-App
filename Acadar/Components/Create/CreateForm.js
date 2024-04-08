@@ -16,11 +16,13 @@ import {useFonts} from "expo-font"
 
 const CreateForm = ({data}) => {
   const [loaded] = useFonts({
-      LikeSnow: require("../../assets/fonts/Like Snow.ttf")
+  
+      MontHeavyDemo: require("../../assets/fonts/HWYGOTH.ttf")
     })
     if(!loaded){
       return null
     }
+
     const { setCurrentUser } = useContext(UserContext);
     console.log(data.userField);
     const addFunc = () => {
@@ -109,7 +111,7 @@ const CreateForm = ({data}) => {
           activeOpacity={0.7}
           style={styles.button}
           onPress={handleSubmit}>
-          <Text style={styles.bText}>Submit</Text>
+          <Text style={styles.bText}>Skip/Submit</Text>
         </TouchableOpacity>
     </ScrollView> 
     </ImageBackground>
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
   },
   header: {
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 32,
     textAlign: 'center',
   },
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 40,
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 14,
     backgroundColor: 'white',
     padding: 10,
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
 
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 20,
   },
   backgroundImage: {
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   bText: {
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     fontSize: 14,
     color: 'black',
   },

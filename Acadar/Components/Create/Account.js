@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, router } from 'expo-router';
 import {
   View,
   Text,
@@ -14,7 +15,7 @@ import {useFonts} from "expo-font"
 
 const Account = ({ mod, data }) => {
   const [loaded] = useFonts({
-      LikeSnow: require("../../assets/fonts/Like Snow.ttf")
+      MontHeavyDemo: require("../../assets/fonts/HWYGOTH.ttf")
     })
     if(!loaded){
       return null
@@ -103,6 +104,13 @@ const Account = ({ mod, data }) => {
         onPress={handleSubmit}>
         <Text style={styles.bText}>Sign Up</Text>
       </TouchableOpacity>
+      <Link 
+            activeOpacity={0.7}
+            style={{...styles.bText}}
+            href="/Login"
+        >
+            Have an Account? Login
+        </Link>
     </View>
   );
 };
@@ -119,18 +127,18 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: 'black',
     backgroundColor: 'white',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     // fontFamily: 'ARCO',
     
   },
   text: {
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     // fontFamily: 'ARCO',
     fontSize: 20,
   },
   bText: {
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     // fontFamily: 'ARCO',
     fontSize: 20,
     color: 'black',
@@ -172,7 +180,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.6,
     height: 40,
     color: 'black',
-    fontFamily: 'LikeSnow',
+    fontFamily: 'MontHeavyDemo',
     // fontFamily: 'ARCO',
     fontSize: 14,
     backgroundColor: 'white',
