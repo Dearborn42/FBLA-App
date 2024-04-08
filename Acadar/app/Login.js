@@ -11,8 +11,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {UserContext} from './_layout';
+import {useFonts} from "expo-font"
 
 export default function Page(){
+  const [loaded] = useFonts({
+      Comicy: require("../assets/fonts/Comicy.ttf")
+    })
+    if(!loaded){
+      return null
+    }
     const { setCurrentUser } = useContext(UserContext);
     const [form, setForm] = useState({ email: '', password: '' });
     var updateForm = (value) =>
@@ -66,7 +73,7 @@ export default function Page(){
         </TouchableOpacity>
         <Link 
             activeOpacity={0.7}
-            style={{textDecoration: 'underline', ...styles.bText}}
+            style={{textDecorationLine: 'underline', ...styles.bText}}
             href="/Create"
         >
             No Account? Sign Up
@@ -116,18 +123,19 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    // fontFamily: 'ARCO',
+    fontFamily: 'Comicy',
     fontSize: 16,
   },
   input: {
     width: Dimensions.get('window').width * 0.6,
     height: 32,
     color: 'black',
-    // fontFamily: 'ARCO',
+    fontFamily: 'Comicy',
     fontSize: 12,
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 32,
     marginBottom: 20,
+    overflow: 'hidden',
   },
 });

@@ -8,9 +8,15 @@ import {
   ImageBackground,
   Dimensions,
 } from 'react-native';
-
+import {useFonts} from "expo-font"
 
 const Page = () => {
+    const [loaded] = useFonts({
+      Comicy: require("../assets/fonts/Comicy.ttf")
+    })
+    if(!loaded){
+      return null
+    }
     return (
       <ImageBackground
             style={styles.container}
@@ -20,7 +26,7 @@ const Page = () => {
         <Text style={styles.text2}>We put you on the academic radar</Text>
         <Image
             style={styles.image2}
-            source={ require('../assets/Lando.png') }></Image>
+            source={ require('../assets/blimpy.png') }></Image>
         <Link 
                 activeOpacity={0.7}
                 style={{...styles.button, ...styles.bText}}
@@ -167,25 +173,30 @@ const styles = StyleSheet.create({
     top: Dimensions.get('window').height * 0.6,
     left: Dimensions.get('window').width * 0.1,
     marginTop:-Dimensions.get('window').height * 0.2,
-    zIndex: -1,
+    zIndex: 1,
   },
   text: {
     backgroundColor: 'transparent',
     // fontFamily: 'ARCO',
     fontSize: 24,
-    margin:16,
+    marginTop:40,
     textAlign: 'center',
+    fontFamily:"Comicy"
   },
   text2: {
     backgroundColor: 'transparent',
     // fontFamily: 'ARCO',
-    fontSize: 12.8,
+    fontSize: 10,
+    marginTop:10,
     textAlign: 'center',
+    fontFamily:"Comicy"
   },
   bText: {
     // fontFamily: 'ARCO',
     fontSize: 16,
     color: 'white',
+    textAlign:"center",
+    fontFamily:"Comicy"
   },
   button: {
     color: 'black',
@@ -202,6 +213,8 @@ const styles = StyleSheet.create({
     marginLeft: -Dimensions.get('window').width * 0.3,
     marginTop: -Dimensions.get('window').height * 0.025,
     borderRadius: 32,
+    zIndex: 3,
+    lineHeight:Dimensions.get('window').height * 0.05
   },
   button2: {
     color: 'black',
@@ -218,6 +231,9 @@ const styles = StyleSheet.create({
     marginLeft: -Dimensions.get('window').width * 0.3,
     marginTop: -Dimensions.get('window').height * 0.025,
     borderRadius: 32,
+    zIndex: 3,
+
+    lineHeight:Dimensions.get('window').height * 0.05
   },
 });
 
