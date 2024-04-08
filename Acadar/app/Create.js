@@ -9,8 +9,6 @@ export default function Page(){
       name: '',
       email: '',
       password: '',
-      'share-pin': '',
-      private: false,
       grade_level: '',
       school: '',
       freshman: [],
