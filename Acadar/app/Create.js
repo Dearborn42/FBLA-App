@@ -71,7 +71,7 @@ export default function Page(){
         last: false
       },
       {
-        "mod":navigation,
+        "mod":setCurrentIndex,
         setCreateForm,
         createForm,
         userField: "communityService",
