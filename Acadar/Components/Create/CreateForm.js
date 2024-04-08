@@ -10,8 +10,15 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import {useFonts} from "expo-font"
 
 const CreateForm = ({data}) => {
+  const [loaded] = useFonts({
+      Comicy: require("../../assets/fonts/Comicy.ttf")
+    })
+    if(!loaded){
+      return null
+    }
     const { setCurrentUser } = useContext(UserContext);
     console.log(data.userField);
     const addFunc = () => {
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
   },
   header: {
     color: 'black',
-    fontFamily: 'ARCO',
+    fontFamily: 'Comicy',
     fontSize: 32,
     textAlign: 'center',
   },
@@ -134,8 +141,8 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.6,
     height: 32,
     color: 'black',
-    fontFamily: 'ARCO',
-    fontSize: 12,
+    fontFamily: 'Comicy',
+    fontSize: 10,
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 32,
@@ -143,7 +150,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontFamily: 'ARCO',
+    fontFamily: 'Comicy',
     fontSize: 16,
   },
   backgroundImage: {
@@ -151,8 +158,8 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   bText: {
-    fontFamily: 'ARCO',
-    fontSize: 12,
+    fontFamily: 'Comicy',
+    fontSize: 10,
     color: 'black',
   },
   button: {

@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  KeyboardAvoidingView
 } from 'react-native';
 import {UserContext} from './_layout';
 import {useFonts} from "expo-font"
@@ -78,7 +79,8 @@ export default function Page(){
         >
             No Account? Sign Up
         </Link>
-        </View>
+        </View >
+        
     );
 }
 
@@ -87,8 +89,12 @@ const styles = StyleSheet.create({
     // fontFamily: 'ARCO',
     fontSize: 12,
     color: 'black',
+    fontFamily: 'Comicy',
+
   },
   button: {
+    fontFamily: 'Comicy',
+
     backgroundColor: 'white',
     opacity: 1,
     display: 'flex',
@@ -99,6 +105,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   container: {
+    
     flex: 1,
     width: '100%',
     height: '100%',
@@ -106,6 +113,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#fff',
+    
   },
   image: {
     width: Dimensions.get('window').width,
@@ -129,13 +137,15 @@ const styles = StyleSheet.create({
   input: {
     width: Dimensions.get('window').width * 0.6,
     height: 32,
+    maxHeight:32,
     color: 'black',
     fontFamily: 'Comicy',
-    fontSize: 12,
+    fontSize: 10,
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 32,
     marginBottom: 20,
-    overflow: 'hidden',
+    position:"relative",
+    top:0
   },
 });

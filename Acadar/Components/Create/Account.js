@@ -10,8 +10,15 @@ import {
   Image,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import {useFonts} from "expo-font"
 
 const Account = ({ mod, data }) => {
+  const [loaded] = useFonts({
+      Comicy: require("../../assets/fonts/Comicy.ttf")
+    })
+    if(!loaded){
+      return null
+    }
   function updateForm(value) {
     return data.setCreateForm((prev) => {
       return { ...prev, ...value };
@@ -37,7 +44,7 @@ const Account = ({ mod, data }) => {
       <Image
         style={styles.image}
         source={require('../../assets/sky.png')}></Image>
-      <Text style={styles.text}>Name</Text>
+      <Text style={styles.text}>Name:</Text>
       <TextInput
         style={styles.input}
         value={data.createForm.name}
@@ -47,7 +54,7 @@ const Account = ({ mod, data }) => {
         id={'name'}
         name={'name'}
       />
-      <Text style={styles.text}>Email</Text>
+      <Text style={styles.text}>Email:</Text>
       <TextInput
         style={styles.input}
         value={data.createForm.email}
@@ -57,7 +64,7 @@ const Account = ({ mod, data }) => {
         id={'email'}
         name={'email'}
       />
-      <Text style={styles.text}>Password</Text>
+      <Text style={styles.text}>Password:</Text>
       <TextInput
         style={styles.input}
         value={data.createForm.password}
@@ -68,7 +75,7 @@ const Account = ({ mod, data }) => {
         name={'password'}
         secureTextEntry={true}
       />
-      <Text style={styles.text}>Pin to share with others</Text>
+      <Text style={styles.text}>Create a share pin:</Text>
       <TextInput
         style={styles.input}
         value={data.createForm['share-pin']}
@@ -79,7 +86,7 @@ const Account = ({ mod, data }) => {
         name={'share-pin'}
         secureTextEntry={true}
       />
-      <Text style={styles.text}>Do you want a private account?</Text>
+      <Text style={styles.text}>Private account?</Text>
       <SelectDropdown
         dropdownStyle={styles.drop}
         buttonStyle={styles.dropo}
@@ -88,7 +95,7 @@ const Account = ({ mod, data }) => {
         onSelect={(itemValue) => updateForm({ private: itemValue === 'Yes' })}
         buttonTextAfterSelection={(selectedItem) => selectedItem}
       />
-      <Text style={styles.text}>Grade Level</Text>
+      <Text style={styles.text}>Grade Level:</Text>
       <TextInput
         style={styles.input}
         value={data.createForm.grade_level}
@@ -98,7 +105,7 @@ const Account = ({ mod, data }) => {
         id={'grade_level'}
         name={'grade_level'}
       />
-      <Text style={styles.text}>School</Text>
+      <Text style={styles.text}>School:</Text>
       <TextInput
         style={styles.input}
         value={data.createForm.school}
@@ -124,21 +131,27 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.6,
     height: Dimensions.get('window').height * 0.05,
     backgroundColor: 'white',
+     marginBottom: 20,
   },
+
   drop: {
-    fontSize: 12,
+    fontSize: 10,
     color: 'black',
     backgroundColor: 'white',
+    fontFamily: 'Comicy',
     // fontFamily: 'ARCO',
+    
   },
   text: {
     color: 'black',
+    fontFamily: 'Comicy',
     // fontFamily: 'ARCO',
     fontSize: 16,
   },
   bText: {
+    fontFamily: 'Comicy',
     // fontFamily: 'ARCO',
-    fontSize: 12,
+    fontSize: 10,
     color: 'black',
   },
   button: {
@@ -178,8 +191,9 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.6,
     height: 32,
     color: 'black',
+    fontFamily: 'Comicy',
     // fontFamily: 'ARCO',
-    fontSize: 12,
+    fontSize: 10,
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 32,

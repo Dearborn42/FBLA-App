@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     height: 32,
     color: 'black',
     // // fontFamily: 'ARCO',
-    fontSize: 12,
+    fontSize: 10,
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 32,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   bText: {
     // fontFamily: 'ARCO',
-    fontSize: 12,
+    fontSize: 10,
     color: 'black',
   },
   button: {
