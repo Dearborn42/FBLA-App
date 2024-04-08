@@ -30,8 +30,6 @@ const Account = ({ mod, data }) => {
       createForm.name, 
       createForm.email, 
       createForm.password, 
-      createForm["share-pin"], 
-      createForm.private, 
       createForm.grade_level, 
       createForm.school
     ]
@@ -75,26 +73,9 @@ const Account = ({ mod, data }) => {
         name={'password'}
         secureTextEntry={true}
       />
-      <Text style={styles.text}>Create a share pin:</Text>
-      <TextInput
-        style={styles.input}
-        value={data.createForm['share-pin']}
-        onChangeText={(text) => updateForm({ 'share-pin': text })}
-        placeholder='Enter your share-pin'
-        required
-        id={'share-pin'}
-        name={'share-pin'}
-        secureTextEntry={true}
-      />
-      <Text style={styles.text}>Private account?</Text>
-      <SelectDropdown
-        dropdownStyle={styles.drop}
-        buttonStyle={styles.dropo}
-        buttonTextStyle={styles.drop}
-        data={['Yes', 'No']}
-        onSelect={(itemValue) => updateForm({ private: itemValue === 'Yes' })}
-        buttonTextAfterSelection={(selectedItem) => selectedItem}
-      />
+  
+      
+
       <Text style={styles.text}>Grade Level:</Text>
       <TextInput
         style={styles.input}
