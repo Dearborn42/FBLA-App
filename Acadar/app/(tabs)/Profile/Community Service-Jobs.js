@@ -5,7 +5,7 @@ import {
     Button, 
     StyleSheet,
     Dimensions,
-    ImageBackground
+    ImageBackground,TouchableOpacity,Text
 } from 'react-native';
 import Display from '../../../Components/ProfileComponents/Display';
 import UpdateComponent from '../../../Components/Update/UpdateComponent';
@@ -56,7 +56,12 @@ export default function Page(){
                 }}
                 />
                 }
-                <Button onPress={() => setShow((prev) => !prev)} title="Edit Section"></Button>
+                <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={() => setShow((prev) => !prev)}>
+                      <Text style={styles.bText}>Edit Section</Text>
+                    </TouchableOpacity>
             </View>
         </ImageBackground>
       </ScrollView>
@@ -104,7 +109,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontFamily: 'ARCO',
     fontSize: '1rem',
   },
   backgroundImage: {
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   bText: {
-    fontFamily: 'ARCO',
+    fontFamily:"MontHeavyDemo",
     fontSize: '.75rem',
     color: 'black',
   },
@@ -122,7 +126,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '2rem',
     padding: '.5rem',
     marginBottom: '1rem',
   },
