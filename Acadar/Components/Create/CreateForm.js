@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { router } from 'expo-router';
 import {UserContext} from "../../app/_layout"
+import * as SecureStore from 'expo-secure-store';
 import {
   View,
   Text,
@@ -64,7 +65,8 @@ const CreateForm = ({data}) => {
             var body1_response = await body1.json();
             if (body1_response.success){
                 setCurrentUser(body1_response.user);
-                router.replace('/login');
+                await SecureStore.setItemAsync("authToken", body1_response.token);
+                router.replace('/(tabs)/Profile/Account');
             }
         }
       }

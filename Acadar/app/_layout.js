@@ -16,7 +16,7 @@ export default function Root(){
         if(!token) return;
         var body1 = await fetch(`http://172.233.131.223:5000/functions/add/${userField}`, {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "auth": token },
             body: JSON.stringify(value)
         });
         var body1_response = await body1.json();
@@ -30,7 +30,7 @@ export default function Root(){
         if(name.includes(" ")) name = name.split(" ").join("%20")
         var body1 = await fetch(`http://172.233.131.223:5000/functions/remove/${userField}/${name}`, {
             method: 'DELETE',
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "auth": token},
             credentials: "include"
         });
         var body1_response = await body1.json();
@@ -45,7 +45,7 @@ export default function Root(){
         if(name.includes(" ")) name = name.split(" ").join("%20")
         var body1 = await fetch(`http://172.233.131.223:5000/functions/update/${userField}/${name}/${field}`, {
             method: 'PUT',
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "auth": token },
             credentials: "include",
             body: JSON.stringify({"value": value})
         });
