@@ -34,7 +34,7 @@ export default function Page(){
     // On iOS/android prints the given html. On web prints the HTML from the current page.
     const { uri } = await Print.printToFileAsync({ html });
     console.log('File has been saved to:', uri);
-    await Sharing.shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+    await Sharing.shareAsync(uri, { UTI: '.jpg', mimeType: 'application/jpg' });
   };
 
   async function selectPrinter(){
