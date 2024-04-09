@@ -1,16 +1,25 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView,TouchableOpacity } from 'react-native';
 import { UserContext } from '../../app/_layout';
 import * as SecureStore from 'expo-secure-store';
-
+import {useFonts} from "expo-font"
 export default function UpdateClasses() {
-    const {currentUser} = useContext(UserContext)
+  const [loaded] = useFonts({
+      MontHeavyDemo: require("../../assets/fonts/HWYGOTH.ttf")
+    })
+    if(!loaded){
+      return null
+    }
+    const {currentUser, updateCurrentUser, reset, setReset} = useContext(UserContext)
     const [newForm, setNewForm] = useState(false);
     const [newClub, setNewClub] = useState({"name": '', "grade": ''});
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
     const [year, setYear] = useState("");
-
+    useEffect(() => {
+      setReset(false);
+    }, [reset])
+    
     var handleValue = (text) => setValue(text);
     var handleField = (textValue) => setField(textValue);
     var handleNewClub = (field, value) => setNewClub((prev) => {return {...prev, ...{[field]: value}}});
@@ -35,8 +44,9 @@ export default function UpdateClasses() {
             });
             var body1_response = await body1.json();
             if (body1_response.success){
-                setYear("");
-                console.log("Yippe")
+              updateCurrentUser(year, newClub, 0, "add");
+              setYear("");
+              setReset(true);
             }
         }
     };
@@ -50,7 +60,8 @@ export default function UpdateClasses() {
         });
         var body1_response = await body1.json();
         if (body1_response.success){
-            console.log("Yippe")
+          updateCurrentUser(year, name, 0, "remove");
+              setReset(true);
         }
     };
 
@@ -74,10 +85,10 @@ export default function UpdateClasses() {
     <View style={styles.container}>
       {['freshman', 'sophomore', 'junior', 'senior'].map((year) => (
         <View key={year}>
-          <Text style={styles.header}>{year.charAt(0).toUpperCase() + year.slice(1)}</Text>
+          <Text style={{...styles.header, fontFamily: 'MontHeavyDemo',}}>{year.charAt(0).toUpperCase() + year.slice(1)}</Text>
           {currentUser[year].map((classItem, index) => (
             <View key={index} style={styles.classContainer}>
-              <Text>Class {index + 1}</Text>
+              <Text style={styles.text}>Class {index + 1}</Text>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {handleValue(text); handleField("name")}}
@@ -189,12 +200,12 @@ const styles = StyleSheet.create({
     height: '100%',
     padding: 20,
     backgroundColor: '#fff',
-    
+    borderRadius: 32,
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 32,
     marginBottom: 0,
+    fontFamily: 'MontHeavyDemo',
   },
   text: {
     color: 'black',
@@ -213,6 +224,7 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderColor:"black",
     marginBottom: 8,
+    borderRadius: 32,
   },
 });
 

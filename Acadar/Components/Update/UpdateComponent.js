@@ -1,12 +1,13 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { View, Button, StyleSheet, ScrollView, Text, TextInput,TouchableOpacity } from 'react-native';
 import { UserContext } from '../../app/_layout';
 
 const UpdateComponent = ({data}) => {
-    const {currentUser, add, remove, update, handleUpdate} = useContext(UserContext)
+    const {currentUser, add, remove, update, handleUpdate, reset, setReset} = useContext(UserContext)
     const [newForm, setNewForm] = useState(false);
     const [newService, setNewService] = useState(data.newFormObj);
-
+    
+    useEffect(() => {setReset(false)}, [reset]);
     var handleNewService = (field, value) => setNewService((prev) => {return {...prev, ...{[field]: value}}});
     var handleForm = () => {
         setNewService(data.newFormObj)
@@ -27,7 +28,12 @@ const UpdateComponent = ({data}) => {
                         placeholder={x[y]}
                     />
                 ))}
-                <Button title="Remove" onPress={() => remove(data.userField, x.name)} />
+                <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={styles.button}
+                      onPress={() => remove(data.userField, x.name)}>
+                      <Text style={styles.bText}>Remove</Text>
+                    </TouchableOpacity>
             </View>
         )})} 
             {newForm && (
@@ -97,7 +103,7 @@ const styles = StyleSheet.create({
     height: '100%',
     padding: 20,
     backgroundColor: '#fff',
-    
+    borderRadius: 32,
   },
   header: {
     fontSize: 24,
@@ -121,6 +127,7 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderColor:"black",
     marginBottom: 8,
+    borderRadius: 32,
   },
 });
 

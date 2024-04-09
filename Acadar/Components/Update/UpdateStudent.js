@@ -5,9 +5,10 @@ import { UserContext } from '../../app/_layout';
 import * as SecureStore from 'expo-secure-store';
 
 const UpdateStudent = () => {
-    const {currentUser} = useContext(UserContext);
+    const {currentUser, updateCurrentUser, reset, setReset} = useContext(UserContext);
     const [form, setForm] = useState({value: ""});
     const [type, setType] = useState("");
+    useEffect(() => {setReset(false)}, [reset]);
     function handleType(text){
         setType(text);
     }
@@ -25,8 +26,9 @@ const UpdateStudent = () => {
       });
       var body1_response = await body1.json();
       if (body1_response.success){
-        if(type !== "password")
+        if(type !== "password"){
           currentUser[`${type}`] = form.value;
+        }
         currentUser.password = "***********";
       }else{
         console.log(body1_response.message)
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
     height: '100%',
     padding: 20,
     backgroundColor: '#fff',
-    
+    borderRadius: 32,
   },
   header: {
     fontSize: 24,
@@ -144,6 +146,7 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderColor:"black",
     marginBottom: 8,
+    borderRadius: 32,
   },
 });
 

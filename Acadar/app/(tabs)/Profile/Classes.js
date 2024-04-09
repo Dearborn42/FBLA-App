@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   button: {
-    backgroundColor: 'white',
+    marginTop: 16,
+    backgroundColor: 'transparent',
     opacity: 1,
     display: 'flex',
     justifyContent: 'center',

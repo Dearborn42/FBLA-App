@@ -7,6 +7,7 @@ export default function Root(){
     const [currentUser, setCurrentUser] = useState("");
     const [field, setField] = useState("");
     const [value, setValue] = useState("");
+    const [reset, setReset] = useState(false);
     function handleUpdate(text, category){
         setValue(text); 
         setField(category);
@@ -21,7 +22,8 @@ export default function Root(){
         });
         var body1_response = await body1.json();
         if (body1_response.success){
-            
+            console.log(userField, value);
+            updateCurrentUser(userField, value, 0, "add");
         }
     };
     async function remove(userField, name){
@@ -35,7 +37,7 @@ export default function Root(){
         });
         var body1_response = await body1.json();
         if (body1_response.success){
-            
+            updateCurrentUser(userField, name, 0, "remove");
         }
     };
     async function update(userField, name){
@@ -55,6 +57,26 @@ export default function Root(){
             console.log(body1_response);
         }
     };
+    function updateCurrentUser(field, value, index, type){
+        if(type === "add"){
+            setReset(true);
+            return setCurrentUser((prev) => {return {...prev, [field]: [...prev[field], value]}})
+        }else if(type === "remove"){
+            var newArr = currentUser[field].filter((x) => x.name !== value);
+            setReset(true);
+            return setCurrentUser((prev) => {return {...prev, [field]:newArr}});
+        }else{
+            if(!index){
+                setReset(true);
+                return setCurrentUser((prev) => {return {...prev, [field]: value}});
+            }else{
+                var newArr = currentUser[field];
+                newArr[index][type] = value;
+                setReset(true);
+                return setCurrentUser((prev) => {return {...prev, [field]: newArr}}); 
+            }
+        }
+    }
     return (
     <UserContext.Provider value={{
         handleUpdate, 
@@ -64,7 +86,10 @@ export default function Root(){
         value, 
         add, 
         remove, 
-        update
+        update,
+        updateCurrentUser,
+        reset, 
+        setReset
     }}>
         <Slot />
     </UserContext.Provider>

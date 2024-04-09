@@ -85,12 +85,14 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   button: {
-    backgroundColor: 'white',
+    marginTop: 16,
+    backgroundColor: 'transparent',
     opacity: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     padding: '.5rem',
     marginBottom: '1rem',
+    
   },
 });
