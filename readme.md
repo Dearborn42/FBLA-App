@@ -31,17 +31,22 @@ This is a mobile application built using the MERN stack approach with React Nati
 
 Contributions are welcome! If you have any suggestions, feature requests, or bug reports, please open an issue or submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Acknowledgements
-
-- Special thanks to the developers of React Native, Expo, MongoDB, Express.js, and Node.js for providing the tools and technologies used to build this application.
 
 ## About Us
 
 We are a team of passionate developers dedicated to creating innovative solutions to address real-world problems. With a diverse skill set and a shared vision for excellence, we strive to deliver high-quality software products that make a positive impact.
+
+## Copyright
+
+This project is © [Year] [Your Name or Organization]. All rights reserved.
+
+## License
+
+This project is licensed under the [MIT] License - see the [MIT](MIT) file for details.
+
+## Acknowledgments
+
+- Special thanks to the developers of React Native, Expo, MongoDB, Express.js, and Node.js for providing the tools and technologies used to build this application.
 
 ## Meet the Team
 
