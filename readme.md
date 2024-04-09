@@ -39,5 +39,29 @@ This project is licensed under the [MIT License](LICENSE).
 
 - Special thanks to the developers of React Native, Expo, MongoDB, Express.js, and Node.js for providing the tools and technologies used to build this application.
 
+## About Us
 
+We are a team of passionate developers dedicated to creating innovative solutions to address real-world problems. With a diverse skill set and a shared vision for excellence, we strive to deliver high-quality software products that make a positive impact.
+
+## Meet the Team
+
+### Andrew Murphy
+
+- **Role:** Backend Developer
+- **Bio:** Jacob specializes in building robust and scalable backend systems. With a keen eye for detail and a passion for efficiency, he ensures that our applications perform optimally under any circumstances.
+
+### Jonathan Lam
+
+- **Role:** Frontend Developer
+- **Bio:** Jonathan is a creative frontend developer with expertise in crafting intuitive and visually appealing user interfaces. He combines his design skills with his technical knowledge to deliver engaging user experiences.
+
+## Contact Us
+
+If you have any questions, feedback, or collaboration opportunities, feel free to reach out to us:
+
+- **Email:** [team@example.com](mailto:team@example.com)
+- **Website:** [www.example.com](https://www.example.com)
+- **GitHub:** [github.com/example](https://github.com/example)
+
+We look forward to hearing from you!
 
