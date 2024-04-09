@@ -1,4 +1,4 @@
-# Student Profile App
+# Acadar
 
 This is a mobile application built using the MERN stack approach with React Native and Expo. The purpose of this app is to allow students to create profiles that encompass various aspects of their high school experience, including grades, elective courses, jobs, and community service activities.
 
@@ -38,7 +38,7 @@ We are a team of passionate developers dedicated to creating innovative solution
 
 ## Copyright
 
-This project is © [Year] [Your Name or Organization]. All rights reserved.
+This project is © [2024] [Acadar]. All rights reserved.
 
 ## License
 
