@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { UserContext } from '../../app/_layout';
+import { Link } from 'expo-router';
 
 const ProfileStudent = () => {
   const {currentUser} = useContext(UserContext)
@@ -12,6 +13,13 @@ const ProfileStudent = () => {
       <Text style={styles.text}>Password: ********</Text>
       <Text style={styles.text}>Grade Level: {currentUser.grade_level}</Text>
       <Text style={styles.text}>School: {currentUser.school}</Text>
+      <Link 
+            activeOpacity={0.7}
+            style={{ ...styles.bText}}
+            href="/"
+        >
+            Logout
+        </Link>
     </View>
     </ScrollView>
   );

@@ -24,7 +24,7 @@ const Page = () => {
         <View style={styles.container}>
         <Text style={styles.text}>Welcome to Acadar!</Text>
         <Text style={styles.text2}>We put you on the academic radar</Text>
-        <Image
+        <Image 
             style={styles.image2}
             source={ require('../assets/blimpy.png') }></Image>
         <Link 

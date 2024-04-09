@@ -4,7 +4,72 @@ import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { UserContext } from "../_layout";
 import { useContext } from "react";
-const html = `
+
+
+
+export default function Page(){
+    const [selectedPrinter, setSelectedPrinter] = React.useState();
+const {currentUser} = useContext(UserContext)
+const fresh = currentUser.freshman.map((x)=>{
+          return(`<li>
+              <h4>${x.name}: ${x.grade}</h4>
+            </li>`
+          )
+        }).join("")
+        const soph = currentUser.sophomore.map((x)=>{
+          return(`<li>
+              <h4>${x.name}: ${x.grade}</h4>
+            </li>`
+          )
+        }).join("")
+        const jun = currentUser.junior.map((x)=>{
+          return(`<li>
+              <h4>${x.name}: ${x.grade}</h4>
+            </li>`
+          )
+        }).join("")
+        const sen = currentUser.senior.map((x)=>{
+          return(`<li>
+              <h4>${x.name}: ${x.grade}</h4>
+            </li>`
+          )
+        }).join("")
+        const clubs = currentUser.clubs.map((x)=>{
+          return(`<li>
+              <h4>${x.name}</h4>
+              <p>${x.desc}</p>
+            </li>`
+          )
+        }).join("")
+        const work = currentUser.work.map((x)=>{
+          return(`<li>
+              <h4>${x.name}</h4>
+              <p>${x.desc}</p>
+            </li>`
+          )
+        }).join("")
+        const com = currentUser.communityService.map((x)=>{
+          return(`<li>
+              <h4>${x.name} - ${x.hours}</h4>
+              <p>${x.desc}</p>
+            </li>`
+          )
+        }).join("")
+        const arts = currentUser.perfrormingArts.map((x)=>{
+          return(`<li>
+              <h4>${x.name} - ${x.award}</h4>
+              <p>${x.desc}</p>
+            </li>`
+          )
+        }).join("")
+        const sports = currentUser.sports.map((x)=>{
+          return(`<li>
+              <h4>${x.name} - ${x.award}</h4>
+              <p>${x.desc}</p>
+            </li>`
+          )
+        }).join("")
+  const html = `
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -21,7 +86,7 @@ const html = `
       margin: 0 auto;
       padding: 20px;
     }
-    h1, h2, h3 {
+    h1, h2, h3,h4 {
       margin: 0;
     }
     section {
@@ -42,69 +107,69 @@ const html = `
       font-size: 18px;
       margin-bottom: 10px;
     }
+    .flex{
+      display: flex;
+      justify-content: start;
+      gap:7rem;
+    }
+    .vert{
+      display: flex;
+      flex-direction: column;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>John Doe</h1>
+      <h1>${currentUser.name}</h1>
       <p>High School Student</p>
     </header>
     <hr></hr>
     <section>
-      <h2 class="section-title">Education</h2>
       <ul>
-        <li><strong>High School:</strong> XYZ High School, City, State (Year of Graduation)</li>
+        <li><strong>High School:</strong> ${currentUser.school} High School, Grade: ${currentUser.grade_level}</li>
+      </ul>
+      <h3 class="section-title">Classes</h2>
+      <ul class ="flex">
+        <ul class="vert"><h3>Freshman</h3>${fresh}</ul>
+        <ul class="vert"><h3>Sophomore</h3>${soph}</ul>
+        <ul class="vert"><h3>Junior</h3>${jun}</ul>
+        <ul class="vert"><h3>Senior</h3>${sen}</ul>
+      </ul>
+      <h3 class="section-title">Clubs</h2>
+      <ul class ="flex">
+        ${clubs}
+      </ul>
+      <h3 class="section-title">Performing Arts</h2>
+      <ul class ="flex">
+        ${arts}
+      </ul>
+      <h3 class="section-title">Sports</h2>
+      <ul class ="flex">
+        ${sports}
       </ul>
     </section>
     <section>
       <h2 class="section-title">Experience</h2>
-      <h3 class="sub-section-title">Internship at ABC Company</h3>
-      <ul>
-        <li>Description of responsibilities and accomplishments during the internship.</li>
+      <h3 class="section-title">Community Service</h2>
+      <ul class ="flex">
+        ${com}
+      </ul>
+      <h3 class="section-title">Job Experience</h2>
+      <ul class ="flex">
+        ${work}
       </ul>
     </section>
     <section>
-      <h2 class="section-title">Skills</h2>
+      <h2 class="section-title">Contact</h2>
       <ul>
-        <li>Technical Skills:</li>
-        <ul>
-          <li>Skill 1</li>
-          <li>Skill 2</li>
-          <li>Skill 3</li>
-        </ul>
-        <li>Soft Skills:</li>
-        <ul>
-          <li>Skill A</li>
-          <li>Skill B</li>
-          <li>Skill C</li>
-        </ul>
-      </ul>
-    </section>
-    <section>
-      <h2 class="section-title">Extracurricular Activities</h2>
-      <ul>
-        <li>Activity 1</li>
-        <li>Activity 2</li>
-        <li>Activity 3</li>
-      </ul>
-    </section>
-    <section>
-      <h2 class="section-title">References</h2>
-      <ul>
-        <li>Name of Reference 1, Position, Contact Information</li>
-        <li>Name of Reference 2, Position, Contact Information</li>
+        <li>Email: ${currentUser.email}</li>
       </ul>
     </section>
   </div>
 </body>
 </html>
 `;
-
-export default function Page(){
-    const [selectedPrinter, setSelectedPrinter] = React.useState();
-const {currentUser} = useContext(UserContext)
-
   async function print(){
     // On iOS/android prints the given html. On web prints the HTML from the current page.
     await Print.printAsync({
