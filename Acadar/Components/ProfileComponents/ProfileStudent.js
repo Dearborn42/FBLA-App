@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'black',
     fontFamily: 'MontHeavyDemo',
+    textAlign: 'center',
+    position:"absolute",
+    bottom: 20,
+    left:"47.5%",
 
   },
   button: {
